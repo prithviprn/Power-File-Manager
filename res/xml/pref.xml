@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/Design" >
+        <ListPreference
+            android:defaultValue="Light"
+            android:entries="@array/themes"
+            android:entryValues="@array/themesValues"
+            android:key="AppTheme"
+            android:summary="@string/ThemeSettingSummary"
+            android:title="@string/ThemeSetting" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/ViewSetting" >
+        <ListPreference
+            android:defaultValue="Alphabet"
+            android:entries="@array/SortOptions"
+            android:entryValues="@array/SortOptionsValues"
+            android:key="SortOption"
+            android:summary="@string/SortSummary"
+            android:title="@string/SortSetting" />
+
+        <CheckBoxPreference
+            android:key="HiddenOption"
+            android:summary="@string/HiddenFileSummary"
+            android:title="@string/HiddenFileSetting" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="UseImageLoader"
+            android:summary="@string/UseImageLoaderSummary"
+            android:title="@string/UseImageLoader" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/ForRootUsers" >
+        <PreferenceScreen
+            android:key="AutoPermissionOptions"
+            android:title="@string/AutoPermissonOptions" >
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="SystemApp_APerm"
+                android:title="/system/app" />
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="SystemEtc_APerm"
+                android:title="/system/etc" />
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="SystemFonts_APerm"
+                android:title="/system/fonts" />
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="SystemFramework_APerm"
+                android:title="/system/framework" />
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="SystemMedia_APerm"
+                android:title="/system/media" />
+            <EditTextPreference
+                android:defaultValue="644"
+                android:key="System_APerm"
+                android:title="/system" />
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="AutoRootCheck"
+            android:summary="@string/AutoRootCheckSummary"
+            android:title="@string/AutoRootCheck" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/AppInfo" >
+        <PreferenceScreen
+            android:key="OpenLicense"
+            android:title="Opensource License" >
+            <Preference
+                android:key="RootTools"
+                android:title="RootTools" />
+            <Preference
+                android:key="Crouton"
+                android:title="Crouton" />
+            <Preference
+                android:key="ActionBarSherlock"
+                android:title="ActionBarSherlock" />
+            <Preference
+                android:key="CommonCompress"
+                android:title="Apache Common Compress Library" />
+            <Preference
+                android:key="AUIL"
+                android:title="Android Universal Image Loader" />
+            <Preference
+                android:key="SND"
+                android:title="SherlockNavigationDrawer" />
+        </PreferenceScreen>
+
+        <Preference
+            android:key="Info"
+            android:title="Power File Manager" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
