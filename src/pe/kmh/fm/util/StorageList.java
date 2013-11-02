@@ -71,12 +71,13 @@ public class StorageList extends Activity {
 					mMounts.add(element);
 				}
 			}
+
+			scanner.close();
 		}
 		catch (Exception e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return mMounts;
 	}
 
@@ -109,6 +110,8 @@ public class StorageList extends Activity {
 					mVold.add(element);
 				}
 			}
+
+			scanner.close();
 		}
 		catch (Exception e) {
 			// Auto-generated catch block

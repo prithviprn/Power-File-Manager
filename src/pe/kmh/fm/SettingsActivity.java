@@ -116,12 +116,15 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	public String getLicenseText() {
 		StringBuilder outLines = new StringBuilder();
 		try {
+			@SuppressWarnings("resource")
 			Scanner s = new Scanner(this.getAssets().open("Apache.txt")).useDelimiter("\n");
 			while (true) {
 				outLines.append(s.next());
 				if (s.hasNext()) outLines.append("\n");
 				else break;
 			}
+			
+			s.close();
 		}
 		catch (IOException e) {
 		}

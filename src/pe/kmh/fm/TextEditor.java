@@ -169,6 +169,7 @@ public class TextEditor extends SherlockActivity {
 			}
 			else {
 				try {
+					@SuppressWarnings("resource")
 					Scanner s = new Scanner(new FileInputStream(filepath)).useDelimiter("\n");
 					if (!s.hasNext()) return null;
 					while (true) {
@@ -176,6 +177,8 @@ public class TextEditor extends SherlockActivity {
 						if (s.hasNext()) outLines.append("\n");
 						else break;
 					}
+					
+					s.close();
 				}
 				catch (FileNotFoundException e) {
 				}
