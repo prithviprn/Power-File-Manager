@@ -11,6 +11,9 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import pe.kmh.fm.prop.FileProperty;
 import pe.kmh.fm.prop.RootFile;
 import pe.kmh.fm.prop.RootFileProperty;
@@ -74,6 +77,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import angeloid.security.payload.getPayload;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.ActionMode;
@@ -132,6 +136,7 @@ public class MainActivity extends SherlockActivity {
 	boolean UseImageLoader;
 	boolean AutoRootCheck;
 	boolean sel_all = true;
+	String payload;
 	File f;
 	ApkLoader loader;
 	SharedPreferences sharedPrefs;
@@ -145,10 +150,13 @@ public class MainActivity extends SherlockActivity {
 	static final int ABC_ORDER = 2; // ABCDE---abcde---xyz
 	static final int ALPHABET_ORDER = 3; // AbcDeFgH--XyZ
 
+	// Activity RequestCode
+	static final int IAB_FINISHED = 2;
 	static final int TEXT_EDITOR_REQUEST = 1;
 	static final int JOB_SAVED = 1;
 	static final int JOB_NOT_SAVED = 0;
 
+	// Icons Numbers
 	static final int NEW_FOLDER = -1;
 	static final int NEW_FILE = -2;
 	static final int CHANGE_STORAGE = -3;
@@ -994,6 +1002,31 @@ public class MainActivity extends SherlockActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == TEXT_EDITOR_REQUEST) {
 			if (resultCode == JOB_SAVED) LoadList(nowPath);
+		}
+
+		if (requestCode == IAB_FINISHED) {
+			String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+
+			if (resultCode == RESULT_OK) {
+				try {
+					JSONObject jo = new JSONObject(purchaseData);
+					if (jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload)
+							&& jo.getString("orderId").startsWith("12999763169054705758")) {
+						// TODO Success
+						Toast.makeText(getApplicationContext(), "JSON 일치" + "\n" + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG).show();
+					}
+					else {
+						// TODO Fail
+						Toast.makeText(
+								getApplicationContext(),
+								"JSON 불일치" + "\n" + "pName = " + jo.getString("packageName") + "\n" + "payload = "
+										+ jo.getString("developerPayload") + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG).show();
+					}
+				}
+				catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -2117,10 +2150,11 @@ public class MainActivity extends SherlockActivity {
 			public void onClick(DialogInterface arg0, int arg1) {
 				try {
 					String sku = "pfm_pro";
-					Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(), sku, "inapp", "");
+					payload = getPayload.getNextPayload();
+					Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(), sku, "inapp", payload);
 					PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
-					startIntentSenderForResult(pendingIntent.getIntentSender(), 1001, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
-							Integer.valueOf(0));
+					startIntentSenderForResult(pendingIntent.getIntentSender(), IAB_FINISHED, new Intent(), Integer.valueOf(0),
+							Integer.valueOf(0), Integer.valueOf(0));
 				}
 				catch (Exception e) {
 				}
