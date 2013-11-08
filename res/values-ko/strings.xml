@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.5.1 업데이트\n1. Android 4.4 Kitkat 지원\n\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
+    <string name="UpdateLog">v3.6 업데이트\n1. UI 개선(일부 여백을 추가)\n2. 슬라이딩 메뉴에서 아이콘 추가\n3. 버튼 위치와 크기 개선\n\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
 
 </resources>

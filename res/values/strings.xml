@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.5.1 Update\n1. Android 4.4 Kitkat Support\n\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.6 Update\n1. UI Improved (Added some margins)\n2. Added Icon in Navigation Drawer(Sliding Menu)\n3. Buttons position fixed\n\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>
