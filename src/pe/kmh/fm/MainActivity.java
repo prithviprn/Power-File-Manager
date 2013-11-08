@@ -69,7 +69,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -483,7 +482,10 @@ public class MainActivity extends SherlockActivity {
 		MenuList = (ListView) findViewById(R.id.left_drawer);
 		if (appTheme.equals("Light")) MenuList.setBackgroundColor(Color.WHITE);
 		else MenuList.setBackgroundColor(Color.BLACK);
-		MenuList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MenuListItems));
+
+		ArrayList<String> arr = new ArrayList<String>();
+		Collections.addAll(arr, MenuListItems);
+		MenuList.setAdapter(new DrawerAdapter(arr));
 		MenuList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -1013,14 +1015,16 @@ public class MainActivity extends SherlockActivity {
 					if (jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload)
 							&& jo.getString("orderId").startsWith("12999763169054705758")) {
 						// TODO Success
-						Toast.makeText(getApplicationContext(), "JSON 일치" + "\n" + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "JSON 일치" + "\n" + "orderId = " + jo.getString("orderId"),
+								Toast.LENGTH_LONG).show();
 					}
 					else {
 						// TODO Fail
 						Toast.makeText(
 								getApplicationContext(),
 								"JSON 불일치" + "\n" + "pName = " + jo.getString("packageName") + "\n" + "payload = "
-										+ jo.getString("developerPayload") + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG).show();
+										+ jo.getString("developerPayload") + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG)
+								.show();
 					}
 				}
 				catch (JSONException e) {
@@ -2039,16 +2043,90 @@ public class MainActivity extends SherlockActivity {
 			holder.check.setVisibility(isSelected[position]);
 			return row;
 		}
+
+		class ViewHolder {
+
+			ImageView fileicon;
+			TextView filename;
+			TextView filedate;
+			TextView fileperm;
+			TextView filesize;
+			ImageView check;
+		}
 	}
 
-	static class ViewHolder {
+	public class DrawerAdapter extends BaseAdapter {
 
-		ImageView fileicon;
-		TextView filename;
-		TextView filedate;
-		TextView fileperm;
-		TextView filesize;
-		ImageView check;
+		private ArrayList<String> object;
+		ViewHolder holder;
+
+		public DrawerAdapter(ArrayList<String> object) {
+			super();
+			this.object = object;
+		}
+
+		@Override
+		public int getCount() {
+			return object.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return null;
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return 0;
+		}
+
+		@Override
+		public View getView(int pos, View convertView, ViewGroup parent) {
+			View row = convertView;
+			if (row == null) {
+				LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+				row = inflater.inflate(R.layout.menurow, parent, false);
+				holder = new ViewHolder();
+
+				// Find View
+				holder.icon = (ImageView) row.findViewById(R.id.icon);
+				holder.name = (TextView) row.findViewById(R.id.name);
+				row.setTag(holder);
+			}
+			else holder = (ViewHolder) row.getTag();
+
+			holder.name.setText(object.get(pos));
+
+			Drawable dr = null;
+			if (pos == 0) dr = res.getDrawable(R.drawable.folder);
+			else if (pos == 1) dr = res.getDrawable(R.drawable.others);
+			if (appTheme.equals("Dark")) {
+				if (pos == 2) dr = res.getDrawable(R.drawable.storage_icon_ondark);
+				else if (pos == 3) dr = res.getDrawable(R.drawable.refresh_icon_ondark);
+				else if (pos == 4) dr = res.getDrawable(R.drawable.search_icon_ondark);
+				else if (pos == 5 && !isRoot) dr = res.getDrawable(R.drawable.settings_icon_ondark);
+				else if (pos == 5 && isRoot) dr = res.getDrawable(R.drawable.reboot_icon_ondark);
+				else if (pos == 6) dr = res.getDrawable(R.drawable.buypro_icon_ondark);
+				else if (pos == 7) dr = res.getDrawable(R.drawable.settings_icon_ondark);
+			}
+			else {
+				if (pos == 2) dr = res.getDrawable(R.drawable.storage_icon_onlight);
+				else if (pos == 3) dr = res.getDrawable(R.drawable.refresh_icon_onlight);
+				else if (pos == 4) dr = res.getDrawable(R.drawable.search_icon_onlight);
+				else if (pos == 5 && !isRoot) dr = res.getDrawable(R.drawable.settings_icon_onlight);
+				else if (pos == 5 && isRoot) dr = res.getDrawable(R.drawable.reboot_icon_onlight);
+				else if (pos == 6) dr = res.getDrawable(R.drawable.buypro_icon_onlight);
+				else if (pos == 7) dr = res.getDrawable(R.drawable.settings_icon_onlight);
+			}
+			holder.icon.setImageDrawable(dr);
+			return row;
+		}
+
+		class ViewHolder {
+
+			ImageView icon;
+			TextView name;
+		}
 	}
 
 	public class ApkLoader {
