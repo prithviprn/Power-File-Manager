@@ -35,7 +35,7 @@
 
             <Button
                 android:id="@+id/CopyBtn"
-                android:layout_width="fill_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onCopyBtnPress"
@@ -44,7 +44,7 @@
 
             <Button
                 android:id="@+id/PasteBtn"
-                android:layout_width="fill_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onPasteBtnPress"
@@ -53,7 +53,7 @@
 
             <Button
                 android:id="@+id/MoveBtn"
-                android:layout_width="fill_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onMoveBtnPress"
@@ -62,7 +62,7 @@
 
             <Button
                 android:id="@+id/DeleteBtn"
-                android:layout_width="fill_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onDeleteBtnPress"

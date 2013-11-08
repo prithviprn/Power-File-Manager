@@ -203,11 +203,11 @@ public class MainActivity extends SherlockActivity {
 		myPath = (TextView) findViewById(R.id.path);
 		root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
 
-		findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+		findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 
 		setListeners();
 
@@ -439,11 +439,11 @@ public class MainActivity extends SherlockActivity {
 				}
 			}
 			Selected_Count = 0;
-			findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+			findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+			findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+			findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+			findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 		}
 	};
 
@@ -727,11 +727,11 @@ public class MainActivity extends SherlockActivity {
 				}
 
 				if (Clipboard_Count == 0) {
-					findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-					findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-					findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-					findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-					if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+					findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+					findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+					findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+					findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+					if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 				}
 			}
 
@@ -1140,11 +1140,11 @@ public class MainActivity extends SherlockActivity {
 			}
 		}).start();
 
-		findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+		findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 	}
 
 	public void onDeleteBtnPress(View v) {
@@ -1183,11 +1183,11 @@ public class MainActivity extends SherlockActivity {
 					}
 				}).start();
 
-				findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-				if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+				findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+				findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+				findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+				findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+				if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 			}
 		});
 
@@ -1279,11 +1279,11 @@ public class MainActivity extends SherlockActivity {
 			}
 		}).start();
 
-		findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+		findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 	}
 
 	public void onPermBtnPress(View v) {
@@ -1337,11 +1337,11 @@ public class MainActivity extends SherlockActivity {
 				LoadList(nowPath);
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+				findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+				findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+				findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+				findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+				findViewById(R.id.PermBtn).setVisibility(View.GONE);
 			}
 		});
 
@@ -1425,11 +1425,11 @@ public class MainActivity extends SherlockActivity {
 			list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
 		}
 
-		findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-		findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+		findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+		if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 
 		if (mActionMode != null && Selected_Count == 0) mActionMode.finish();
 	}
@@ -1445,9 +1445,9 @@ public class MainActivity extends SherlockActivity {
 			// When Selected_Count == 1, After this process it will be 0, then
 			// set copy/delete button invisible
 			if (Selected_Count == 1) {
-				CopyBtn.setVisibility(View.INVISIBLE);
-				DeleteBtn.setVisibility(View.INVISIBLE);
-				if (isRoot) PermBtn.setVisibility(View.INVISIBLE);
+				CopyBtn.setVisibility(View.GONE);
+				DeleteBtn.setVisibility(View.GONE);
+				if (isRoot) PermBtn.setVisibility(View.GONE);
 				mActionMode.finish();
 				Selected_Count = 1;
 			}
@@ -1469,6 +1469,11 @@ public class MainActivity extends SherlockActivity {
 		CopyBtn.setVisibility(View.VISIBLE); // Set Visible
 		DeleteBtn.setVisibility(View.VISIBLE); // Set Visible
 		if (isRoot) PermBtn.setVisibility(View.VISIBLE); // Set Visible
+		
+		// TODO TEST
+		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+		
 		isSelected[position] = View.VISIBLE; // Set Visible
 		Selected_Count++;
 		int firstPos = parent.getFirstVisiblePosition();
@@ -1500,11 +1505,11 @@ public class MainActivity extends SherlockActivity {
 		if (p == View.GONE) {
 			Selected_Count = 0;
 			mActionMode.finish();
-			findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-			findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+			findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+			findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+			findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+			findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 		}
 		mActionMode.setTitle(String.valueOf(Selected_Count) + " " + getString(R.string.N_Selected));
 		mActionMode.getMenu().findItem(R.id.Rename).setVisible(false);
@@ -1541,11 +1546,11 @@ public class MainActivity extends SherlockActivity {
 				File now = isRoot ? new RootFile(filepath) : new File(filepath);
 				now.renameTo(new File(nowPath + "/" + newNameStr));
 				LoadList(nowPath);
-				findViewById(R.id.CopyBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.PasteBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.MoveBtn).setVisibility(View.INVISIBLE);
-				findViewById(R.id.DeleteBtn).setVisibility(View.INVISIBLE);
-				if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.INVISIBLE);
+				findViewById(R.id.CopyBtn).setVisibility(View.GONE);
+				findViewById(R.id.PasteBtn).setVisibility(View.GONE);
+				findViewById(R.id.MoveBtn).setVisibility(View.GONE);
+				findViewById(R.id.DeleteBtn).setVisibility(View.GONE);
+				if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 			}

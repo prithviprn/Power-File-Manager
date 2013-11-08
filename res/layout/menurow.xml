@@ -15,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingLeft="10sp"
+        android:paddingLeft="6sp"
         android:paddingTop="5dp"
         android:textColor="?android:attr/textColorPrimary"
-        android:textSize="19sp" />
+        android:textSize="17sp" />
 
 </LinearLayout>

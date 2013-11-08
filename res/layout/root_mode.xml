@@ -27,63 +27,57 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom" >
+            android:gravity="bottom"
+            android:orientation="horizontal" >
 
-            <TableRow>
+            <Button
+                android:id="@+id/CopyBtn"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onCopyBtnPress"
+                android:text="@string/Copy"
+                android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/PermBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_column="3"
-                    android:layout_weight="1"
-                    android:onClick="onPermBtnPress"
-                    android:text="@string/Perm"
-                    android:textSize="13sp" />
-            </TableRow>
+            <Button
+                android:id="@+id/PasteBtn"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onPasteBtnPress"
+                android:text="@string/Paste"
+                android:textSize="13sp" />
 
-            <TableRow>
+            <Button
+                android:id="@+id/MoveBtn"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onMoveBtnPress"
+                android:text="@string/Move"
+                android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/CopyBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onCopyBtnPress"
-                    android:text="@string/Copy"
-                    android:textSize="13sp" />
+            <Button
+                android:id="@+id/DeleteBtn"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onDeleteBtnPress"
+                android:text="@string/Delete"
+                android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/PasteBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onPasteBtnPress"
-                    android:text="@string/Paste"
-                    android:textSize="13sp" />
-
-                <Button
-                    android:id="@+id/MoveBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onMoveBtnPress"
-                    android:text="@string/Move"
-                    android:textSize="13sp" />
-
-                <Button
-                    android:id="@+id/DeleteBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onDeleteBtnPress"
-                    android:text="@string/Delete"
-                    android:textSize="13sp" />
-            </TableRow>
-        </TableLayout>
+            <Button
+                android:id="@+id/PermBtn"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onPermBtnPress"
+                android:text="@string/Perm"
+                android:textSize="13sp" />
+        </LinearLayout>
     </FrameLayout>
 
     <ListView
