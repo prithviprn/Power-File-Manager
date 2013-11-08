@@ -1015,16 +1015,12 @@ public class MainActivity extends SherlockActivity {
 					if (jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload)
 							&& jo.getString("orderId").startsWith("12999763169054705758")) {
 						// TODO Success
-						Toast.makeText(getApplicationContext(), "JSON 일치" + "\n" + "orderId = " + jo.getString("orderId"),
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "License Check Successful", Toast.LENGTH_LONG).show();
 					}
 					else {
 						// TODO Fail
-						Toast.makeText(
-								getApplicationContext(),
-								"JSON 불일치" + "\n" + "pName = " + jo.getString("packageName") + "\n" + "payload = "
-										+ jo.getString("developerPayload") + "orderId = " + jo.getString("orderId"), Toast.LENGTH_LONG)
-								.show();
+						Toast.makeText(getApplicationContext(), "License Check FAILED\n" + "orderId = " + jo.getString("orderId"),
+								Toast.LENGTH_LONG).show();
 					}
 				}
 				catch (JSONException e) {
@@ -1469,11 +1465,11 @@ public class MainActivity extends SherlockActivity {
 		CopyBtn.setVisibility(View.VISIBLE); // Set Visible
 		DeleteBtn.setVisibility(View.VISIBLE); // Set Visible
 		if (isRoot) PermBtn.setVisibility(View.VISIBLE); // Set Visible
-		
+
 		// TODO TEST
 		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
 		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
-		
+
 		isSelected[position] = View.VISIBLE; // Set Visible
 		Selected_Count++;
 		int firstPos = parent.getFirstVisiblePosition();

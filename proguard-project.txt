@@ -19,21 +19,17 @@
 #   public *;
 #}
 
-#-libraryjars libs/android-support-v4.jar
-#-libraryjars libs/Commons-Compress-1.5.jar
-#-libraryjars libs/RootTools-2.6.jar
+-keep class com.android.vending.billing.**
 
-#-keep class com.android.vending.billing.**
-#-keep class android.support.v4.app.** { *; }
-#-keep interface android.support.v4.app.** { *; }
-#-keep class com.actionbarsherlock.** { *; }
-#-keep interface com.actionbarsherlock.** { *; }
-#-keep class org.apache.commons.compress.** { *; }
-#-keep interface org.apache.commons.compress.** { *; }
-#-keep class org.tukaani.** { *; }
-#-keep interface org.tukaani.** { *; }
-#-keepclassmembers class **.R$* { public static <fields>; }
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+-keep class com.actionbarsherlock.** { *; }
+-keep interface com.actionbarsherlock.** { *; }
+-keep class org.apache.commons.compress.** { *; }
+-keep interface org.apache.commons.compress.** { *; }
+-keep class org.tukaani.** { *; }
+-keep interface org.tukaani.** { *; }
 
-#-keepattributes *Annotation*
-
-#-dontwarn com.actionbarsherlock.*
+-dontwarn org.apache.commons.compress.**
+-dontwarn com.actionbarsherlock.**
+-keepattributes *Annotation*
