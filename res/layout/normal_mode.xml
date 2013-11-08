@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:onClick="onCopyBtnPress"
                 android:text="@string/Copy"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/PasteBtn"
@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:onClick="onPasteBtnPress"
                 android:text="@string/Paste"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/MoveBtn"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:onClick="onMoveBtnPress"
                 android:text="@string/Move"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/DeleteBtn"
@@ -67,7 +67,7 @@
                 android:layout_weight="1"
                 android:onClick="onDeleteBtnPress"
                 android:text="@string/Delete"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
         </LinearLayout>
     </FrameLayout>
 

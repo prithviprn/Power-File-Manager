@@ -424,6 +424,10 @@ public class MainActivity extends SherlockActivity {
 				}
 			}
 
+			else if (itemId == R.id.Item_info) {
+				// TODO Item Info
+			}
+
 			return false;
 		}
 
@@ -450,6 +454,11 @@ public class MainActivity extends SherlockActivity {
 	public void importPreferences() {
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = sharedPrefs.edit();
+		if (sharedPrefs.getBoolean("CrackAttempt", false)) {
+			Toast.makeText(getApplicationContext(), R.string.Crack_Detected, Toast.LENGTH_LONG).show();
+			finish();
+		}
+		
 		appTheme = sharedPrefs.getString("AppTheme", "Light");
 		if (appTheme.equals("Light")) setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
 		else if (appTheme.equals("Dark")) setTheme(R.style.Theme_Sherlock);
@@ -1012,15 +1021,12 @@ public class MainActivity extends SherlockActivity {
 			if (resultCode == RESULT_OK) {
 				try {
 					JSONObject jo = new JSONObject(purchaseData);
-					if (jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload)
-							&& jo.getString("orderId").startsWith("12999763169054705758")) {
-						// TODO Success
-						Toast.makeText(getApplicationContext(), "License Check Successful", Toast.LENGTH_LONG).show();
-					}
-					else {
-						// TODO Fail
-						Toast.makeText(getApplicationContext(), "License Check FAILED\n" + "orderId = " + jo.getString("orderId"),
-								Toast.LENGTH_LONG).show();
+					if (!(jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload) && jo
+							.getString("orderId").startsWith("12999763169054705758"))) {
+						Toast.makeText(getApplicationContext(), "License Check FAILED\n", Toast.LENGTH_LONG).show();
+						editor.putBoolean("CrackAttempt", true);
+						editor.commit();
+						finish();
 					}
 				}
 				catch (JSONException e) {

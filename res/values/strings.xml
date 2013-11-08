@@ -82,6 +82,7 @@
     <string name="Opening">Opening File..</string>
     <string name="ToUnZip">Destination to Unzip</string>
     <string name="Share">Share</string>
+    <string name="Item_info">Details</string>
     <string name="Reboot">Reboot</string>
     <string name="RebootConfirm">REBOOT: Are you sure?</string>
     <string name="SomeDevicesNotOK">In some devices, may not work.</string>
@@ -93,6 +94,7 @@
     <string name="CannotShare">No Apps found to share this item.</string>
     <string name="UnknownErrorDuringisPro">Unknown Error happened during checking the purchased item list.</string>
     <string name="SlideIt">To open menu: Slide left to right!</string>
+    <string name="Crack_Detected">Crack attempt detected. Uninstall this app and re-install from play store.</string>
     <string name="OpenMenu">Open Menu</string>
     <string name="CloseMenu">Close Menu</string>
     <string name="FirstStart">Welcome</string>
