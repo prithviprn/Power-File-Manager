@@ -136,6 +136,7 @@ public class MainActivity extends SherlockActivity {
 	boolean AutoRootCheck;
 	boolean sel_all = true;
 	String payload;
+	boolean isCracked = false;
 	File f;
 	ApkLoader loader;
 	SharedPreferences sharedPrefs;
@@ -454,11 +455,7 @@ public class MainActivity extends SherlockActivity {
 	public void importPreferences() {
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = sharedPrefs.edit();
-		if (sharedPrefs.getBoolean("CrackAttempt", false)) {
-			Toast.makeText(getApplicationContext(), R.string.Crack_Detected, Toast.LENGTH_LONG).show();
-			finish();
-		}
-		
+
 		appTheme = sharedPrefs.getString("AppTheme", "Light");
 		if (appTheme.equals("Light")) setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
 		else if (appTheme.equals("Dark")) setTheme(R.style.Theme_Sherlock);
@@ -589,7 +586,7 @@ public class MainActivity extends SherlockActivity {
 				else if (itemId == SETTING) {
 					Intent sActivity = new Intent(MainActivity.this, SettingsActivity.class);
 					sActivity.putExtra("isRoot", isRoot).putExtra("isPro", isPro());
-					startActivity(sActivity);
+					if(!isCracked) startActivity(sActivity);
 					return;
 				}
 
@@ -603,7 +600,6 @@ public class MainActivity extends SherlockActivity {
 
 						// Purchase it
 						Upgrade();
-
 					}
 					catch (Exception e) {
 					}
@@ -1023,10 +1019,18 @@ public class MainActivity extends SherlockActivity {
 					JSONObject jo = new JSONObject(purchaseData);
 					if (!(jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload) && jo
 							.getString("orderId").startsWith("12999763169054705758"))) {
-						Toast.makeText(getApplicationContext(), "License Check FAILED\n", Toast.LENGTH_LONG).show();
-						editor.putBoolean("CrackAttempt", true);
-						editor.commit();
-						finish();
+						AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
+						ad.setMessage(R.string.Crack_Detected);
+						ad.setCancelable(false);
+						ad.setPositiveButton("OK", new OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								android.os.Process.killProcess(android.os.Process.myPid());
+							}
+
+						});
+						ad.show();
 					}
 				}
 				catch (JSONException e) {
@@ -1291,10 +1295,11 @@ public class MainActivity extends SherlockActivity {
 	public void onPermBtnPress(View v) {
 		// MULTI-PERMISSION
 		// Pro Ver Check
-		boolean isPro = isPro();
-		if (!isPro && Selected_Count > 3) {
-			Upgrade();
-			Refresh_Screen();
+		if (Selected_Count > 3) {
+			if (!isPro()) {
+				Upgrade();
+				Refresh_Screen();
+			}
 			return;
 		}
 
@@ -2268,7 +2273,35 @@ public class MainActivity extends SherlockActivity {
 			int response = ownedItems.getInt("RESPONSE_CODE");
 			ArrayList<String> ownedSkus = null;
 
-			if (response == 0) ownedSkus = ownedItems.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+			if (response == 0) {
+				ownedSkus = ownedItems.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+				ArrayList<String> purchaseData = ownedItems.getStringArrayList("INAPP_PURCHASE_DATA_LIST");
+				try {
+					if (purchaseData.size() > 0) {
+						JSONObject jo = new JSONObject(purchaseData.get(0));
+						if (!(jo.getString("packageName").equals(getPackageName()) && jo.getString("orderId").startsWith(
+								"12999763169054705758"))) {
+							isCracked = true;
+							AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
+							ad.setMessage(R.string.Crack_Detected);
+							ad.setCancelable(false);
+							ad.setPositiveButton("OK", new OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									android.os.Process.killProcess(android.os.Process.myPid());
+								}
+
+							});
+							ad.show();
+						}
+					}
+				}
+				catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
 
 			if (response == 0 && ownedSkus.size() > 0 && ownedSkus.get(0).equals("pfm_pro")) return true;
 		}
