@@ -586,7 +586,7 @@ public class MainActivity extends SherlockActivity {
 				else if (itemId == SETTING) {
 					Intent sActivity = new Intent(MainActivity.this, SettingsActivity.class);
 					sActivity.putExtra("isRoot", isRoot).putExtra("isPro", isPro());
-					if(!isCracked) startActivity(sActivity);
+					if (!isCracked) startActivity(sActivity);
 					return;
 				}
 
@@ -1467,9 +1467,9 @@ public class MainActivity extends SherlockActivity {
 			ImageView check = (ImageView) v.findViewById(R.id.check);
 			check.setVisibility(View.GONE); // Uncheck it
 			check.refreshDrawableState(); // Refresh Button
-			mActionMode.setTitle(String.valueOf(Selected_Count) + " " + getString(R.string.N_Selected));
+			if (Selected_Count > 0) mActionMode.setTitle(String.valueOf(Selected_Count) + " " + getString(R.string.N_Selected));
 			if (Selected_Count == 1) mActionMode.getMenu().findItem(R.id.Rename).setVisible(true);
-			else mActionMode.getMenu().findItem(R.id.Rename).setVisible(false);
+			else if (Selected_Count > 1) mActionMode.getMenu().findItem(R.id.Rename).setVisible(false);
 			return;
 		}
 

@@ -18,14 +18,14 @@
     <item
         android:id="@+id/Share"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom" 
+        android:showAsAction="always" 
         android:icon="@drawable/share_icon_ondark"
         android:title="@string/Share" />
     
     <item
         android:id="@+id/Item_info"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom" 
+        android:showAsAction="always" 
         android:icon="@drawable/info_icon_ondark"
         android:title="@string/Item_info" />
 </menu>
