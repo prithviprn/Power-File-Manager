@@ -135,6 +135,7 @@ public class MainActivity extends SherlockActivity {
 	boolean UseImageLoader;
 	boolean AutoRootCheck;
 	boolean sel_all = true;
+	String StartPathPref;
 	String payload;
 	boolean isCracked = false;
 	File f;
@@ -202,8 +203,19 @@ public class MainActivity extends SherlockActivity {
 		res = getResources();
 
 		myPath = (TextView) findViewById(R.id.path);
+		
 		root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
-
+		
+		StartPathPref = sharedPrefs.getString("StartPath", "Automatic");
+		if(StartPathPref.equals("Internal")) root = Environment.getExternalStorageDirectory().toString();
+		else if(StartPathPref.equals("External")) root = StorageList.getMicroSDCardDirectory();
+		if(root == null) {
+			StartPathPref = "External";
+			root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
+		}
+		
+		
+		
 		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
 		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
 		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
@@ -230,6 +242,7 @@ public class MainActivity extends SherlockActivity {
 			aDialog.setPositiveButton(getString(R.string.Finish), new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int which) {
+					MenuLayout.openDrawer(MenuList);
 				}
 			});
 
@@ -240,14 +253,13 @@ public class MainActivity extends SherlockActivity {
 					Intent intent = new Intent(Intent.ACTION_VIEW);
 					intent.setData(Uri.parse("market://details?id=pe.kmh.fm"));
 					startActivity(intent);
+					MenuLayout.openDrawer(MenuList);
 				}
 			});
 
 			aDialog.show();
 
 			editor.putBoolean("HiddenOption", isRoot);
-
-			MenuLayout.openDrawer(MenuList);
 			Toast.makeText(getApplicationContext(), getString(R.string.SlideIt), Toast.LENGTH_LONG).show();
 		}
 
@@ -377,7 +389,7 @@ public class MainActivity extends SherlockActivity {
 					String s;
 					String path = nowPath.endsWith("/") ? nowPath : nowPath + "/";
 					ArrayList<Uri> Uris = new ArrayList<Uri>();
-					for (int i = 0; i <= MAX_LIST_ITEMS; i++) {
+					for (int i = 0; i < (isRoot ? rootitem.size() : item.size()); i++) {
 						if (isSelected[i] == View.VISIBLE) {
 							if (isRoot) s = path + rootitem.get(i).getName();
 							else s = path + item.get(i).getName();
@@ -474,6 +486,8 @@ public class MainActivity extends SherlockActivity {
 		UseImageLoader = sharedPrefs.getBoolean("UseImageLoader", true);
 
 		AutoRootCheck = sharedPrefs.getBoolean("AutoRootCheck", true);
+		
+		
 	}
 
 	public void setListeners() {
@@ -1477,7 +1491,6 @@ public class MainActivity extends SherlockActivity {
 		DeleteBtn.setVisibility(View.VISIBLE); // Set Visible
 		if (isRoot) PermBtn.setVisibility(View.VISIBLE); // Set Visible
 
-		// TODO TEST
 		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
 		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
 
@@ -1697,8 +1710,6 @@ public class MainActivity extends SherlockActivity {
 				item = new ArrayList<FileProperty>();
 				rootitem = new ArrayList<RootFileProperty>();
 				path = new ArrayList<String>();
-				// clipboard.clear();
-				// Clipboard_Count = 0;
 				nowlevel = -1;
 				list_state_index = new int[MAX_LIST_ITEMS + 1];
 				list_state_top = new int[MAX_LIST_ITEMS + 1];
@@ -2202,6 +2213,7 @@ public class MainActivity extends SherlockActivity {
 				BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad);
 				Activity a = (Activity) photoToLoad.imageView.getContext();
 				a.runOnUiThread(bd);
+				bmp.recycle();
 			}
 		}
 

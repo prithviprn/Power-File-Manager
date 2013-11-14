@@ -133,11 +133,7 @@ public class StorageList extends Activity {
 	}
 
 	private static boolean isAvailableFileSystem(String fileSystemName) {
-		final String[] unAvailableFileSystemList = { "/dev", "/mnt/asec", "/mnt/obb", "/system", "/data", "/cache", "/efs", "/firmware" }; // 알려진
-																																			// File
-																																			// System
-																																			// List입니다.
-
+		final String[] unAvailableFileSystemList = { "/dev", "/mnt/asec", "/mnt/obb", "/system", "/data", "/cache", "/efs", "/firmware" };
 		for (String name : unAvailableFileSystemList) {
 			if (fileSystemName.contains(name) == true) { return false; }
 		}

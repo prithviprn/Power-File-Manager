@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
+
     <item
         android:id="@+id/Rename"
-        android:orderInCategory="100"
-        android:showAsAction="always"
         android:icon="@drawable/rename_icon_ondark"
-        android:title="@string/Rename" />
-    
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/Rename"/>
     <item
         android:id="@+id/SelectAll"
-        android:orderInCategory="100"
-        android:showAsAction="always"
         android:icon="@drawable/select_all_icon_ondark"
-        android:title="@string/SelectAll" />
-    
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/SelectAll"/>
     <item
         android:id="@+id/Share"
-        android:orderInCategory="100"
-        android:showAsAction="always" 
         android:icon="@drawable/share_icon_ondark"
-        android:title="@string/Share" />
-    
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/Share"/>
     <item
         android:id="@+id/Item_info"
-        android:orderInCategory="100"
-        android:showAsAction="always" 
         android:icon="@drawable/info_icon_ondark"
-        android:title="@string/Item_info" />
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/Item_info"/>
+
 </menu>

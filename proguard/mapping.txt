@@ -9119,20 +9119,21 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     boolean UseImageLoader -> z
     boolean AutoRootCheck -> S
     boolean sel_all -> A
+    java.lang.String StartPathPref -> T
     java.lang.String payload -> B
     boolean isCracked -> C
     java.io.File f -> D
     pe.kmh.fm.MainActivity$ApkLoader loader -> E
-    android.content.SharedPreferences sharedPrefs -> T
-    android.content.SharedPreferences$Editor editor -> U
-    java.lang.String[] MenuListItems -> V
+    android.content.SharedPreferences sharedPrefs -> U
+    android.content.SharedPreferences$Editor editor -> V
+    java.lang.String[] MenuListItems -> W
     android.support.v4.widget.DrawerLayout MenuLayout -> F
-    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> W
+    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> X
     android.widget.ListView MenuList -> G
     java.lang.StringBuilder sb -> H
     com.android.vending.billing.IInAppBillingService mService -> I
     com.actionbarsherlock.view.ActionMode mActionMode -> J
-    android.content.ServiceConnection mServiceConn -> X
+    android.content.ServiceConnection mServiceConn -> Y
     com.actionbarsherlock.view.ActionMode$Callback mActionModeCallback -> K
     void onStart() -> onStart
     void onCreate(android.os.Bundle) -> onCreate
@@ -9258,6 +9259,7 @@ pe.kmh.fm.MainActivity$29 -> pe.kmh.fm.z:
     java.lang.String val$extPath -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$3 -> pe.kmh.fm.A:
+    pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$30 -> pe.kmh.fm.B:
     pe.kmh.fm.MainActivity this$0 -> a
@@ -9476,7 +9478,8 @@ pe.kmh.fm.SettingsActivity -> pe.kmh.fm.SettingsActivity:
     android.content.SharedPreferences$OnSharedPreferenceChangeListener ospcl -> b
     void onCreate(android.os.Bundle) -> onCreate
     boolean onPreferenceTreeClick(android.preference.PreferenceScreen,android.preference.Preference) -> onPreferenceTreeClick
-    java.lang.String getLicenseText() -> a
+    void Refresh_Screen() -> a
+    java.lang.String getLicenseText() -> b
     void onResume() -> onResume
     void onPause() -> onPause
     void onDestroy() -> onDestroy

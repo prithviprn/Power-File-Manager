@@ -7,7 +7,6 @@
             android:entries="@array/themes"
             android:entryValues="@array/themesValues"
             android:key="AppTheme"
-            android:summary="@string/ThemeSettingSummary"
             android:title="@string/ThemeSetting" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/ViewSetting" >
@@ -16,7 +15,6 @@
             android:entries="@array/SortOptions"
             android:entryValues="@array/SortOptionsValues"
             android:key="SortOption"
-            android:summary="@string/SortSummary"
             android:title="@string/SortSetting" />
 
         <CheckBoxPreference
@@ -28,6 +26,12 @@
             android:key="UseImageLoader"
             android:summary="@string/UseImageLoaderSummary"
             android:title="@string/UseImageLoader" />
+
+        <ListPreference
+            android:defaultValue="Automatic"
+            android:key="StartPath"
+            android:title="@string/StartPath"
+            android:entryValues="@array/StartPath" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/ForRootUsers" >
         <PreferenceScreen

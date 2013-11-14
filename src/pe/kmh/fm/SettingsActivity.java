@@ -3,6 +3,7 @@ package pe.kmh.fm;
 import java.io.IOException;
 import java.util.Scanner;
 
+import pe.kmh.fm.util.StorageList;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
@@ -10,6 +11,8 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -23,7 +26,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 	SharedPreferences sharedPrefs;
 	OnSharedPreferenceChangeListener ospcl;
-	
+
 	@SuppressLint("InlinedApi")
 	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,45 +61,24 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			getPreferenceScreen().findPreference("AutoPermissionOptions").setEnabled(false);
 		}
 
-		if (isRoot) {
-			sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-			ospcl = new OnSharedPreferenceChangeListener() {
-				@Override
-				public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-					String sApp = sharedPrefs.getString("SystemApp_APerm", "644");
-					String sEtc = sharedPrefs.getString("SystemEtc_APerm", "644");
-					String sFonts = sharedPrefs.getString("SystemFonts_APerm", "644");
-					String sFrame = sharedPrefs.getString("SystemFramework_APerm", "644");
-					String sMedia = sharedPrefs.getString("SystemMedia_APerm", "644");
-					String s = sharedPrefs.getString("System_APerm", "644");
-					
-					PreferenceScreen Opts = ((PreferenceScreen) getPreferenceScreen().findPreference("AutoPermissionOptions"));
-					
-					Opts.findPreference("SystemApp_APerm").setSummary(sApp);
-					Opts.findPreference("SystemEtc_APerm").setSummary(sEtc);
-					Opts.findPreference("SystemFonts_APerm").setSummary(sFonts);
-					Opts.findPreference("SystemFramework_APerm").setSummary(sFrame);
-					Opts.findPreference("SystemMedia_APerm").setSummary(sMedia);
-					Opts.findPreference("System_APerm").setSummary(s);
-				}
-			};
-			
-			String sApp = sharedPrefs.getString("SystemApp_APerm", "644");
-			String sEtc = sharedPrefs.getString("SystemEtc_APerm", "644");
-			String sFonts = sharedPrefs.getString("SystemFonts_APerm", "644");
-			String sFrame = sharedPrefs.getString("SystemFramework_APerm", "644");
-			String sMedia = sharedPrefs.getString("SystemMedia_APerm", "644");
-			String s = sharedPrefs.getString("System_APerm", "644");
-			
-			PreferenceScreen Opts = ((PreferenceScreen) getPreferenceScreen().findPreference("AutoPermissionOptions"));
-			
-			Opts.findPreference("SystemApp_APerm").setSummary(sApp);
-			Opts.findPreference("SystemEtc_APerm").setSummary(sEtc);
-			Opts.findPreference("SystemFonts_APerm").setSummary(sFonts);
-			Opts.findPreference("SystemFramework_APerm").setSummary(sFrame);
-			Opts.findPreference("SystemMedia_APerm").setSummary(sMedia);
-			Opts.findPreference("System_APerm").setSummary(s);
-		}
+		ListPreference startPath = (ListPreference) getPreferenceScreen().findPreference("StartPath");
+		String extPath = StorageList.getMicroSDCardDirectory();
+		String items[] = extPath != null ? new String[3] : new String[2];
+		items[0] = getString(R.string.AutomaticSet);
+		items[1] = Environment.getExternalStorageDirectory().getAbsolutePath() + "\n[" + getString(R.string.InternalStorage) + "]";
+		if (extPath != null) items[2] = extPath + "\n[" + getString(R.string.ExternalStorage) + "]";
+
+		startPath.setEntries(items);
+
+		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		ospcl = new OnSharedPreferenceChangeListener() {
+
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+				Refresh_Screen();
+			}
+		};
+		Refresh_Screen();
 	}
 
 	@Override
@@ -113,6 +95,45 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
 
+	@SuppressWarnings("deprecation")
+	public void Refresh_Screen() {
+
+		PreferenceScreen ps = getPreferenceScreen();
+		String theme = sharedPrefs.getString("AppTheme", getString(R.string.Light_DarkActionBar));
+		if (theme.equals("Light")) theme = getString(R.string.Light_DarkActionBar);
+		else if (theme.equals("Dark")) theme = getString(R.string.Dark);
+
+		String sort = sharedPrefs.getString("SortOption", getString(R.string.Alphabet));
+		if (sort.equals("Alphabet")) sort = getString(R.string.Alphabet);
+		else if (sort.equals("FolderFirst")) sort = getString(R.string.FolderFirst);
+		else if (sort.equals("ABC")) sort = getString(R.string.ABC);
+		String startPath = sharedPrefs.getString("StartPath", getString(R.string.AutomaticSet));
+		if (startPath.equals("Automatic")) startPath = getString(R.string.AutomaticSet);
+		else if (startPath.equals("Internal")) startPath = getString(R.string.InternalStorage);
+		else if (startPath.equals("External")) startPath = getString(R.string.ExternalStorage);
+
+		ps.findPreference("AppTheme").setSummary(theme);
+		ps.findPreference("SortOption").setSummary(sort);
+		ps.findPreference("StartPath").setSummary(startPath);
+
+		PreferenceScreen Opts = ((PreferenceScreen) getPreferenceScreen().findPreference("AutoPermissionOptions"));
+
+		String sApp = sharedPrefs.getString("SystemApp_APerm", "644");
+		String sEtc = sharedPrefs.getString("SystemEtc_APerm", "644");
+		String sFonts = sharedPrefs.getString("SystemFonts_APerm", "644");
+		String sFrame = sharedPrefs.getString("SystemFramework_APerm", "644");
+		String sMedia = sharedPrefs.getString("SystemMedia_APerm", "644");
+		String sys = sharedPrefs.getString("System_APerm", "644");
+
+		Opts.findPreference("SystemApp_APerm").setSummary(sApp);
+		Opts.findPreference("SystemEtc_APerm").setSummary(sEtc);
+		Opts.findPreference("SystemFonts_APerm").setSummary(sFonts);
+		Opts.findPreference("SystemFramework_APerm").setSummary(sFrame);
+		Opts.findPreference("SystemMedia_APerm").setSummary(sMedia);
+		Opts.findPreference("System_APerm").setSummary(sys);
+
+	}
+
 	public String getLicenseText() {
 		StringBuilder outLines = new StringBuilder();
 		try {
@@ -123,7 +144,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				if (s.hasNext()) outLines.append("\n");
 				else break;
 			}
-			
+
 			s.close();
 		}
 		catch (IOException e) {
@@ -134,16 +155,16 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 	@Override
 	protected void onResume() {
-	    super.onResume();
-	    if(sharedPrefs != null && ospcl != null) sharedPrefs.registerOnSharedPreferenceChangeListener(ospcl);
+		super.onResume();
+		if (sharedPrefs != null && ospcl != null) sharedPrefs.registerOnSharedPreferenceChangeListener(ospcl);
 	}
 
 	@Override
-	protected void onPause() {      
-	    super.onPause();
-	    if(sharedPrefs != null && ospcl != null) sharedPrefs.unregisterOnSharedPreferenceChangeListener(ospcl);
+	protected void onPause() {
+		super.onPause();
+		if (sharedPrefs != null && ospcl != null) sharedPrefs.unregisterOnSharedPreferenceChangeListener(ospcl);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
