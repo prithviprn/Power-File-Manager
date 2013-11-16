@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 
@@ -18,7 +19,8 @@ public class StorageList extends Activity {
 		for (int i = 0; i < mMounts.size(); i++) {
 			String mount = mMounts.get(i);
 
-			if (!mVold.contains(mount)) {
+			// vold.fstab Check : below Android 4.3
+			if (!mVold.contains(mount) && Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
 				mMounts.remove(i--);
 				continue;
 			}

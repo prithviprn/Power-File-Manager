@@ -2213,7 +2213,7 @@ public class MainActivity extends SherlockActivity {
 				BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad);
 				Activity a = (Activity) photoToLoad.imageView.getContext();
 				a.runOnUiThread(bd);
-				bmp.recycle();
+//				bmp.recycle();
 			}
 		}
 
