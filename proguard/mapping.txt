@@ -1195,8 +1195,6 @@ android.support.v4.app.Watson$OnOptionsItemSelectedListener -> android.support.v
 android.support.v4.app.Watson$OnPrepareOptionsMenuListener -> android.support.v4.app.Watson$OnPrepareOptionsMenuListener:
     void onPrepareOptionsMenu(com.actionbarsherlock.view.Menu) -> onPrepareOptionsMenu
 android.support.v4.content.ContextCompat -> android.support.v4.a.a:
-    int homeAsUpIndicator -> homeAsUpIndicator
-    int abs__home -> abs__home
     boolean startActivities(android.content.Context,android.content.Intent[]) -> startActivities
     boolean startActivities(android.content.Context,android.content.Intent[],android.os.Bundle) -> startActivities
     void startActivities(android.content.Context,android.content.Intent[]) -> startActivities
@@ -1289,16 +1287,7 @@ android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateIcsImpl
     boolean onRequestSendAccessibilityEvent(java.lang.Object,android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
     void sendAccessibilityEvent(java.lang.Object,android.view.View,int) -> a
     void sendAccessibilityEventUnchecked(java.lang.Object,android.view.View,android.view.accessibility.AccessibilityEvent) -> d
-android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateIcsImpl$1 -> android.support.v4.c.c:
-    android.support.v4.view.AccessibilityDelegateCompat val$compat -> a
-    boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> a
-    void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> b
-    void onInitializeAccessibilityNodeInfo(android.view.View,java.lang.Object) -> a
-    void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> c
-    boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
-    void sendAccessibilityEvent(android.view.View,int) -> a
-    void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> d
-android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateImpl -> android.support.v4.c.d:
+android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateImpl -> android.support.v4.c.c:
     java.lang.Object newAccessiblityDelegateDefaultImpl() -> a
     java.lang.Object newAccessiblityDelegateBridge(android.support.v4.view.AccessibilityDelegateCompat) -> a
     boolean dispatchPopulateAccessibilityEvent(java.lang.Object,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
@@ -1310,11 +1299,11 @@ android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateImpl ->
     void sendAccessibilityEventUnchecked(java.lang.Object,android.view.View,android.view.accessibility.AccessibilityEvent) -> d
     android.support.v4.view.accessibility.AccessibilityNodeProviderCompat getAccessibilityNodeProvider(java.lang.Object,android.view.View) -> a
     boolean performAccessibilityAction(java.lang.Object,android.view.View,int,android.os.Bundle) -> a
-android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateJellyBeanImpl -> android.support.v4.c.e:
+android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateJellyBeanImpl -> android.support.v4.c.d:
     java.lang.Object newAccessiblityDelegateBridge(android.support.v4.view.AccessibilityDelegateCompat) -> a
     android.support.v4.view.accessibility.AccessibilityNodeProviderCompat getAccessibilityNodeProvider(java.lang.Object,android.view.View) -> a
     boolean performAccessibilityAction(java.lang.Object,android.view.View,int,android.os.Bundle) -> a
-android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateJellyBeanImpl$1 -> android.support.v4.c.f:
+android.support.v4.view.AccessibilityDelegateCompatIcs -> android.support.v4.c.e:
     android.support.v4.view.AccessibilityDelegateCompat val$compat -> a
     boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> a
     void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> b
@@ -1323,10 +1312,8 @@ android.support.v4.view.AccessibilityDelegateCompat$AccessibilityDelegateJellyBe
     boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
     void sendAccessibilityEvent(android.view.View,int) -> a
     void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> d
-    java.lang.Object getAccessibilityNodeProvider(android.view.View) -> a
-    boolean performAccessibilityAction(android.view.View,int,android.os.Bundle) -> a
-android.support.v4.view.AccessibilityDelegateCompatIcs$1 -> android.support.v4.c.g:
-    android.support.v4.view.AccessibilityDelegateCompatIcs$AccessibilityDelegateBridge val$bridge -> a
+android.support.v4.view.AccessibilityDelegateCompatIcs$1 -> android.support.v4.c.f:
+    android.support.v4.view.AccessibilityDelegateCompatIcs val$bridge$6be2295a -> a
     boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> dispatchPopulateAccessibilityEvent
     void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> onInitializeAccessibilityEvent
     void onInitializeAccessibilityNodeInfo(android.view.View,android.view.accessibility.AccessibilityNodeInfo) -> onInitializeAccessibilityNodeInfo
@@ -1334,15 +1321,7 @@ android.support.v4.view.AccessibilityDelegateCompatIcs$1 -> android.support.v4.c
     boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> onRequestSendAccessibilityEvent
     void sendAccessibilityEvent(android.view.View,int) -> sendAccessibilityEvent
     void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> sendAccessibilityEventUnchecked
-android.support.v4.view.AccessibilityDelegateCompatIcs$AccessibilityDelegateBridge -> android.support.v4.c.h:
-    boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> a
-    void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> b
-    void onInitializeAccessibilityNodeInfo(android.view.View,java.lang.Object) -> a
-    void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> c
-    boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
-    void sendAccessibilityEvent(android.view.View,int) -> a
-    void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> d
-android.support.v4.view.AccessibilityDelegateCompatJellyBean$1 -> android.support.v4.c.i:
+android.support.v4.view.AccessibilityDelegateCompatJellyBean$1 -> android.support.v4.c.g:
     android.support.v4.view.AccessibilityDelegateCompatJellyBean$AccessibilityDelegateBridgeJellyBean val$bridge -> a
     boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> dispatchPopulateAccessibilityEvent
     void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> onInitializeAccessibilityEvent
@@ -1353,7 +1332,8 @@ android.support.v4.view.AccessibilityDelegateCompatJellyBean$1 -> android.suppor
     void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> sendAccessibilityEventUnchecked
     android.view.accessibility.AccessibilityNodeProvider getAccessibilityNodeProvider(android.view.View) -> getAccessibilityNodeProvider
     boolean performAccessibilityAction(android.view.View,int,android.os.Bundle) -> performAccessibilityAction
-android.support.v4.view.AccessibilityDelegateCompatJellyBean$AccessibilityDelegateBridgeJellyBean -> android.support.v4.c.j:
+android.support.v4.view.AccessibilityDelegateCompatJellyBean$AccessibilityDelegateBridgeJellyBean -> android.support.v4.c.h:
+    android.support.v4.view.AccessibilityDelegateCompat val$compat -> a
     boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> a
     void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> b
     void onInitializeAccessibilityNodeInfo(android.view.View,java.lang.Object) -> a
@@ -1363,29 +1343,29 @@ android.support.v4.view.AccessibilityDelegateCompatJellyBean$AccessibilityDelega
     void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent) -> d
     java.lang.Object getAccessibilityNodeProvider(android.view.View) -> a
     boolean performAccessibilityAction(android.view.View,int,android.os.Bundle) -> a
-android.support.v4.view.GravityCompat -> android.support.v4.c.k:
+android.support.v4.view.GravityCompat -> android.support.v4.c.i:
     android.support.v4.view.GravityCompat$GravityCompatImpl IMPL -> a
     int getAbsoluteGravity(int,int) -> a
-android.support.v4.view.GravityCompat$GravityCompatImpl -> android.support.v4.c.l:
+android.support.v4.view.GravityCompat$GravityCompatImpl -> android.support.v4.c.j:
     int getAbsoluteGravity(int,int) -> a
-android.support.v4.view.GravityCompat$GravityCompatImplBase -> android.support.v4.c.m:
+android.support.v4.view.GravityCompat$GravityCompatImplBase -> android.support.v4.c.k:
     int getAbsoluteGravity(int,int) -> a
-android.support.v4.view.GravityCompat$GravityCompatImplJellybeanMr1 -> android.support.v4.c.n:
+android.support.v4.view.GravityCompat$GravityCompatImplJellybeanMr1 -> android.support.v4.c.l:
     int getAbsoluteGravity(int,int) -> a
-android.support.v4.view.KeyEventCompat -> android.support.v4.c.o:
+android.support.v4.view.KeyEventCompat -> android.support.v4.c.m:
     android.support.v4.view.KeyEventCompat$KeyEventVersionImpl IMPL -> a
     boolean hasNoModifiers(android.view.KeyEvent) -> a
     void startTracking(android.view.KeyEvent) -> b
-android.support.v4.view.KeyEventCompat$EclairKeyEventVersionImpl -> android.support.v4.c.p:
+android.support.v4.view.KeyEventCompat$EclairKeyEventVersionImpl -> android.support.v4.c.n:
     void startTracking(android.view.KeyEvent) -> a
-android.support.v4.view.KeyEventCompat$HoneycombKeyEventVersionImpl -> android.support.v4.c.q:
+android.support.v4.view.KeyEventCompat$HoneycombKeyEventVersionImpl -> android.support.v4.c.o:
     int normalizeMetaState(int) -> a
     boolean metaStateHasNoModifiers(int) -> b
-android.support.v4.view.KeyEventCompat$KeyEventVersionImpl -> android.support.v4.c.r:
+android.support.v4.view.KeyEventCompat$KeyEventVersionImpl -> android.support.v4.c.p:
     boolean metaStateHasNoModifiers(int) -> b
     void startTracking(android.view.KeyEvent) -> a
     int normalizeMetaState(int) -> a
-android.support.v4.view.MotionEventCompat -> android.support.v4.c.s:
+android.support.v4.view.MotionEventCompat -> android.support.v4.c.q:
     android.support.v4.view.MotionEventCompat$MotionEventVersionImpl IMPL -> a
     int getActionMasked(android.view.MotionEvent) -> a
     int getActionIndex(android.view.MotionEvent) -> b
@@ -1394,25 +1374,25 @@ android.support.v4.view.MotionEventCompat -> android.support.v4.c.s:
     float getX(android.view.MotionEvent,int) -> c
     float getY(android.view.MotionEvent,int) -> d
     int getPointerCount(android.view.MotionEvent) -> c
-android.support.v4.view.MotionEventCompat$BaseMotionEventVersionImpl -> android.support.v4.c.t:
+android.support.v4.view.MotionEventCompat$BaseMotionEventVersionImpl -> android.support.v4.c.r:
     int findPointerIndex(android.view.MotionEvent,int) -> a
     int getPointerId(android.view.MotionEvent,int) -> b
     float getX(android.view.MotionEvent,int) -> c
     float getY(android.view.MotionEvent,int) -> d
     int getPointerCount(android.view.MotionEvent) -> a
-android.support.v4.view.MotionEventCompat$EclairMotionEventVersionImpl -> android.support.v4.c.u:
+android.support.v4.view.MotionEventCompat$EclairMotionEventVersionImpl -> android.support.v4.c.s:
     int findPointerIndex(android.view.MotionEvent,int) -> a
     int getPointerId(android.view.MotionEvent,int) -> b
     float getX(android.view.MotionEvent,int) -> c
     float getY(android.view.MotionEvent,int) -> d
     int getPointerCount(android.view.MotionEvent) -> a
-android.support.v4.view.MotionEventCompat$MotionEventVersionImpl -> android.support.v4.c.v:
+android.support.v4.view.MotionEventCompat$MotionEventVersionImpl -> android.support.v4.c.t:
     int findPointerIndex(android.view.MotionEvent,int) -> a
     int getPointerId(android.view.MotionEvent,int) -> b
     float getX(android.view.MotionEvent,int) -> c
     float getY(android.view.MotionEvent,int) -> d
     int getPointerCount(android.view.MotionEvent) -> a
-android.support.v4.view.PagerAdapter -> android.support.v4.c.w:
+android.support.v4.view.PagerAdapter -> android.support.v4.c.u:
     android.database.DataSetObservable mObservable -> mObservable
     int POSITION_UNCHANGED -> POSITION_UNCHANGED
     int POSITION_NONE -> POSITION_NONE
@@ -1436,49 +1416,49 @@ android.support.v4.view.PagerAdapter -> android.support.v4.c.w:
     void unregisterDataSetObserver(android.database.DataSetObserver) -> unregisterDataSetObserver
     java.lang.CharSequence getPageTitle(int) -> getPageTitle
     float getPageWidth(int) -> getPageWidth
-android.support.v4.view.VelocityTrackerCompat -> android.support.v4.c.x:
+android.support.v4.view.VelocityTrackerCompat -> android.support.v4.c.v:
     android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl IMPL -> a
     float getXVelocity(android.view.VelocityTracker,int) -> a
     float getYVelocity(android.view.VelocityTracker,int) -> b
-android.support.v4.view.VelocityTrackerCompat$BaseVelocityTrackerVersionImpl -> android.support.v4.c.y:
+android.support.v4.view.VelocityTrackerCompat$BaseVelocityTrackerVersionImpl -> android.support.v4.c.w:
     float getXVelocity(android.view.VelocityTracker,int) -> a
     float getYVelocity(android.view.VelocityTracker,int) -> b
-android.support.v4.view.VelocityTrackerCompat$HoneycombVelocityTrackerVersionImpl -> android.support.v4.c.z:
+android.support.v4.view.VelocityTrackerCompat$HoneycombVelocityTrackerVersionImpl -> android.support.v4.c.x:
     float getXVelocity(android.view.VelocityTracker,int) -> a
     float getYVelocity(android.view.VelocityTracker,int) -> b
-android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl -> android.support.v4.c.A:
+android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl -> android.support.v4.c.y:
     float getXVelocity(android.view.VelocityTracker,int) -> a
     float getYVelocity(android.view.VelocityTracker,int) -> b
-android.support.v4.view.ViewCompat -> android.support.v4.c.B:
+android.support.v4.view.ViewCompat -> android.support.v4.c.z:
     android.support.v4.view.ViewCompat$ViewCompatImpl IMPL -> a
     void setAccessibilityDelegate(android.view.View,android.support.v4.view.AccessibilityDelegateCompat) -> a
     void postInvalidateOnAnimation(android.view.View) -> a
     int getLayoutDirection(android.view.View) -> b
     android.view.ViewParent getParentForAccessibility(android.view.View) -> c
-android.support.v4.view.ViewCompat$EclairMr1ViewCompatImpl -> android.support.v4.c.C:
-android.support.v4.view.ViewCompat$GBViewCompatImpl -> android.support.v4.c.D:
-android.support.v4.view.ViewCompat$HCViewCompatImpl -> android.support.v4.c.E:
+android.support.v4.view.ViewCompat$EclairMr1ViewCompatImpl -> android.support.v4.c.A:
+android.support.v4.view.ViewCompat$GBViewCompatImpl -> android.support.v4.c.B:
+android.support.v4.view.ViewCompat$HCViewCompatImpl -> android.support.v4.c.C:
     long getFrameTime() -> a
-android.support.v4.view.ViewCompat$ICSViewCompatImpl -> android.support.v4.c.F:
+android.support.v4.view.ViewCompat$ICSViewCompatImpl -> android.support.v4.c.D:
     void setAccessibilityDelegate(android.view.View,android.support.v4.view.AccessibilityDelegateCompat) -> a
-android.support.v4.view.ViewCompat$JBViewCompatImpl -> android.support.v4.c.G:
+android.support.v4.view.ViewCompat$JBViewCompatImpl -> android.support.v4.c.E:
     void postInvalidateOnAnimation(android.view.View) -> a
     android.view.ViewParent getParentForAccessibility(android.view.View) -> b
-android.support.v4.view.ViewCompat$JbMr1ViewCompatImpl -> android.support.v4.c.H:
+android.support.v4.view.ViewCompat$JbMr1ViewCompatImpl -> android.support.v4.c.F:
     int getLayoutDirection(android.view.View) -> c
-android.support.v4.view.ViewCompat$ViewCompatImpl -> android.support.v4.c.I:
+android.support.v4.view.ViewCompat$ViewCompatImpl -> android.support.v4.c.G:
     void setAccessibilityDelegate(android.view.View,android.support.v4.view.AccessibilityDelegateCompat) -> a
     void postInvalidateOnAnimation(android.view.View) -> a
     int getLayoutDirection(android.view.View) -> c
     android.view.ViewParent getParentForAccessibility(android.view.View) -> b
     long getFrameTime() -> a
-android.support.v4.view.ViewGroupCompat -> android.support.v4.c.J:
+android.support.v4.view.ViewGroupCompat -> android.support.v4.c.H:
     android.support.v4.view.ViewGroupCompat$ViewGroupCompatImpl IMPL -> a
     void setMotionEventSplittingEnabled(android.view.ViewGroup,boolean) -> a
-android.support.v4.view.ViewGroupCompat$ViewGroupCompatHCImpl -> android.support.v4.c.K:
+android.support.v4.view.ViewGroupCompat$ViewGroupCompatHCImpl -> android.support.v4.c.I:
     void setMotionEventSplittingEnabled(android.view.ViewGroup,boolean) -> a
-android.support.v4.view.ViewGroupCompat$ViewGroupCompatIcsImpl -> android.support.v4.c.L:
-android.support.v4.view.ViewGroupCompat$ViewGroupCompatImpl -> android.support.v4.c.M:
+android.support.v4.view.ViewGroupCompat$ViewGroupCompatIcsImpl -> android.support.v4.c.J:
+android.support.v4.view.ViewGroupCompat$ViewGroupCompatImpl -> android.support.v4.c.K:
     void setMotionEventSplittingEnabled(android.view.ViewGroup,boolean) -> a
 android.support.v4.view.accessibility.AccessibilityNodeInfoCompat -> android.support.v4.c.a.a:
     android.support.v4.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityNodeInfoImpl IMPL -> a
@@ -1613,17 +1593,13 @@ android.support.v4.view.accessibility.AccessibilityNodeProviderCompat -> android
     java.util.List findAccessibilityNodeInfosByText$2393931d() -> d
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderJellyBeanImpl -> android.support.v4.c.a.h:
     java.lang.Object newAccessibilityNodeProviderBridge(android.support.v4.view.accessibility.AccessibilityNodeProviderCompat) -> a
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderJellyBeanImpl$1 -> android.support.v4.c.a.i:
-    android.support.v4.view.accessibility.AccessibilityNodeProviderCompat val$compat -> a
-    boolean performAction(int,int,android.os.Bundle) -> a
-    java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> a
-    java.lang.Object createAccessibilityNodeInfo(int) -> a
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean$1 -> android.support.v4.c.a.j:
+android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean$1 -> android.support.v4.c.a.i:
     android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean$AccessibilityNodeInfoBridge val$bridge -> a
     android.view.accessibility.AccessibilityNodeInfo createAccessibilityNodeInfo(int) -> createAccessibilityNodeInfo
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> findAccessibilityNodeInfosByText
     boolean performAction(int,int,android.os.Bundle) -> performAction
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean$AccessibilityNodeInfoBridge -> android.support.v4.c.a.k:
+android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean$AccessibilityNodeInfoBridge -> android.support.v4.c.a.j:
+    android.support.v4.view.accessibility.AccessibilityNodeProviderCompat val$compat -> a
     java.lang.Object createAccessibilityNodeInfo(int) -> a
     boolean performAction(int,int,android.os.Bundle) -> a
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> a
@@ -6136,14 +6112,12 @@ com.android.vending.billing.IInAppBillingService$Stub$Proxy -> com.android.vendi
     android.os.Bundle getBuyIntent(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     android.os.Bundle getPurchases(int,java.lang.String,java.lang.String,java.lang.String) -> a
     int consumePurchase(int,java.lang.String,java.lang.String) -> b
-com.nostra13.universalimageloader.cache.disc.BaseDiscCache -> com.a.a.a.a.a:
+com.nostra13.universalimageloader.cache.disc.DiscCacheAware -> com.a.a.a.a.a:
     java.io.File cacheDir -> a
     com.nostra13.universalimageloader.core.DefaultConfigurationFactory fileNameGenerator$68283613 -> b
-    java.io.File get(java.lang.String) -> a
-com.nostra13.universalimageloader.cache.disc.DiscCacheAware -> com.a.a.a.a.b:
     void put$53cdd136(java.io.File) -> a
     java.io.File get(java.lang.String) -> a
-com.nostra13.universalimageloader.cache.disc.LimitedDiscCache -> com.a.a.a.a.c:
+com.nostra13.universalimageloader.cache.disc.LimitedDiscCache -> com.a.a.a.a.b:
     java.util.concurrent.atomic.AtomicInteger cacheSize -> b
     int sizeLimit -> c
     java.util.Map lastUsageDates -> d
@@ -6153,7 +6127,7 @@ com.nostra13.universalimageloader.cache.disc.LimitedDiscCache -> com.a.a.a.a.c:
     int getSize(java.io.File) -> b
     java.util.Map access$000(com.nostra13.universalimageloader.cache.disc.LimitedDiscCache) -> a
     java.util.concurrent.atomic.AtomicInteger access$100(com.nostra13.universalimageloader.cache.disc.LimitedDiscCache) -> b
-com.nostra13.universalimageloader.cache.disc.LimitedDiscCache$1 -> com.a.a.a.a.d:
+com.nostra13.universalimageloader.cache.disc.LimitedDiscCache$1 -> com.a.a.a.a.c:
     com.nostra13.universalimageloader.cache.disc.LimitedDiscCache this$0 -> a
     void run() -> run
 com.nostra13.universalimageloader.cache.disc.impl.FileCountLimitedDiscCache -> com.a.a.a.a.a.a:
@@ -6907,15 +6881,8 @@ de.keyboardsurfer.android.widget.crouton.Configuration$Builder -> b.a.a.a.a.b:
     int durationInMilliseconds -> a
     int inAnimationResId -> b
     int outAnimationResId -> c
-    android.view.animation.Animation slideInDownAnimation -> d
-    android.view.animation.Animation slideOutUpAnimation -> e
-    int lastInAnimationHeight -> f
-    int lastOutAnimationHeight -> g
     de.keyboardsurfer.android.widget.crouton.Configuration$Builder setDuration(int) -> a
     int access$0(de.keyboardsurfer.android.widget.crouton.Configuration$Builder) -> a
-    android.view.animation.Animation buildDefaultSlideInDownAnimation(android.view.View) -> a
-    android.view.animation.Animation buildDefaultSlideOutUpAnimation(android.view.View) -> b
-    boolean areLastMeasuredAnimationHeightAndCurrentEqual(int,android.view.View) -> a
 de.keyboardsurfer.android.widget.crouton.Crouton -> b.a.a.a.a.c:
     java.lang.CharSequence text -> a
     de.keyboardsurfer.android.widget.crouton.Style style -> b
@@ -6942,7 +6909,15 @@ de.keyboardsurfer.android.widget.crouton.Crouton -> b.a.a.a.a.c:
     android.app.Activity getActivity() -> j
     java.lang.CharSequence getText() -> k
     android.view.View getView() -> l
-de.keyboardsurfer.android.widget.crouton.Manager -> b.a.a.a.a.d:
+de.keyboardsurfer.android.widget.crouton.DefaultAnimationsBuilder -> b.a.a.a.a.d:
+    android.view.animation.Animation slideInDownAnimation -> a
+    android.view.animation.Animation slideOutUpAnimation -> b
+    int lastInAnimationHeight -> c
+    int lastOutAnimationHeight -> d
+    android.view.animation.Animation buildDefaultSlideInDownAnimation(android.view.View) -> a
+    android.view.animation.Animation buildDefaultSlideOutUpAnimation(android.view.View) -> b
+    boolean areLastMeasuredAnimationHeightAndCurrentEqual(int,android.view.View) -> a
+de.keyboardsurfer.android.widget.crouton.Manager -> b.a.a.a.a.e:
     de.keyboardsurfer.android.widget.crouton.Manager INSTANCE -> a
     java.util.Queue croutonQueue -> b
     de.keyboardsurfer.android.widget.crouton.Manager getInstance() -> a
@@ -6954,12 +6929,12 @@ de.keyboardsurfer.android.widget.crouton.Manager -> b.a.a.a.a.d:
     void announceForAccessibilityCompat(android.content.Context,java.lang.CharSequence) -> a
     java.lang.String toString() -> toString
     void access$0(de.keyboardsurfer.android.widget.crouton.Manager,de.keyboardsurfer.android.widget.crouton.Crouton,int,long) -> a
-de.keyboardsurfer.android.widget.crouton.Manager$1 -> b.a.a.a.a.e:
+de.keyboardsurfer.android.widget.crouton.Manager$1 -> b.a.a.a.a.f:
     de.keyboardsurfer.android.widget.crouton.Manager this$0 -> a
     android.view.View val$croutonView -> b
     de.keyboardsurfer.android.widget.crouton.Crouton val$crouton -> c
     void onGlobalLayout() -> onGlobalLayout
-de.keyboardsurfer.android.widget.crouton.Style -> b.a.a.a.a.f:
+de.keyboardsurfer.android.widget.crouton.Style -> b.a.a.a.a.g:
     de.keyboardsurfer.android.widget.crouton.Style ALERT -> a
     de.keyboardsurfer.android.widget.crouton.Style CONFIRM -> b
     de.keyboardsurfer.android.widget.crouton.Style INFO -> c
@@ -6986,7 +6961,7 @@ de.keyboardsurfer.android.widget.crouton.Style -> b.a.a.a.a.f:
     int paddingInPixels -> x
     int paddingDimensionResId -> y
     java.lang.String toString() -> toString
-de.keyboardsurfer.android.widget.crouton.Style$Builder -> b.a.a.a.a.g:
+de.keyboardsurfer.android.widget.crouton.Style$Builder -> b.a.a.a.a.h:
     de.keyboardsurfer.android.widget.crouton.Configuration configuration -> a
     int backgroundColorValue -> b
     int backgroundColorResourceId -> c

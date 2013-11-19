@@ -94,13 +94,13 @@
     <string name="CannotShare">No Apps found to share this item.</string>
     <string name="UnknownErrorDuringisPro">Unknown Error happened during checking the purchased item list.</string>
     <string name="SlideIt">To open menu: Slide left to right!</string>
-    <string name="Crack_Detected">Crack attempt detected. Uninstall this app and re-install from play store.</string>
+    <string name="Crack_Detected">Crack attempt detected. Clear data of Play Store and Re-purchase this item.</string>
     <string name="OpenMenu">Open Menu</string>
     <string name="CloseMenu">Close Menu</string>
     <string name="FirstStart">Welcome</string>
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.6 Update\n1. UI Improved (Added some margins)\n2. Added Icon in Navigation Drawer(Sliding Menu)\n3. Buttons position fixed\n\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.6 Update\n1. UI Improved (Added some margins)\n2. Added Icon in Navigation Drawer(Sliding Menu)\n3. Buttons position fixed\n4. Start-Path Option Added\n5. Improved Settings\n6. Improve for Out of Memory Error\n7. Fix : Bug in Change Storage menu above Android 4.3.\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>

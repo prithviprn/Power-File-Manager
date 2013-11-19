@@ -203,19 +203,17 @@ public class MainActivity extends SherlockActivity {
 		res = getResources();
 
 		myPath = (TextView) findViewById(R.id.path);
-		
+
 		root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
-		
+
 		StartPathPref = sharedPrefs.getString("StartPath", "Automatic");
-		if(StartPathPref.equals("Internal")) root = Environment.getExternalStorageDirectory().toString();
-		else if(StartPathPref.equals("External")) root = StorageList.getMicroSDCardDirectory();
-		if(root == null) {
+		if (StartPathPref.equals("Internal")) root = Environment.getExternalStorageDirectory().toString();
+		else if (StartPathPref.equals("External")) root = StorageList.getMicroSDCardDirectory();
+		if (root == null) {
 			StartPathPref = "External";
 			root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
 		}
-		
-		
-		
+
 		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
 		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
 		findViewById(R.id.MoveBtn).setVisibility(View.GONE);
@@ -486,8 +484,7 @@ public class MainActivity extends SherlockActivity {
 		UseImageLoader = sharedPrefs.getBoolean("UseImageLoader", true);
 
 		AutoRootCheck = sharedPrefs.getBoolean("AutoRootCheck", true);
-		
-		
+
 	}
 
 	public void setListeners() {
@@ -2213,7 +2210,6 @@ public class MainActivity extends SherlockActivity {
 				BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad);
 				Activity a = (Activity) photoToLoad.imageView.getContext();
 				a.runOnUiThread(bd);
-//				bmp.recycle();
 			}
 		}
 
