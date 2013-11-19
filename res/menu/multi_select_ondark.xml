@@ -19,11 +19,13 @@
         android:orderInCategory="100"
         android:showAsAction="always|withText"
         android:title="@string/Share"/>
+    <!--
     <item
         android:id="@+id/Item_info"
         android:icon="@drawable/info_icon_ondark"
         android:orderInCategory="100"
         android:showAsAction="always|withText"
-        android:title="@string/Item_info"/>
+        android:title="@string/Item_info"/>
+        -->
 
 </menu>

@@ -435,9 +435,9 @@ public class MainActivity extends SherlockActivity {
 				}
 			}
 
-			else if (itemId == R.id.Item_info) {
+//			else if (itemId == R.id.Item_info) {
 				// TODO Item Info
-			}
+//			}
 
 			return false;
 		}
