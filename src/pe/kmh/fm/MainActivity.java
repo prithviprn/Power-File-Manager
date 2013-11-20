@@ -138,6 +138,7 @@ public class MainActivity extends SherlockActivity {
 	String StartPathPref;
 	String payload;
 	boolean isCracked = false;
+	boolean Zip_Flag = false;
 	File f;
 	ApkLoader loader;
 	SharedPreferences sharedPrefs;
@@ -655,10 +656,10 @@ public class MainActivity extends SherlockActivity {
 					if (sb == null) sb = new StringBuilder().append("");
 					StringBuilder temp = new StringBuilder();
 					if (sb != null) temp = sb.reverse();
-					String extension = temp.toString();
-					String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+					String extension = temp.toString().toLowerCase();
+					String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 
-					if (extension.equals("zip")) {
+					if (extension.equals("zip") || extension.equals("tar")) {
 						Context mContext = getApplicationContext();
 						LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 						final View layout = inflater.inflate(R.layout.getname, null);
@@ -695,7 +696,7 @@ public class MainActivity extends SherlockActivity {
 									@Override
 									public void run() {
 										try {
-											new ZipUtil().unzip(new File(f.getAbsolutePath()), new File(sb.toString()), "EUC-KR");
+											new ZipUtil().unzip(f, new File(sb.toString()), "EUC-KR", getExtension(f).toLowerCase());
 										}
 										catch (IOException e) {
 											e.printStackTrace();
@@ -711,8 +712,14 @@ public class MainActivity extends SherlockActivity {
 						return;
 					}
 
-					if (mimeType == null || extension.toLowerCase().equals("xml") || extension.toLowerCase().equals("txt")
-							|| runFile(f, mimeType) == false) {
+					// TEST
+/*					if(extension.equals("zip")) {
+						LoadList(path.get(position));
+						Zip_Flag = true;
+						return;
+					}
+*/					
+					if (mimeType == null || extension.equals("xml") || extension.equals("txt") || !runFile(f, mimeType)) {
 						AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 						alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
 
@@ -809,13 +816,19 @@ public class MainActivity extends SherlockActivity {
 		if (!isRoot) item.clear();
 		if (isRoot) rootitem.clear();
 		path.clear();
-
+		
 		if (isRoot) f = new RootFile(dirPath);
 		else f = new File(dirPath);
 
 		File[] files = null;
 		String[] fileperms = null;
 		Integer[] filesizes = null;
+		
+		if(Zip_Flag) {
+			// ZIP Explore Mode
+			// TODO
+		}
+		
 		if (isRoot) files = ((RootFile) f).listFiles();
 		if (isRoot) fileperms = ((RootFile) f).listPerms();
 		if (isRoot) filesizes = ((RootFile) f).listSizes();
@@ -845,7 +858,7 @@ public class MainActivity extends SherlockActivity {
 				boolean isDir = isRoot ? ((RootFile) file).isDirectory() : file.isDirectory();
 
 				path.add(file.getPath());
-				String icontype = isDir ? "FOLDER" : getExtension(file);
+				String icontype = isDir ? "FOLDER" : getExtension(file).toLowerCase();
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {

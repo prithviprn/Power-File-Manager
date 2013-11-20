@@ -5,130 +5,38 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Stack;
 
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.ArchiveInputStream;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 
+import pe.kmh.fm.prop.FileProperty;
+import android.util.Log;
+
 public class ZipUtil {
 
-	private static boolean debug = true;
-
-	public void unzip(File zippedFile) throws IOException {
-		unzip(zippedFile, Charset.defaultCharset().name());
-	}
-
-	public void unzip(File zippedFile, String charsetName) throws IOException {
-		unzip(zippedFile, zippedFile.getParentFile(), charsetName);
-	}
-
-	public void unzip(File zippedFile, File destDir) throws IOException {
-		unzip(new FileInputStream(zippedFile), destDir, Charset.defaultCharset().name());
-	}
-
-	public void unzip(File zippedFile, File destDir, String charsetName) throws IOException {
-		unzip(new FileInputStream(zippedFile), destDir, charsetName);
-	}
-
-	public void unzip(InputStream is, File destDir) throws IOException {
-		unzip(is, destDir, Charset.defaultCharset().name());
-	}
-
-	public void unzip(InputStream is, File destDir, String charsetName) throws IOException {
-		ZipArchiveInputStream zis;
-		ZipArchiveEntry entry;
-		String name;
-		File target;
-		int nWritten = 0;
-		BufferedOutputStream bos;
-		byte[] buf = new byte[1024 * 8];
-		destDir.mkdirs();
-		zis = new ZipArchiveInputStream(is, charsetName, true);
-		while ((entry = zis.getNextZipEntry()) != null) {
-			name = entry.getName();
-			target = new File(destDir, name);
-			if (entry.isDirectory()) {
-				target.mkdirs(); /* does it always work? */
-				debug("dir  : " + name);
-			}
-			else {
-				new File(target.getParent()).mkdirs();
-				target.createNewFile();
-				bos = new BufferedOutputStream(new FileOutputStream(target));
-				while ((nWritten = zis.read(buf)) >= 0) {
-					bos.write(buf, 0, nWritten);
-				}
-				bos.close();
-				debug("file : " + name);
-			}
-		}
-		zis.close();
-	}
-
-	/**
-	 * compresses the given file(or dir) and creates new file under the same
-	 * directory.
-	 * 
-	 * @param src
-	 *            file or directory
-	 * @throws IOException
-	 */
 	public void zip(File src) throws IOException {
 		zip(src, Charset.defaultCharset().name(), true);
 	}
 
-	/**
-	 * zips the given file(or dir) and create
-	 * 
-	 * @param src
-	 *            file or directory to compress
-	 * @param includeSrc
-	 *            if true and src is directory, then src is not included in the
-	 *            compression. if false, src is included.
-	 * @throws IOException
-	 */
 	public void zip(File src, boolean includeSrc) throws IOException {
 		zip(src, Charset.defaultCharset().name(), includeSrc);
 	}
 
-	/**
-	 * compresses the given src file (or directory) with the given encoding
-	 * 
-	 * @param src
-	 * @param charSetName
-	 * @param includeSrc
-	 * @throws IOException
-	 */
 	public void zip(File src, String charSetName, boolean includeSrc) throws IOException {
 		zip(src, src.getParentFile(), charSetName, includeSrc);
 	}
 
-	/**
-	 * compresses the given src file(or directory) and writes to the given
-	 * output stream.
-	 * 
-	 * @param src
-	 * @param os
-	 * @throws IOException
-	 */
 	public void zip(File src, OutputStream os) throws IOException {
 		zip(src, os, Charset.defaultCharset().name(), true);
 	}
 
-	/**
-	 * compresses the given src file(or directory) and create the compressed
-	 * file under the given destDir.
-	 * 
-	 * @param src
-	 * @param destDir
-	 * @param charSetName
-	 * @param includeSrc
-	 * @throws IOException
-	 */
 	public void zip(File src, File destDir, String charSetName, boolean includeSrc) throws IOException {
 		String fileName = src.getName();
 		if (!src.isDirectory()) {
@@ -178,7 +86,6 @@ public class ZipUtil {
 			File f = stack.pop();
 			name = toPath(root, f);
 			if (f.isDirectory()) {
-				debug("dir  : " + name);
 				File[] fs = f.listFiles();
 				for (int i = 0; i < fs.length; i++) {
 					if (fs[i].isDirectory()) stack.push(fs[i]);
@@ -186,7 +93,6 @@ public class ZipUtil {
 				}
 			}
 			else {
-				debug("file : " + name);
 				ze = new ZipArchiveEntry(name);
 				zos.putArchiveEntry(ze);
 				fis = new FileInputStream(f);
@@ -200,15 +106,50 @@ public class ZipUtil {
 		zos.close();
 	}
 
+	public void unzip(File zippedFile, File destDir, String charsetName, String filetype) throws IOException {
+		FileInputStream is = new FileInputStream(zippedFile);
+		ArchiveEntry entry;
+		String name;
+		File target;
+		int nWritten = 0;
+		BufferedOutputStream bos;
+		byte[] buf = new byte[1024 * 8];
+		destDir.mkdirs();
+		ArchiveInputStream ais = null;
+		if (filetype.equals("zip")) ais = new ZipArchiveInputStream(is, charsetName, true);
+		if (filetype.equals("tar")) ais = new TarArchiveInputStream(is);
+		while ((entry = ais.getNextEntry()) != null) {
+			name = entry.getName();
+			target = new File(destDir, name);
+			Log.d("PFM_Archive", target.getAbsolutePath());
+			if (entry.isDirectory()) {
+				target.mkdirs();
+			}
+			else {
+				new File(target.getParent()).mkdirs();
+				target.createNewFile();
+				bos = new BufferedOutputStream(new FileOutputStream(target));
+				while ((nWritten = ais.read(buf)) >= 0) {
+					bos.write(buf, 0, nWritten);
+				}
+				bos.close();
+			}
+		}
+		ais.close();
+	}
+
+	public FileProperty[][] listFiles(String path) {
+		// ZipArchiveInputStream zis = new ZipArchiveInputStream(new
+		// FileInputStream(path), "EUC-KR", true);
+		// zis.close();
+		return null;
+	}
+
 	private String toPath(File root, File dir) {
 		String path = dir.getAbsolutePath();
 		path = path.substring(root.getAbsolutePath().length()).replace(File.separatorChar, '/');
 		if (path.startsWith("/")) path = path.substring(1);
 		if (dir.isDirectory() && !path.endsWith("/")) path += "/";
 		return path;
-	}
-
-	private static void debug(String msg) {
-		if (debug) System.out.println(msg);
 	}
 }
