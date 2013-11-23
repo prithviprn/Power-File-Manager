@@ -9552,7 +9552,4 @@ pe.kmh.fm.util.StorageList -> pe.kmh.fm.b.a:
     java.util.List readVoldFile() -> c
     boolean isAvailableFileSystem(java.lang.String) -> a
 pe.kmh.fm.util.ZipUtil -> pe.kmh.fm.b.b:
-    boolean debug -> a
-    void unzip(java.io.File,java.io.File,java.lang.String) -> a
-    void unzip(java.io.InputStream,java.io.File,java.lang.String) -> a
-    void debug(java.lang.String) -> a
+    void unzip(java.io.File,java.io.File,java.lang.String,java.lang.String) -> a

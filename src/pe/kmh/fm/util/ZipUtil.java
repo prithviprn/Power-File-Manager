@@ -16,7 +16,6 @@ import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 
-import pe.kmh.fm.prop.FileProperty;
 import android.util.Log;
 
 public class ZipUtil {
@@ -138,13 +137,16 @@ public class ZipUtil {
 		ais.close();
 	}
 
-	public FileProperty[][] listFiles(String path) {
-		// ZipArchiveInputStream zis = new ZipArchiveInputStream(new
-		// FileInputStream(path), "EUC-KR", true);
-		// zis.close();
-		return null;
-	}
-
+	// TODO Develop
+	/*
+	 * public FileProperty[][] listFiles(String path, String type) {
+	 * FileInputStream is = new FileInputStream(path);
+	 * if (filetype.equals("zip")) ais = new ZipArchiveInputStream(is,
+	 * charsetName, true);
+	 * if (filetype.equals("tar")) ais = new TarArchiveInputStream(is);
+	 * return null;
+	 * }
+	 */
 	private String toPath(File root, File dir) {
 		String path = dir.getAbsolutePath();
 		path = path.substring(root.getAbsolutePath().length()).replace(File.separatorChar, '/');

@@ -436,9 +436,9 @@ public class MainActivity extends SherlockActivity {
 				}
 			}
 
-//			else if (itemId == R.id.Item_info) {
-				// TODO Item Info
-//			}
+			// else if (itemId == R.id.Item_info) {
+			// TODO Item Info
+			// }
 
 			return false;
 		}
@@ -712,13 +712,14 @@ public class MainActivity extends SherlockActivity {
 						return;
 					}
 
-					// TEST
-/*					if(extension.equals("zip")) {
-						LoadList(path.get(position));
-						Zip_Flag = true;
-						return;
-					}
-*/					
+					// TODO Develop
+					/*
+					 * if(extension.equals("zip")) {
+					 * LoadList(path.get(position));
+					 * Zip_Flag = true;
+					 * return;
+					 * }
+					 */
 					if (mimeType == null || extension.equals("xml") || extension.equals("txt") || !runFile(f, mimeType)) {
 						AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 						alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
@@ -816,19 +817,21 @@ public class MainActivity extends SherlockActivity {
 		if (!isRoot) item.clear();
 		if (isRoot) rootitem.clear();
 		path.clear();
-		
+
 		if (isRoot) f = new RootFile(dirPath);
 		else f = new File(dirPath);
 
 		File[] files = null;
 		String[] fileperms = null;
 		Integer[] filesizes = null;
-		
-		if(Zip_Flag) {
-			// ZIP Explore Mode
-			// TODO
-		}
-		
+
+		// TODO Develop
+		/*
+		 * if (Zip_Flag) {
+		 * // ZIP Explore Mode
+		 * // TODO
+		 * }
+		 */
 		if (isRoot) files = ((RootFile) f).listFiles();
 		if (isRoot) fileperms = ((RootFile) f).listPerms();
 		if (isRoot) filesizes = ((RootFile) f).listSizes();
@@ -1319,11 +1322,9 @@ public class MainActivity extends SherlockActivity {
 	public void onPermBtnPress(View v) {
 		// MULTI-PERMISSION
 		// Pro Ver Check
-		if (Selected_Count > 3) {
-			if (!isPro()) {
-				Upgrade();
-				Refresh_Screen();
-			}
+		if (Selected_Count > 3 && !isPro()) {
+			Upgrade();
+			Refresh_Screen();
 			return;
 		}
 
