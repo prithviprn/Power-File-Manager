@@ -1336,6 +1336,8 @@ android.support.v4.view.PagerAdapter: void registerDataSetObserver(android.datab
 android.support.v4.view.PagerAdapter: void unregisterDataSetObserver(android.database.DataSetObserver)
 android.support.v4.view.PagerAdapter: java.lang.CharSequence getPageTitle(int)
 android.support.v4.view.PagerAdapter: float getPageWidth(int)
+android.support.v4.view.ViewPager$SavedState
+android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.widget.CursorAdapter: boolean mDataValid
 android.support.v4.widget.CursorAdapter: boolean mAutoRequery
 android.support.v4.widget.CursorAdapter: android.database.Cursor mCursor
@@ -1374,6 +1376,8 @@ android.support.v4.widget.DrawerLayout
 android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context)
 android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context,android.util.AttributeSet)
 android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context,android.util.AttributeSet,int)
+android.support.v4.widget.DrawerLayout$SavedState
+android.support.v4.widget.DrawerLayout$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.widget.ResourceCursorAdapter: int mLayout
 android.support.v4.widget.ResourceCursorAdapter: int mDropDownLayout
 android.support.v4.widget.ResourceCursorAdapter: android.view.LayoutInflater mInflater
@@ -1384,6 +1388,8 @@ android.support.v4.widget.ResourceCursorAdapter: android.view.View newView(andro
 android.support.v4.widget.ResourceCursorAdapter: android.view.View newDropDownView(android.content.Context,android.database.Cursor,android.view.ViewGroup)
 android.support.v4.widget.ResourceCursorAdapter: void setViewResource(int)
 android.support.v4.widget.ResourceCursorAdapter: void setDropDownViewResource(int)
+android.support.v4.widget.SlidingPaneLayout$SavedState
+android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
 com.actionbarsherlock.ActionBarSherlock
 com.actionbarsherlock.ActionBarSherlock: java.lang.String TAG
 com.actionbarsherlock.ActionBarSherlock: boolean DEBUG
@@ -8251,3 +8257,7 @@ pe.kmh.fm.SettingsActivity: SettingsActivity()
 pe.kmh.fm.TextEditor
 pe.kmh.fm.TextEditor: TextEditor()
 pe.kmh.fm.TextEditor: void onFileSaveBtnPress(android.view.View)
+pe.kmh.fm.prop.SearchedFileProperty
+pe.kmh.fm.prop.SearchedFileProperty: android.os.Parcelable$Creator CREATOR
+pe.kmh.fm.prop.SearchedRootFileProperty
+pe.kmh.fm.prop.SearchedRootFileProperty: android.os.Parcelable$Creator CREATOR

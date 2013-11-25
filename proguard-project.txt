@@ -30,6 +30,10 @@
 -keep class org.tukaani.** { *; }
 -keep interface org.tukaani.** { *; }
 
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
 -dontwarn org.apache.commons.compress.**
 -dontwarn com.actionbarsherlock.**
 -keepattributes *Annotation*
