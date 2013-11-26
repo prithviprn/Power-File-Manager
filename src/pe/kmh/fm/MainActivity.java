@@ -289,6 +289,8 @@ public class MainActivity extends SherlockActivity {
 
 		tag_len = getString(R.string.Path).length() + 1;
 
+		sb = new StringBuilder();
+
 		LoadList(root);
 	}
 
@@ -421,7 +423,7 @@ public class MainActivity extends SherlockActivity {
 					if (isRoot) name = rootitem.get(position).getName();
 					else name = item.get(position).getName();
 
-					String extension = getExtension(name);
+					String extension = FileUtil.getExtension(name);
 					String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
 					intent.setType(mimeType);
 					String path = nowPath.endsWith("/") ? nowPath : nowPath + "/";
@@ -658,68 +660,77 @@ public class MainActivity extends SherlockActivity {
 					if (sb != null) temp = sb.reverse();
 					String extension = temp.toString().toLowerCase();
 					String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-
-					if (extension.equals("zip") || extension.equals("tar")) {
-						Context mContext = getApplicationContext();
-						LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-						final View layout = inflater.inflate(R.layout.getname, null);
-						final EditText et = (EditText) layout.findViewById(R.id.gettingName);
-						et.setHint(getString(R.string.ToUnZip));
-						Crouton.makeText(MainActivity.this, R.string.ifEmptythen, Style.INFO).show();
-						AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
-						aDialog.setTitle(getString(R.string.Unzipping));
-						aDialog.setView(layout);
-
-						aDialog.setPositiveButton(getString(R.string.Finish), new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog, int which) {
-								String name = et.getText().toString();
-								sb.setLength(0);
-								sb.append(nowPath);
-								if (!sb.toString().endsWith("/")) sb.append("/");
-								if (!name.equals("")) sb.append(name);
-								if (!sb.toString().endsWith("/")) sb.append("/");
-
-								final ProgressDialog pdialog = ProgressDialog.show(MainActivity.this, getString(R.string.Unzipping),
-										getString(R.string.Wait), true);
-
-								final Handler handler = new Handler() {
-
-									@Override
-									public void handleMessage(Message msg) {
-										LoadList(nowPath);
-									}
-								};
-
-								new Thread(new Runnable() {
-
-									@Override
-									public void run() {
-										try {
-											new ZipUtil().unzip(f, new File(sb.toString()), "EUC-KR", getExtension(f).toLowerCase());
-										}
-										catch (IOException e) {
-											e.printStackTrace();
-										}
-										handler.sendEmptyMessage(0);
-										pdialog.dismiss();
-									}
-								}).start();
-							}
-						});
-
-						aDialog.show();
-						return;
-					}
-
-					// TODO Develop
 					/*
-					 * if(extension.equals("zip")) {
-					 * LoadList(path.get(position));
-					 * Zip_Flag = true;
+					 * if (extension.equals("zip") || extension.equals("tar")) {
+					 * Context mContext = getApplicationContext();
+					 * LayoutInflater inflater = (LayoutInflater)
+					 * mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+					 * final View layout = inflater.inflate(R.layout.getname,
+					 * null);
+					 * final EditText et = (EditText)
+					 * layout.findViewById(R.id.gettingName);
+					 * et.setHint(getString(R.string.ToUnZip));
+					 * Crouton.makeText(MainActivity.this, R.string.ifEmptythen,
+					 * Style.INFO).show();
+					 * AlertDialog.Builder aDialog = new
+					 * AlertDialog.Builder(MainActivity.this);
+					 * aDialog.setTitle(getString(R.string.Unzipping));
+					 * aDialog.setView(layout);
+					 * 
+					 * aDialog.setPositiveButton(getString(R.string.Finish), new
+					 * DialogInterface.OnClickListener() {
+					 * 
+					 * public void onClick(DialogInterface dialog, int which) {
+					 * String name = et.getText().toString();
+					 * sb.setLength(0);
+					 * sb.append(nowPath);
+					 * if (!sb.toString().endsWith("/")) sb.append("/");
+					 * if (!name.equals("")) sb.append(name);
+					 * if (!sb.toString().endsWith("/")) sb.append("/");
+					 * 
+					 * final ProgressDialog pdialog =
+					 * ProgressDialog.show(MainActivity.this,
+					 * getString(R.string.Unzipping),
+					 * getString(R.string.Wait), true);
+					 * 
+					 * final Handler handler = new Handler() {
+					 * 
+					 * @Override
+					 * public void handleMessage(Message msg) {
+					 * LoadList(nowPath);
+					 * }
+					 * };
+					 * 
+					 * new Thread(new Runnable() {
+					 * 
+					 * @Override
+					 * public void run() {
+					 * try {
+					 * new ZipUtil().unzip(f, new File(sb.toString()), "EUC-KR",
+					 * FileUtil.getExtension(f));
+					 * }
+					 * catch (IOException e) {
+					 * e.printStackTrace();
+					 * }
+					 * handler.sendEmptyMessage(0);
+					 * pdialog.dismiss();
+					 * }
+					 * }).start();
+					 * }
+					 * });
+					 * 
+					 * aDialog.show();
 					 * return;
 					 * }
 					 */
+
+					// TODO Develop
+					if (extension.equals("zip")) {
+						int c = ZipUtil.loadZip(f.getAbsolutePath(), "zip");
+						Toast.makeText(getApplicationContext(), "Loaded " + Integer.toString(c) + " item(s).", Toast.LENGTH_LONG).show();
+						return;
+					}
+
 					if (mimeType == null || extension.equals("xml") || extension.equals("txt") || !runFile(f, mimeType)) {
 						AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 						alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
@@ -739,7 +750,7 @@ public class MainActivity extends SherlockActivity {
 									public void onClick(DialogInterface dialog, int which) {
 										Intent intent = new Intent(MainActivity.this, TextEditor.class);
 										intent.putExtra("filepath", f.getPath());
-										if (isRoot) intent.putExtra("Perm", calcPerm(rootitem.get(position).getPerm()));
+										if (isRoot) intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
 										intent.putExtra("isRoot", isRoot);
 										startActivityForResult(intent, TEXT_EDITOR_REQUEST);
 									}
@@ -861,7 +872,7 @@ public class MainActivity extends SherlockActivity {
 				boolean isDir = isRoot ? ((RootFile) file).isDirectory() : file.isDirectory();
 
 				path.add(file.getPath());
-				String icontype = isDir ? "FOLDER" : getExtension(file).toLowerCase();
+				String icontype = isDir ? "FOLDER" : FileUtil.getExtension(file);
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {
@@ -985,7 +996,7 @@ public class MainActivity extends SherlockActivity {
 			if (ico.equals("FOLDER")) internal_icon[i] = Folder;
 			else {
 				file = ico;
-				mimeType = getMIME(file);
+				mimeType = FileUtil.getMIME(file);
 				if (file.equals("zip") || file.equals("7z") || file.equals("rar") || file.equals("tar")) internal_icon[i] = Compressed;
 				else if (mimeType == null) internal_icon[i] = Others;
 				else if (mimeType.startsWith("image")) internal_icon[i] = Image;
@@ -1804,8 +1815,8 @@ public class MainActivity extends SherlockActivity {
 			if (list[i].isDirectory() && (ShowHiddenFiles || !file.isHidden())) Search(list[i].getAbsolutePath(), Name, arr);
 			else {
 				if (list[i].getName().contains(Name))
-					arr.add(new SearchedFileProperty(getExtension(list[i]), list[i].getName(), DateFormat.format("yyyy.MM.dd kk:mm",
-							list[i].lastModified()).toString(), "", list[i].getAbsolutePath()));
+					arr.add(new SearchedFileProperty(FileUtil.getExtension(list[i]), list[i].getName(), DateFormat.format(
+							"yyyy.MM.dd kk:mm", list[i].lastModified()).toString(), "", list[i].getAbsolutePath()));
 			}
 		}
 
@@ -1821,62 +1832,6 @@ public class MainActivity extends SherlockActivity {
 		Drawable icon = appInfo.loadIcon(getPackageManager());
 		if (icon == null) icon = res.getDrawable(R.drawable.android);
 		return icon;
-	}
-
-	public String getExtension(File file) {
-		String name = file.getName();
-		int length = name.length() - 1;
-		if (length < 0) return "";
-		sb = new StringBuilder();
-		while (true) {
-			if (name.charAt(length) != '.') sb.append(name.charAt(length--));
-			else break;
-			if (length <= 0) return "";
-		}
-
-		StringBuilder temp = new StringBuilder();
-		if (sb != null) temp = sb.reverse();
-		return temp.toString();
-	}
-
-	public String getExtension(String name) {
-		int length = name.length() - 1;
-		sb.setLength(0);
-
-		while (true) {
-			if (name.charAt(length) != 46) sb.append(name.charAt(length--));
-			else break;
-			if (length <= 0) {
-				sb = null;
-				break;
-			}
-		}
-
-		if (sb == null) sb = new StringBuilder().append("");
-		StringBuilder temp = new StringBuilder();
-		if (sb != null) temp = sb.reverse();
-		String extension = temp.toString();
-		return extension;
-	}
-
-	public String getMIME(String ext) {
-		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
-	}
-
-	public int calcPerm(String perm) {
-		if (perm.length() < 9) return 0;
-		int ret = 0;
-		if (perm.charAt(0) == 'r') ret += 400;
-		if (perm.charAt(1) == 'w') ret += 200;
-		if (perm.charAt(2) == 'x') ret += 100;
-		if (perm.charAt(3) == 'r') ret += 40;
-		if (perm.charAt(4) == 'w') ret += 20;
-		if (perm.charAt(5) == 'x') ret += 10;
-		if (perm.charAt(6) == 'r') ret += 4;
-		if (perm.charAt(7) == 'w') ret += 2;
-		if (perm.charAt(8) == 'x') ret += 1;
-
-		return ret;
 	}
 
 	public class FileAdapter extends BaseAdapter {

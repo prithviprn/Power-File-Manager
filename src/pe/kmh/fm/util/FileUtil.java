@@ -9,6 +9,8 @@ import java.io.OutputStream;
 
 import pe.kmh.fm.prop.RootFile;
 
+import android.webkit.MimeTypeMap;
+
 import com.stericson.RootTools.RootTools;
 
 public class FileUtil {
@@ -105,5 +107,51 @@ public class FileUtil {
 			String t = String.format("%.2f GB", (double) size / 1024 / 1024 / 1024);
 			return t;
 		}
+	}
+	
+	public static String getExtension(File file) {
+		String name = file.getName();
+		return getExtension(name);
+	}
+
+	public static String getExtension(String name) {
+		int length = name.length() - 1;
+		if (length < 0) return "";
+		StringBuilder sb = new StringBuilder();
+
+		while (true) {
+			if (name.charAt(length) != 46) sb.append(name.charAt(length--));
+			else break;
+			if (length <= 0) {
+				sb = null;
+				break;
+			}
+		}
+
+		if (sb == null) sb = new StringBuilder().append("");
+		StringBuilder temp = new StringBuilder();
+		if (sb != null) temp = sb.reverse();
+		String extension = temp.toString().toLowerCase();
+		return extension;
+	}
+
+	public static String getMIME(String ext) {
+		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
+	}
+
+	public static int calcPerm(String perm) {
+		if (perm.length() < 9) return 0;
+		int ret = 0;
+		if (perm.charAt(0) == 'r') ret += 400;
+		if (perm.charAt(1) == 'w') ret += 200;
+		if (perm.charAt(2) == 'x') ret += 100;
+		if (perm.charAt(3) == 'r') ret += 40;
+		if (perm.charAt(4) == 'w') ret += 20;
+		if (perm.charAt(5) == 'x') ret += 10;
+		if (perm.charAt(6) == 'r') ret += 4;
+		if (perm.charAt(7) == 'w') ret += 2;
+		if (perm.charAt(8) == 'x') ret += 1;
+
+		return ret;
 	}
 }
