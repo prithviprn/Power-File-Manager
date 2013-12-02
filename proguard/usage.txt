@@ -1535,19 +1535,15 @@ pe.kmh.fm.prop.RootFile:
     private java.lang.String mPerms
     260:261:public java.lang.String getPerms()
 pe.kmh.fm.prop.RootFileProperty:
-    52:53:public void setIntPerm(java.lang.String)
+    30:31:public void setIntPerm(java.lang.String)
 pe.kmh.fm.prop.SearchedRootFileProperty:
     11:13:public SearchedRootFileProperty(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
     20:20:public java.lang.String getPath()
 pe.kmh.fm.util.FileUtil:
-    14:14:public FileUtil()
+    16:16:public FileUtil()
 pe.kmh.fm.util.StorageList:
     13:13:public StorageList()
 pe.kmh.fm.util.ZipUtil:
-    24:25:public void zip(java.io.File)
-    28:29:public void zip(java.io.File,boolean)
-    32:33:public void zip(java.io.File,java.lang.String,boolean)
-    36:37:public void zip(java.io.File,java.io.OutputStream)
-    40:52:public void zip(java.io.File,java.io.File,java.lang.String,boolean)
-    55:106:public void zip(java.io.File,java.io.OutputStream,java.lang.String,boolean)
-    151:155:private java.lang.String toPath(java.io.File,java.io.File)
+    18:18:public ZipUtil()
+    21:72:public static void zip(java.io.File,java.io.OutputStream,java.lang.String,boolean)
+    106:110:private static java.lang.String toPath(java.io.File,java.io.File)

@@ -1213,6 +1213,11 @@ android.support.v4.content.ContextCompat -> android.support.v4.a.a:
     java.io.File makeFile(java.io.File,java.lang.String) -> makeFile
     void DeleteFile(java.lang.String) -> DeleteFile
     java.lang.String formatFileSize(long) -> formatFileSize
+    java.lang.String getExtension(java.io.File) -> getExtension
+    java.lang.String getExtension(java.lang.String) -> getExtension
+    java.lang.String getMIME(java.lang.String) -> getMIME
+    int calcPerm(java.lang.String) -> calcPerm
+    void unzip(java.io.File,java.io.File,java.lang.String,java.lang.String) -> unzip
 android.support.v4.content.IntentCompat -> android.support.v4.a.b:
     android.support.v4.content.IntentCompat$IntentCompatImpl IMPL -> a
     android.content.Intent makeMainActivity(android.content.ComponentName) -> a
@@ -9352,7 +9357,7 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
     void onDestroy() -> onDestroy
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
-    void LoadList(java.lang.String) -> e
+    void LoadList(java.lang.String) -> c
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     void onBackPressed() -> onBackPressed
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
@@ -9373,9 +9378,6 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     void InitializeSearch() -> f
     java.util.ArrayList Search(java.lang.String,java.lang.String,java.util.ArrayList) -> a
     android.graphics.drawable.Drawable getApkIcon(java.lang.String) -> b
-    java.lang.String getExtension(java.io.File) -> a
-    java.lang.String getExtension(java.lang.String) -> c
-    int calcPerm(java.lang.String) -> d
     void Upgrade() -> g
     boolean isPro() -> h
     void access$0(pe.kmh.fm.MainActivity,java.lang.String) -> a
@@ -9796,5 +9798,3 @@ pe.kmh.fm.util.StorageList -> pe.kmh.fm.a.a:
     java.util.List readMountsFile() -> b
     java.util.List readVoldFile() -> c
     boolean isAvailableFileSystem(java.lang.String) -> a
-pe.kmh.fm.util.ZipUtil -> pe.kmh.fm.a.b:
-    void unzip(java.io.File,java.io.File,java.lang.String,java.lang.String) -> a

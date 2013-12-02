@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Stack;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
@@ -16,14 +15,7 @@ import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 
-import pe.kmh.fm.prop.FileProperty;
-
-import android.text.format.DateFormat;
-import android.util.Log;
-
 public class ZipUtil {
-
-	static ArrayList<ArrayList<FileProperty>> list;
 
 	public static void zip(File src, OutputStream os, String charsetName, boolean includeSrc) throws IOException {
 		ZipArchiveOutputStream zos = new ZipArchiveOutputStream(os);
@@ -94,7 +86,6 @@ public class ZipUtil {
 		while ((entry = ais.getNextEntry()) != null) {
 			name = entry.getName();
 			target = new File(destDir, name);
-			Log.d("PFM_Archive", target.getAbsolutePath());
 			if (entry.isDirectory()) {
 				target.mkdirs();
 			}
@@ -109,49 +100,6 @@ public class ZipUtil {
 			}
 		}
 		ais.close();
-	}
-
-	public static int loadZip(String path, String type) {
-		int total_count = 0;
-		try {
-			list = new ArrayList<ArrayList<FileProperty>>();
-			FileInputStream is = new FileInputStream(path);
-			ArchiveInputStream ais = null;
-			if (type.equals("zip")) ais = new ZipArchiveInputStream(is, "EUC-KR", true);
-			if (type.equals("tar")) ais = new TarArchiveInputStream(is);
-
-			// TODO 예외 처리
-			if (ais == null) return -1;
-
-			ArchiveEntry ae;
-			String name, date, size;
-
-			while ((ae = ais.getNextEntry()) != null) {
-				total_count++;
-				name = ae.getName();
-				date = DateFormat.format("yyyy.MM.dd kk:mm", ae.getLastModifiedDate()).toString();
-				size = FileUtil.formatFileSize(ae.getSize());
-
-				int loopcount = name.endsWith("/") ? name.length() - 1 : name.length();
-				int count = 0;
-				for (int i = 0; i < loopcount; i++) {
-					if (name.charAt(i) == '/') count++;
-				}
-
-				while (count > list.size() - 1) list.add(new ArrayList<FileProperty>());
-				if (name.endsWith("/")) {
-					list.get(count).add(new FileProperty("FOLDER", name, date, ""));
-				}
-				else {
-					list.get(count).add(new FileProperty(FileUtil.getExtension(name), name, date, size));
-				}
-			}
-		}
-		catch (Exception e) {
-			Log.e("PFM_E", e.getMessage());
-		}
-
-		return total_count;
 	}
 
 	private static String toPath(File root, File dir) {

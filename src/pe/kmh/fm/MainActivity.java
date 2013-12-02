@@ -58,6 +58,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.Html;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -487,7 +488,6 @@ public class MainActivity extends SherlockActivity {
 		UseImageLoader = sharedPrefs.getBoolean("UseImageLoader", true);
 
 		AutoRootCheck = sharedPrefs.getBoolean("AutoRootCheck", true);
-
 	}
 
 	public void setListeners() {
@@ -660,74 +660,57 @@ public class MainActivity extends SherlockActivity {
 					if (sb != null) temp = sb.reverse();
 					String extension = temp.toString().toLowerCase();
 					String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-					/*
-					 * if (extension.equals("zip") || extension.equals("tar")) {
-					 * Context mContext = getApplicationContext();
-					 * LayoutInflater inflater = (LayoutInflater)
-					 * mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-					 * final View layout = inflater.inflate(R.layout.getname,
-					 * null);
-					 * final EditText et = (EditText)
-					 * layout.findViewById(R.id.gettingName);
-					 * et.setHint(getString(R.string.ToUnZip));
-					 * Crouton.makeText(MainActivity.this, R.string.ifEmptythen,
-					 * Style.INFO).show();
-					 * AlertDialog.Builder aDialog = new
-					 * AlertDialog.Builder(MainActivity.this);
-					 * aDialog.setTitle(getString(R.string.Unzipping));
-					 * aDialog.setView(layout);
-					 * 
-					 * aDialog.setPositiveButton(getString(R.string.Finish), new
-					 * DialogInterface.OnClickListener() {
-					 * 
-					 * public void onClick(DialogInterface dialog, int which) {
-					 * String name = et.getText().toString();
-					 * sb.setLength(0);
-					 * sb.append(nowPath);
-					 * if (!sb.toString().endsWith("/")) sb.append("/");
-					 * if (!name.equals("")) sb.append(name);
-					 * if (!sb.toString().endsWith("/")) sb.append("/");
-					 * 
-					 * final ProgressDialog pdialog =
-					 * ProgressDialog.show(MainActivity.this,
-					 * getString(R.string.Unzipping),
-					 * getString(R.string.Wait), true);
-					 * 
-					 * final Handler handler = new Handler() {
-					 * 
-					 * @Override
-					 * public void handleMessage(Message msg) {
-					 * LoadList(nowPath);
-					 * }
-					 * };
-					 * 
-					 * new Thread(new Runnable() {
-					 * 
-					 * @Override
-					 * public void run() {
-					 * try {
-					 * new ZipUtil().unzip(f, new File(sb.toString()), "EUC-KR",
-					 * FileUtil.getExtension(f));
-					 * }
-					 * catch (IOException e) {
-					 * e.printStackTrace();
-					 * }
-					 * handler.sendEmptyMessage(0);
-					 * pdialog.dismiss();
-					 * }
-					 * }).start();
-					 * }
-					 * });
-					 * 
-					 * aDialog.show();
-					 * return;
-					 * }
-					 */
 
-					// TODO Develop
-					if (extension.equals("zip")) {
-						int c = ZipUtil.loadZip(f.getAbsolutePath(), "zip");
-						Toast.makeText(getApplicationContext(), "Loaded " + Integer.toString(c) + " item(s).", Toast.LENGTH_LONG).show();
+					if (extension.equals("zip") || extension.equals("tar")) {
+						Context mContext = getApplicationContext();
+						LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+						final View layout = inflater.inflate(R.layout.getname, null);
+						final EditText et = (EditText) layout.findViewById(R.id.gettingName);
+						et.setHint(getString(R.string.ToUnZip));
+						Crouton.makeText(MainActivity.this, R.string.ifEmptythen, Style.INFO).show();
+						AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+						aDialog.setTitle(getString(R.string.Unzipping));
+						aDialog.setView(layout);
+
+						aDialog.setPositiveButton(getString(R.string.Finish), new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int which) {
+								String name = et.getText().toString();
+								sb.setLength(0);
+								sb.append(nowPath);
+								if (!sb.toString().endsWith("/")) sb.append("/");
+								if (!name.equals("")) sb.append(name);
+								if (!sb.toString().endsWith("/")) sb.append("/");
+
+								final ProgressDialog pdialog = ProgressDialog.show(MainActivity.this, getString(R.string.Unzipping),
+										getString(R.string.Wait), true);
+
+								final Handler handler = new Handler() {
+
+									@Override
+									public void handleMessage(Message msg) {
+										LoadList(nowPath);
+									}
+								};
+
+								new Thread(new Runnable() {
+
+									@Override
+									public void run() {
+										try {
+											ZipUtil.unzip(f, new File(sb.toString()), "EUC-KR", FileUtil.getExtension(f));
+										}
+										catch (IOException e) {
+											e.printStackTrace();
+										}
+										handler.sendEmptyMessage(0);
+										pdialog.dismiss();
+									}
+								}).start();
+							}
+						});
+
+						aDialog.show();
 						return;
 					}
 
@@ -836,13 +819,6 @@ public class MainActivity extends SherlockActivity {
 		String[] fileperms = null;
 		Integer[] filesizes = null;
 
-		// TODO Develop
-		/*
-		 * if (Zip_Flag) {
-		 * // ZIP Explore Mode
-		 * // TODO
-		 * }
-		 */
 		if (isRoot) files = ((RootFile) f).listFiles();
 		if (isRoot) fileperms = ((RootFile) f).listPerms();
 		if (isRoot) filesizes = ((RootFile) f).listSizes();
@@ -990,19 +966,18 @@ public class MainActivity extends SherlockActivity {
 		icon = new Drawable[psize];
 		internal_icon = new int[psize];
 
-		String file, mimeType, ico;
+		String mimeType, ico;
 		for (int i = 0; i < psize; i++) {
 			ico = isRoot ? rootitem.get(i).getIcon() : item.get(i).getIcon();
 			if (ico.equals("FOLDER")) internal_icon[i] = Folder;
 			else {
-				file = ico;
-				mimeType = FileUtil.getMIME(file);
-				if (file.equals("zip") || file.equals("7z") || file.equals("rar") || file.equals("tar")) internal_icon[i] = Compressed;
+				mimeType = FileUtil.getMIME(ico);
+				if (ico.equals("zip") || ico.equals("7z") || ico.equals("rar") || ico.equals("tar")) internal_icon[i] = Compressed;
 				else if (mimeType == null) internal_icon[i] = Others;
 				else if (mimeType.startsWith("image")) internal_icon[i] = Image;
 				else if (mimeType.startsWith("audio")) internal_icon[i] = Audio;
-				else if (!file.equals("apk")) internal_icon[i] = Others;
-				else if (file.equals("apk")) internal_icon[i] = Apk;
+				else if (!ico.equals("apk")) internal_icon[i] = Others;
+				else if (ico.equals("apk")) internal_icon[i] = Apk;
 			}
 		}
 
@@ -1214,11 +1189,12 @@ public class MainActivity extends SherlockActivity {
 					public void run() {
 						int i = 0;
 						while (true) {
+							Log.d("PFM", path.get(i));
 							if (isSelected[i] == View.VISIBLE) {
 								if (isRoot) new RootFile(path.get(i)).delete();
 								else FileUtil.DeleteFile(path.get(i));
 							}
-							if (i < path.size() - 2) i++;
+							if (i < path.size() - 1) i++;
 							else break;
 						}
 
