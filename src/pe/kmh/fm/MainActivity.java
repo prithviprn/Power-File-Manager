@@ -135,7 +135,6 @@ public class MainActivity extends SherlockActivity {
 	boolean ShowHiddenFiles;
 	boolean UseImageLoader;
 	boolean AutoRootCheck;
-	boolean sel_all = true;
 	String StartPathPref;
 	String payload;
 	boolean isCracked = false;
@@ -342,7 +341,6 @@ public class MainActivity extends SherlockActivity {
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 			MenuInflater inflater = mode.getMenuInflater();
 			inflater.inflate(R.menu.multi_select_ondark, menu);
-			sel_all = true;
 			return true;
 		}
 
@@ -355,9 +353,10 @@ public class MainActivity extends SherlockActivity {
 		public boolean onActionItemClicked(ActionMode mode, MenuItem mitem) {
 			int itemId = mitem.getItemId();
 			if (itemId == R.id.SelectAll) {
-				int s = sel_all ? View.VISIBLE : View.GONE;
+				int s;
+				if ((path.size() - (nowPath.equals(root) ? 0 : 1)) != Selected_Count) s = View.VISIBLE;
+				else s = View.GONE;
 				SelectAll(s);
-				sel_all = !sel_all;
 				return false;
 			}
 
@@ -960,7 +959,7 @@ public class MainActivity extends SherlockActivity {
 		if (!dirPath.equals(root)) {
 			if (isRoot) rootitem.set(0, new RootFileProperty("FOLDER", "../", getString(R.string.ParentFolder), "", ""));
 			else item.set(0, new FileProperty("FOLDER", "../", getString(R.string.ParentFolder), ""));
-			path.add(f.getParent());
+			path.set(0, f.getParent());
 		}
 
 		icon = new Drawable[psize];
@@ -1519,7 +1518,7 @@ public class MainActivity extends SherlockActivity {
 			}
 		}
 
-		Selected_Count = path.size() - (nowPath.equals(root) ? 1 : 2);
+		Selected_Count = path.size() - (nowPath.equals(root) ? 0 : 1);
 		if (p == View.GONE) {
 			Selected_Count = 0;
 			mActionMode.finish();
@@ -1530,7 +1529,7 @@ public class MainActivity extends SherlockActivity {
 			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 		}
 		mActionMode.setTitle(String.valueOf(Selected_Count) + " " + getString(R.string.N_Selected));
-		mActionMode.getMenu().findItem(R.id.Rename).setVisible(false);
+		if (Selected_Count > 1) mActionMode.getMenu().findItem(R.id.Rename).setVisible(false);
 	}
 
 	public boolean runFile(File file, String MimeType) {

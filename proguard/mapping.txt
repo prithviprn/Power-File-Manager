@@ -9309,7 +9309,7 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     android.widget.ListView list -> g
     java.lang.String root -> h
     android.widget.TextView myPath -> i
-    int tag_len -> L
+    int tag_len -> K
     int nowlevel -> j
     int[] list_state_index -> k
     int[] list_state_top -> l
@@ -9320,37 +9320,36 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     boolean showMultiSelectToast -> q
     java.lang.String sfilename -> r
     java.lang.String appTheme -> s
-    int SortFlag -> M
+    int SortFlag -> L
     android.content.res.Resources res -> t
-    int Folder -> N
-    int Others -> O
-    int Audio -> P
-    int Compressed -> Q
+    int Folder -> M
+    int Others -> N
+    int Audio -> O
+    int Compressed -> P
     int Apk -> u
     int Image -> v
     int[] internal_icon -> w
     com.stericson.RootTools.execution.Command cmd -> x
     boolean isRoot -> y
-    boolean ShowHiddenFiles -> R
+    boolean ShowHiddenFiles -> Q
     boolean UseImageLoader -> z
-    boolean AutoRootCheck -> S
-    boolean sel_all -> A
-    java.lang.String StartPathPref -> T
-    java.lang.String payload -> B
-    boolean isCracked -> C
-    java.io.File f -> D
-    pe.kmh.fm.MainActivity$ApkLoader loader -> E
-    android.content.SharedPreferences sharedPrefs -> U
-    android.content.SharedPreferences$Editor editor -> V
-    java.lang.String[] MenuListItems -> W
-    android.support.v4.widget.DrawerLayout MenuLayout -> F
-    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> X
-    android.widget.ListView MenuList -> G
-    java.lang.StringBuilder sb -> H
-    com.android.vending.billing.IInAppBillingService mService -> I
-    com.actionbarsherlock.view.ActionMode mActionMode -> J
-    android.content.ServiceConnection mServiceConn -> Y
-    com.actionbarsherlock.view.ActionMode$Callback mActionModeCallback -> K
+    boolean AutoRootCheck -> R
+    java.lang.String StartPathPref -> S
+    java.lang.String payload -> A
+    boolean isCracked -> B
+    java.io.File f -> C
+    pe.kmh.fm.MainActivity$ApkLoader loader -> D
+    android.content.SharedPreferences sharedPrefs -> T
+    android.content.SharedPreferences$Editor editor -> U
+    java.lang.String[] MenuListItems -> V
+    android.support.v4.widget.DrawerLayout MenuLayout -> E
+    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> W
+    android.widget.ListView MenuList -> F
+    java.lang.StringBuilder sb -> G
+    com.android.vending.billing.IInAppBillingService mService -> H
+    com.actionbarsherlock.view.ActionMode mActionMode -> I
+    android.content.ServiceConnection mServiceConn -> X
+    com.actionbarsherlock.view.ActionMode$Callback mActionModeCallback -> J
     void onStart() -> onStart
     void onCreate(android.os.Bundle) -> onCreate
     void onPostCreate(android.os.Bundle) -> onPostCreate

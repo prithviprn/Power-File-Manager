@@ -71,7 +71,7 @@
     <string name="Buy">업그레이드</string>
     <string name="AlreadyBuy">이미 구매하셨네요! 프리미엄 버전의 기능을 언락합니다.</string>
     <string name="BuyProTitle">업그레이드</string>
-    <string name="BuyProMsg">4개 이상 파일의 퍼미션을 한 번에 지정하고, 자주 사용되는 경로에 대해서 자동으로 퍼미션을 지정하는 기능을 사용하려면, 이 앱을 업그레이드해야 합니다.\n<Data><![CDATA[ <br></br><font color="red">가격은 1,999원 입니다.</font> ]]> </Data></string>
+    <string name="BuyProMsg">4개 이상 파일의 퍼미션을 한 번에 지정하고, 자주 사용되는 경로에 대해서 자동으로 퍼미션을 지정하는 기능을 사용하려면, 이 앱을 업그레이드해야 합니다.\n<Data><![CDATA[ <br></br><font color="red">가격은 1,999원 입니다.\n단, 원칙적으로 환불은 해 드리지 않으니 주의하시길 바랍니다.</font> ]]> </Data></string>
     <string name="RestartApp">설정 변경 후에는 앱을 재시작해주세요!</string>
     <string name="AskOpenWithTextEditor">텍스트 에디터로 이 파일을 열까요?</string>
     <string name="Yes">네</string>
@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.6.3 업데이트\n1. 버튼으로 인해 가려져서 마지막 항목을 선택할 수 없던 문제 수정\n2. 일부 상황에서 삭제가 정상적으로 되지 않던 문제 수정\n\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
+    <string name="UpdateLog">v3.6.4 업데이트\n- 전체 선택과 권한 설정에 관련된 치명적인 버그 수정\n\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
 
 </resources>
