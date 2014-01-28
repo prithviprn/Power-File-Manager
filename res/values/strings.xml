@@ -66,7 +66,7 @@
     <string name="AutoPermissionOptionsNotRoot">Auto-Permission is for rooted devices!</string>
     <string name="AutoRootCheck">Automatic Root Check</string>
     <string name="AutoRootCheckSummary">Automatic check root permission.\nIf disable this option, always use normal mode exploring.</string>
-    <string name="RequestBusybox">This app requires Busybox. After Install, restart App.</string>
+    <string name="BusyboxRequired">This app requires <Data><![CDATA[ <br></br><font color="red">Busybox v1.21.</font> ]]> </Data> After Install, restart App.</string>
     <string name="SaveFile">Save</string>
     <string name="Buy">Upgrade to Pro Version</string>
     <string name="AlreadyBuy">You already bought this :) Unlocked Premium Functions!</string>

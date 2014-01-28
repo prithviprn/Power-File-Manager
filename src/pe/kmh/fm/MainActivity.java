@@ -185,9 +185,20 @@ public class MainActivity extends SherlockActivity {
 		importPreferences();
 
 		if (AutoRootCheck && RootTools.isAccessGiven()) {
-			if (!RootTools.isBusyboxAvailable()) {
-				Crouton.makeText(MainActivity.this, R.string.RequestBusybox, Style.ALERT).show();
-				RootTools.offerBusyBox(this);
+			if (!RootTools.isBusyboxAvailable() || RootTools.getBusyBoxVersion().contains("1.22")) {
+
+				AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+				aDialog.setTitle("Busybox");
+				aDialog.setMessage(Html.fromHtml(getString(R.string.BusyboxRequired)));
+				aDialog.setCancelable(false);
+				aDialog.setPositiveButton(getString(R.string.GotoPlayStore), new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						RootTools.offerBusyBox(MainActivity.this);
+					}
+				});
+
+				aDialog.show();
 			}
 			isRoot = true;
 		}
@@ -292,6 +303,7 @@ public class MainActivity extends SherlockActivity {
 		sb = new StringBuilder();
 
 		LoadList(root);
+
 	}
 
 	@Override

@@ -6981,18 +6981,19 @@ com.stericson.RootTools.RootTools -> com.c.a.a:
     java.lang.String utilPath -> c
     int shellDelay -> d
     void setRim(com.stericson.RootTools.internal.RootToolsInternalMethods) -> a
-    com.stericson.RootTools.internal.RootToolsInternalMethods getInternals() -> e
+    com.stericson.RootTools.internal.RootToolsInternalMethods getInternals() -> f
     void closeShell(boolean) -> a
     boolean copyFile(java.lang.String,java.lang.String,boolean,boolean) -> a
     boolean exists(java.lang.String) -> a
     boolean findBinary(java.lang.String) -> b
+    java.lang.String getBusyBoxVersion() -> a
     com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> c
-    java.util.ArrayList getMounts() -> a
+    java.util.ArrayList getMounts() -> b
     java.lang.String getMountedAs(java.lang.String) -> d
-    java.util.Set getPath() -> b
+    java.util.Set getPath() -> c
     com.stericson.RootTools.execution.Shell getShell(boolean) -> b
-    boolean isAccessGiven() -> c
-    boolean isBusyboxAvailable() -> d
+    boolean isAccessGiven() -> d
+    boolean isBusyboxAvailable() -> e
     void offerBusyBox(android.app.Activity) -> a
     boolean remount(java.lang.String,java.lang.String) -> a
     void log(java.lang.String) -> e
@@ -7080,9 +7081,10 @@ com.stericson.RootTools.execution.Shell$Worker -> com.c.a.c.f:
 com.stericson.RootTools.internal.InternalVariables -> com.c.a.d.a:
     boolean accessGiven -> a
     boolean found -> b
-    java.util.Set path -> c
-    java.util.ArrayList mounts -> d
-    com.stericson.RootTools.containers.Permissions permissions -> e
+    java.lang.String busyboxVersion -> c
+    java.util.Set path -> d
+    java.util.ArrayList mounts -> e
+    com.stericson.RootTools.containers.Permissions permissions -> f
 com.stericson.RootTools.internal.Remounter -> com.c.a.d.b:
     boolean remount(java.lang.String,java.lang.String) -> a
     com.stericson.RootTools.containers.Mount findMountPointRecursive(java.lang.String) -> a
@@ -7091,24 +7093,27 @@ com.stericson.RootTools.internal.RootToolsInternalMethods -> com.c.a.d.c:
     boolean returnPath() -> e
     int parsePermissions(java.lang.String) -> a
     boolean copyFile(java.lang.String,java.lang.String,boolean,boolean) -> a
-    boolean checkUtil(java.lang.String) -> f
+    boolean checkUtil(java.lang.String) -> g
     boolean exists(java.lang.String) -> b
     boolean findBinary(java.lang.String) -> c
+    java.lang.String getBusyBoxVersion(java.lang.String) -> d
     boolean isAccessGiven() -> b
-    com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> d
+    com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> e
     java.util.ArrayList getMounts() -> c
-    java.lang.String getMountedAs(java.lang.String) -> e
+    java.lang.String getMountedAs(java.lang.String) -> f
     java.util.Set getPath() -> d
     boolean hasUtil(java.lang.String,java.lang.String) -> a
 com.stericson.RootTools.internal.RootToolsInternalMethods$1 -> com.c.a.d.d:
     java.util.List val$result -> c
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$5 -> com.c.a.d.e:
+com.stericson.RootTools.internal.RootToolsInternalMethods$3 -> com.c.a.d.e:
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$6 -> com.c.a.d.f:
+com.stericson.RootTools.internal.RootToolsInternalMethods$5 -> com.c.a.d.f:
+    void output(int,java.lang.String) -> a
+com.stericson.RootTools.internal.RootToolsInternalMethods$6 -> com.c.a.d.g:
     com.stericson.RootTools.internal.RootToolsInternalMethods this$0 -> c
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$9 -> com.c.a.d.g:
+com.stericson.RootTools.internal.RootToolsInternalMethods$9 -> com.c.a.d.h:
     java.lang.String val$box -> c
     java.lang.String val$util -> d
     void output(int,java.lang.String) -> a
@@ -9385,184 +9390,187 @@ pe.kmh.fm.MainActivity$1 -> pe.kmh.fm.a:
     void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
     void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
 pe.kmh.fm.MainActivity$10 -> pe.kmh.fm.b:
-    int compare(java.lang.Object,java.lang.Object) -> compare
+    pe.kmh.fm.MainActivity this$0 -> a
+    void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
+    void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
 pe.kmh.fm.MainActivity$11 -> pe.kmh.fm.c:
     int compare(java.lang.Object,java.lang.Object) -> compare
 pe.kmh.fm.MainActivity$12 -> pe.kmh.fm.d:
     int compare(java.lang.Object,java.lang.Object) -> compare
 pe.kmh.fm.MainActivity$13 -> pe.kmh.fm.e:
-    void onClick(android.content.DialogInterface,int) -> onClick
+    int compare(java.lang.Object,java.lang.Object) -> compare
 pe.kmh.fm.MainActivity$14 -> pe.kmh.fm.f:
-    pe.kmh.fm.MainActivity this$0 -> a
-    android.app.ProgressDialog val$dialog -> b
-    void handleMessage(android.os.Message) -> handleMessage
+    void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$15 -> pe.kmh.fm.g:
     pe.kmh.fm.MainActivity this$0 -> a
-    android.os.Handler val$handler -> b
-    android.app.ProgressDialog val$dialog -> c
-    void run() -> run
+    android.app.ProgressDialog val$dialog -> b
+    void handleMessage(android.os.Message) -> handleMessage
 pe.kmh.fm.MainActivity$16 -> pe.kmh.fm.h:
     pe.kmh.fm.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$16) -> a
-pe.kmh.fm.MainActivity$16$1 -> pe.kmh.fm.i:
-    pe.kmh.fm.MainActivity$16 this$1 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-pe.kmh.fm.MainActivity$16$2 -> pe.kmh.fm.j:
-    pe.kmh.fm.MainActivity$16 this$1 -> a
     android.os.Handler val$handler -> b
     android.app.ProgressDialog val$dialog -> c
     void run() -> run
-pe.kmh.fm.MainActivity$17 -> pe.kmh.fm.k:
+pe.kmh.fm.MainActivity$17 -> pe.kmh.fm.i:
+    pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
+    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$17) -> a
+pe.kmh.fm.MainActivity$17$1 -> pe.kmh.fm.j:
+    pe.kmh.fm.MainActivity$17 this$1 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+pe.kmh.fm.MainActivity$17$2 -> pe.kmh.fm.k:
+    pe.kmh.fm.MainActivity$17 this$1 -> a
+    android.os.Handler val$handler -> b
+    android.app.ProgressDialog val$dialog -> c
+    void run() -> run
 pe.kmh.fm.MainActivity$18 -> pe.kmh.fm.l:
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$19 -> pe.kmh.fm.m:
     pe.kmh.fm.MainActivity this$0 -> a
     android.app.ProgressDialog val$dialog -> b
     void handleMessage(android.os.Message) -> handleMessage
-pe.kmh.fm.MainActivity$19 -> pe.kmh.fm.m:
-    pe.kmh.fm.MainActivity this$0 -> a
-    android.os.Handler val$handler -> b
-    android.app.ProgressDialog val$dialog -> c
-    void run() -> run
-pe.kmh.fm.MainActivity$19$1 -> pe.kmh.fm.n:
-    android.os.Handler val$handler -> c
-    int val$prog -> d
-    void output(int,java.lang.String) -> a
-pe.kmh.fm.MainActivity$2 -> pe.kmh.fm.o:
+pe.kmh.fm.MainActivity$2 -> pe.kmh.fm.n:
     pe.kmh.fm.MainActivity this$0 -> a
     boolean onCreateActionMode(com.actionbarsherlock.view.ActionMode,com.actionbarsherlock.view.Menu) -> onCreateActionMode
     boolean onPrepareActionMode(com.actionbarsherlock.view.ActionMode,com.actionbarsherlock.view.Menu) -> onPrepareActionMode
     boolean onActionItemClicked(com.actionbarsherlock.view.ActionMode,com.actionbarsherlock.view.MenuItem) -> onActionItemClicked
     void onDestroyActionMode(com.actionbarsherlock.view.ActionMode) -> onDestroyActionMode
-pe.kmh.fm.MainActivity$20 -> pe.kmh.fm.p:
+pe.kmh.fm.MainActivity$20 -> pe.kmh.fm.o:
+    pe.kmh.fm.MainActivity this$0 -> a
+    android.os.Handler val$handler -> b
+    android.app.ProgressDialog val$dialog -> c
+    void run() -> run
+pe.kmh.fm.MainActivity$20$1 -> pe.kmh.fm.p:
+    android.os.Handler val$handler -> c
+    int val$prog -> d
+    void output(int,java.lang.String) -> a
+pe.kmh.fm.MainActivity$21 -> pe.kmh.fm.q:
     pe.kmh.fm.MainActivity this$0 -> a
     android.widget.EditText val$NumPerm -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$20$1 -> pe.kmh.fm.q:
-    void output(int,java.lang.String) -> a
-pe.kmh.fm.MainActivity$21 -> pe.kmh.fm.r:
+pe.kmh.fm.MainActivity$21$1 -> pe.kmh.fm.r:
     void output(int,java.lang.String) -> a
 pe.kmh.fm.MainActivity$22 -> pe.kmh.fm.s:
     void output(int,java.lang.String) -> a
 pe.kmh.fm.MainActivity$23 -> pe.kmh.fm.t:
+    void output(int,java.lang.String) -> a
+pe.kmh.fm.MainActivity$24 -> pe.kmh.fm.u:
     pe.kmh.fm.MainActivity this$0 -> a
     android.view.View val$layout -> b
     java.lang.String val$filepath -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$24 -> pe.kmh.fm.u:
-    pe.kmh.fm.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$25 -> pe.kmh.fm.v:
     pe.kmh.fm.MainActivity this$0 -> a
-    android.widget.EditText val$FolderName -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$26 -> pe.kmh.fm.w:
     pe.kmh.fm.MainActivity this$0 -> a
+    android.widget.EditText val$FolderName -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$27 -> pe.kmh.fm.x:
     pe.kmh.fm.MainActivity this$0 -> a
-    android.widget.EditText val$FileName -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$28 -> pe.kmh.fm.y:
     pe.kmh.fm.MainActivity this$0 -> a
+    android.widget.EditText val$FileName -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$29 -> pe.kmh.fm.z:
     pe.kmh.fm.MainActivity this$0 -> a
-    java.lang.String val$extPath -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$3 -> pe.kmh.fm.A:
     pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$30 -> pe.kmh.fm.B:
     pe.kmh.fm.MainActivity this$0 -> a
+    java.lang.String val$extPath -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$31 -> pe.kmh.fm.C:
+    pe.kmh.fm.MainActivity this$0 -> a
     android.widget.EditText val$SearchingFileName -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$30) -> a
-pe.kmh.fm.MainActivity$30$1 -> pe.kmh.fm.C:
-    pe.kmh.fm.MainActivity$30 this$1 -> a
+    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$31) -> a
+pe.kmh.fm.MainActivity$31$1 -> pe.kmh.fm.D:
+    pe.kmh.fm.MainActivity$31 this$1 -> a
     android.app.ProgressDialog val$pdialog -> b
     void run() -> run
-pe.kmh.fm.MainActivity$31 -> pe.kmh.fm.D:
-    pe.kmh.fm.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$32 -> pe.kmh.fm.E:
     pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$33 -> pe.kmh.fm.F:
+    pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 pe.kmh.fm.MainActivity$34 -> pe.kmh.fm.G:
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$4 -> pe.kmh.fm.H:
+pe.kmh.fm.MainActivity$35 -> pe.kmh.fm.H:
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$4 -> pe.kmh.fm.I:
     pe.kmh.fm.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$5 -> pe.kmh.fm.I:
-    void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$6 -> pe.kmh.fm.J:
+pe.kmh.fm.MainActivity$5 -> pe.kmh.fm.J:
     pe.kmh.fm.MainActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$6) -> a
-pe.kmh.fm.MainActivity$6$1 -> pe.kmh.fm.K:
-    pe.kmh.fm.MainActivity$6 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$6$1$1 -> pe.kmh.fm.L:
-    pe.kmh.fm.MainActivity$6$1 this$2 -> a
+pe.kmh.fm.MainActivity$6 -> pe.kmh.fm.K:
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$6$1$1$1 -> pe.kmh.fm.M:
-    void output(int,java.lang.String) -> a
-pe.kmh.fm.MainActivity$6$1$2 -> pe.kmh.fm.N:
-    void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$7 -> pe.kmh.fm.O:
+pe.kmh.fm.MainActivity$7 -> pe.kmh.fm.L:
     pe.kmh.fm.MainActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
     pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$7) -> a
-pe.kmh.fm.MainActivity$7$1 -> pe.kmh.fm.P:
+pe.kmh.fm.MainActivity$7$1 -> pe.kmh.fm.M:
     pe.kmh.fm.MainActivity$7 this$1 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$7$1$1 -> pe.kmh.fm.N:
+    pe.kmh.fm.MainActivity$7$1 this$2 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$7$1$1$1 -> pe.kmh.fm.O:
+    void output(int,java.lang.String) -> a
+pe.kmh.fm.MainActivity$7$1$2 -> pe.kmh.fm.P:
+    void onClick(android.content.DialogInterface,int) -> onClick
+pe.kmh.fm.MainActivity$8 -> pe.kmh.fm.Q:
+    pe.kmh.fm.MainActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$8) -> a
+pe.kmh.fm.MainActivity$8$1 -> pe.kmh.fm.R:
+    pe.kmh.fm.MainActivity$8 this$1 -> a
     android.widget.EditText val$et -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-    pe.kmh.fm.MainActivity$7 access$0(pe.kmh.fm.MainActivity$7$1) -> a
-pe.kmh.fm.MainActivity$7$1$1 -> pe.kmh.fm.Q:
-    pe.kmh.fm.MainActivity$7$1 this$2 -> a
+    pe.kmh.fm.MainActivity$8 access$0(pe.kmh.fm.MainActivity$8$1) -> a
+pe.kmh.fm.MainActivity$8$1$1 -> pe.kmh.fm.S:
+    pe.kmh.fm.MainActivity$8$1 this$2 -> a
     void handleMessage(android.os.Message) -> handleMessage
-pe.kmh.fm.MainActivity$7$1$2 -> pe.kmh.fm.R:
-    pe.kmh.fm.MainActivity$7$1 this$2 -> a
+pe.kmh.fm.MainActivity$8$1$2 -> pe.kmh.fm.T:
+    pe.kmh.fm.MainActivity$8$1 this$2 -> a
     android.os.Handler val$handler -> b
     android.app.ProgressDialog val$pdialog -> c
     void run() -> run
-pe.kmh.fm.MainActivity$7$2 -> pe.kmh.fm.S:
+pe.kmh.fm.MainActivity$8$2 -> pe.kmh.fm.U:
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$7$3 -> pe.kmh.fm.T:
-    pe.kmh.fm.MainActivity$7 this$1 -> a
+pe.kmh.fm.MainActivity$8$3 -> pe.kmh.fm.V:
+    pe.kmh.fm.MainActivity$8 this$1 -> a
     int val$position -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.MainActivity$8 -> pe.kmh.fm.U:
+pe.kmh.fm.MainActivity$9 -> pe.kmh.fm.W:
     pe.kmh.fm.MainActivity this$0 -> a
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-pe.kmh.fm.MainActivity$9 -> pe.kmh.fm.V:
-    pe.kmh.fm.MainActivity this$0 -> a
-    void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
-    void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-pe.kmh.fm.MainActivity$ApkLoader -> pe.kmh.fm.W:
+pe.kmh.fm.MainActivity$ApkLoader -> pe.kmh.fm.X:
     java.util.Map imageViews -> c
     java.util.concurrent.ExecutorService executorService -> d
     boolean isScrolling -> a
     pe.kmh.fm.MainActivity this$0 -> b
     void DisplayImage(java.lang.String,java.lang.String,android.widget.ImageView,int) -> a
     boolean imageViewReused(pe.kmh.fm.MainActivity$ApkLoader$PhotoToLoad) -> a
-pe.kmh.fm.MainActivity$ApkLoader$BitmapDisplayer -> pe.kmh.fm.X:
+pe.kmh.fm.MainActivity$ApkLoader$BitmapDisplayer -> pe.kmh.fm.Y:
     android.graphics.Bitmap bitmap -> a
     pe.kmh.fm.MainActivity$ApkLoader$PhotoToLoad photoToLoad -> b
     pe.kmh.fm.MainActivity$ApkLoader this$1 -> c
     void run() -> run
-pe.kmh.fm.MainActivity$ApkLoader$PhotoToLoad -> pe.kmh.fm.Y:
+pe.kmh.fm.MainActivity$ApkLoader$PhotoToLoad -> pe.kmh.fm.Z:
     java.lang.String url -> a
     android.widget.ImageView imageView -> b
     java.lang.String b -> c
     int pos -> d
-pe.kmh.fm.MainActivity$ApkLoader$PhotosLoader -> pe.kmh.fm.Z:
+pe.kmh.fm.MainActivity$ApkLoader$PhotosLoader -> pe.kmh.fm.aa:
     pe.kmh.fm.MainActivity$ApkLoader$PhotoToLoad photoToLoad -> a
     pe.kmh.fm.MainActivity$ApkLoader this$1 -> b
     void run() -> run
-pe.kmh.fm.MainActivity$DrawerAdapter -> pe.kmh.fm.aa:
+pe.kmh.fm.MainActivity$DrawerAdapter -> pe.kmh.fm.ab:
     java.util.ArrayList object -> a
     pe.kmh.fm.MainActivity$DrawerAdapter$ViewHolder holder -> b
     pe.kmh.fm.MainActivity this$0 -> c
@@ -9570,10 +9578,10 @@ pe.kmh.fm.MainActivity$DrawerAdapter -> pe.kmh.fm.aa:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-pe.kmh.fm.MainActivity$DrawerAdapter$ViewHolder -> pe.kmh.fm.ab:
+pe.kmh.fm.MainActivity$DrawerAdapter$ViewHolder -> pe.kmh.fm.ac:
     android.widget.ImageView icon -> a
     android.widget.TextView name -> b
-pe.kmh.fm.MainActivity$FileAdapter -> pe.kmh.fm.ac:
+pe.kmh.fm.MainActivity$FileAdapter -> pe.kmh.fm.ad:
     java.util.ArrayList object -> b
     boolean isScrolling -> a
     java.lang.String filename -> c
@@ -9586,16 +9594,16 @@ pe.kmh.fm.MainActivity$FileAdapter -> pe.kmh.fm.ac:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$FileAdapter) -> a
-pe.kmh.fm.MainActivity$FileAdapter$1 -> pe.kmh.fm.ad:
+pe.kmh.fm.MainActivity$FileAdapter$1 -> pe.kmh.fm.ae:
     pe.kmh.fm.MainActivity$FileAdapter this$1 -> a
     void onLoadingComplete$5848811b(android.view.View,android.graphics.Bitmap) -> a
-pe.kmh.fm.MainActivity$FileAdapter$ViewHolder -> pe.kmh.fm.ae:
+pe.kmh.fm.MainActivity$FileAdapter$ViewHolder -> pe.kmh.fm.af:
     android.widget.ImageView fileicon -> a
     android.widget.TextView filename -> b
     android.widget.TextView filedate -> c
     android.widget.TextView filesize -> d
     android.widget.ImageView check -> e
-pe.kmh.fm.MainActivity$RootFileAdapter -> pe.kmh.fm.af:
+pe.kmh.fm.MainActivity$RootFileAdapter -> pe.kmh.fm.ag:
     java.util.ArrayList object -> b
     boolean isScrolling -> a
     java.lang.String filename -> c
@@ -9610,10 +9618,10 @@ pe.kmh.fm.MainActivity$RootFileAdapter -> pe.kmh.fm.af:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     pe.kmh.fm.MainActivity access$0(pe.kmh.fm.MainActivity$RootFileAdapter) -> a
-pe.kmh.fm.MainActivity$RootFileAdapter$1 -> pe.kmh.fm.ag:
+pe.kmh.fm.MainActivity$RootFileAdapter$1 -> pe.kmh.fm.ah:
     pe.kmh.fm.MainActivity$RootFileAdapter this$1 -> a
     void onLoadingComplete$5848811b(android.view.View,android.graphics.Bitmap) -> a
-pe.kmh.fm.MainActivity$RootFileAdapter$ViewHolder -> pe.kmh.fm.ah:
+pe.kmh.fm.MainActivity$RootFileAdapter$ViewHolder -> pe.kmh.fm.ai:
     android.widget.ImageView fileicon -> a
     android.widget.TextView filename -> b
     android.widget.TextView filedate -> c
@@ -9634,39 +9642,39 @@ pe.kmh.fm.SearchActivity -> pe.kmh.fm.SearchActivity:
     void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
     android.graphics.drawable.Drawable getApkIcon(java.lang.String) -> a
     java.lang.String getMIME(java.lang.String) -> b
-pe.kmh.fm.SearchActivity$1 -> pe.kmh.fm.ai:
+pe.kmh.fm.SearchActivity$1 -> pe.kmh.fm.aj:
     pe.kmh.fm.SearchActivity this$0 -> a
     int val$psize -> b
     void run() -> run
-pe.kmh.fm.SearchActivity$2 -> pe.kmh.fm.aj:
+pe.kmh.fm.SearchActivity$2 -> pe.kmh.fm.ak:
     android.widget.ListView val$list -> a
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-pe.kmh.fm.SearchActivity$3 -> pe.kmh.fm.ak:
+pe.kmh.fm.SearchActivity$3 -> pe.kmh.fm.al:
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.SearchActivity$4 -> pe.kmh.fm.al:
+pe.kmh.fm.SearchActivity$4 -> pe.kmh.fm.am:
     pe.kmh.fm.SearchActivity this$0 -> a
     java.io.File val$file -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-pe.kmh.fm.SearchActivity$ApkLoader -> pe.kmh.fm.am:
+pe.kmh.fm.SearchActivity$ApkLoader -> pe.kmh.fm.an:
     java.util.Map imageViews -> a
     java.util.concurrent.ExecutorService executorService -> b
     pe.kmh.fm.SearchActivity this$0 -> c
     boolean imageViewReused(pe.kmh.fm.SearchActivity$ApkLoader$PhotoToLoad) -> a
-pe.kmh.fm.SearchActivity$ApkLoader$BitmapDisplayer -> pe.kmh.fm.an:
+pe.kmh.fm.SearchActivity$ApkLoader$BitmapDisplayer -> pe.kmh.fm.ao:
     android.graphics.Bitmap bitmap -> a
     pe.kmh.fm.SearchActivity$ApkLoader$PhotoToLoad photoToLoad -> b
     pe.kmh.fm.SearchActivity$ApkLoader this$1 -> c
     void run() -> run
-pe.kmh.fm.SearchActivity$ApkLoader$PhotoToLoad -> pe.kmh.fm.ao:
+pe.kmh.fm.SearchActivity$ApkLoader$PhotoToLoad -> pe.kmh.fm.ap:
     java.lang.String url -> a
     java.lang.String b -> b
     android.widget.ImageView imageView -> c
-pe.kmh.fm.SearchActivity$ApkLoader$PhotosLoader -> pe.kmh.fm.ap:
+pe.kmh.fm.SearchActivity$ApkLoader$PhotosLoader -> pe.kmh.fm.aq:
     pe.kmh.fm.SearchActivity$ApkLoader$PhotoToLoad photoToLoad -> a
     pe.kmh.fm.SearchActivity$ApkLoader this$1 -> b
     void run() -> run
-pe.kmh.fm.SearchActivity$FileAdapter -> pe.kmh.fm.aq:
+pe.kmh.fm.SearchActivity$FileAdapter -> pe.kmh.fm.ar:
     boolean isScrolling -> a
     java.util.ArrayList object -> b
     java.lang.String filename -> c
@@ -9679,7 +9687,7 @@ pe.kmh.fm.SearchActivity$FileAdapter -> pe.kmh.fm.aq:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-pe.kmh.fm.SearchActivity$FileAdapter$ViewHolder -> pe.kmh.fm.ar:
+pe.kmh.fm.SearchActivity$FileAdapter$ViewHolder -> pe.kmh.fm.as:
     android.widget.ImageView fileicon -> a
     android.widget.TextView filename -> b
     android.widget.TextView filepath -> c
@@ -9695,7 +9703,7 @@ pe.kmh.fm.SettingsActivity -> pe.kmh.fm.SettingsActivity:
     void onResume() -> onResume
     void onPause() -> onPause
     void onDestroy() -> onDestroy
-pe.kmh.fm.SettingsActivity$1 -> pe.kmh.fm.as:
+pe.kmh.fm.SettingsActivity$1 -> pe.kmh.fm.at:
     pe.kmh.fm.SettingsActivity this$0 -> a
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
 pe.kmh.fm.TextEditor -> pe.kmh.fm.TextEditor:
@@ -9707,9 +9715,9 @@ pe.kmh.fm.TextEditor -> pe.kmh.fm.TextEditor:
     void onDestroy() -> onDestroy
     void onFileSaveBtnPress(android.view.View) -> onFileSaveBtnPress
     void onBackPressed() -> onBackPressed
-pe.kmh.fm.TextEditor$1 -> pe.kmh.fm.at:
+pe.kmh.fm.TextEditor$1 -> pe.kmh.fm.au:
     void output(int,java.lang.String) -> a
-pe.kmh.fm.TextEditor$FileLoadTask -> pe.kmh.fm.au:
+pe.kmh.fm.TextEditor$FileLoadTask -> pe.kmh.fm.av:
     java.lang.StringBuilder outLines -> a
     android.app.ProgressDialog pdialog -> b
     pe.kmh.fm.TextEditor this$0 -> c
@@ -9717,7 +9725,7 @@ pe.kmh.fm.TextEditor$FileLoadTask -> pe.kmh.fm.au:
     java.lang.Void doInBackground$10299ca() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-pe.kmh.fm.TextEditor$FileLoadTask$1 -> pe.kmh.fm.av:
+pe.kmh.fm.TextEditor$FileLoadTask$1 -> pe.kmh.fm.aw:
     pe.kmh.fm.TextEditor$FileLoadTask this$1 -> c
     void output(int,java.lang.String) -> a
 pe.kmh.fm.prop.FileProperty -> pe.kmh.fm.prop.a:
