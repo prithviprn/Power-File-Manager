@@ -54,6 +54,7 @@ public class SearchActivity extends SherlockListActivity {
 	int Others = R.drawable.others;
 	int Audio = R.drawable.audio;
 	int Compressed = R.drawable.compressed;
+	int Video = R.drawable.video;
 	int Apk = -1;
 	int Image = -2;
 
@@ -104,6 +105,8 @@ public class SearchActivity extends SherlockListActivity {
 
 						else if (mimeType.startsWith("audio")) icon.add(Audio);
 
+						else if (ico.equals("avi") || ico.equals("wmv") || ico.equals("mkv") || ico.equals("mp4")) icon.add(Video);
+						
 						else if (!file.equals("apk")) icon.add(Others);
 
 						else if (file.equals("apk")) icon.add(Apk);

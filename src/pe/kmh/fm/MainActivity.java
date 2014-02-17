@@ -127,6 +127,7 @@ public class MainActivity extends SherlockActivity {
 	int Others = R.drawable.others;
 	int Audio = R.drawable.audio;
 	int Compressed = R.drawable.compressed;
+	int Video = R.drawable.video;
 	int Apk = -1;
 	int Image = -2;
 	int[] internal_icon;
@@ -185,11 +186,11 @@ public class MainActivity extends SherlockActivity {
 		importPreferences();
 
 		if (AutoRootCheck && RootTools.isAccessGiven()) {
-			if (!RootTools.isBusyboxAvailable() || RootTools.getBusyBoxVersion().contains("1.22")) {
+			if (!RootTools.isBusyboxAvailable()) {
 
 				AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
 				aDialog.setTitle("Busybox");
-				aDialog.setMessage(Html.fromHtml(getString(R.string.BusyboxRequired)));
+				aDialog.setMessage(getString(R.string.BusyboxRequired));
 				aDialog.setCancelable(false);
 				aDialog.setPositiveButton(getString(R.string.GotoPlayStore), new DialogInterface.OnClickListener() {
 
@@ -987,6 +988,7 @@ public class MainActivity extends SherlockActivity {
 				else if (mimeType == null) internal_icon[i] = Others;
 				else if (mimeType.startsWith("image")) internal_icon[i] = Image;
 				else if (mimeType.startsWith("audio")) internal_icon[i] = Audio;
+				else if (ico.equals("avi") || ico.equals("wmv") || ico.equals("mkv") || ico.equals("mp4")) internal_icon[i] = Video;
 				else if (!ico.equals("apk")) internal_icon[i] = Others;
 				else if (ico.equals("apk")) internal_icon[i] = Apk;
 			}

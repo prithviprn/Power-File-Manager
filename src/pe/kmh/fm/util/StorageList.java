@@ -41,8 +41,10 @@ public class StorageList extends Activity {
 			}
 		}
 
-		if (mMounts.size() == 1) { return mMounts.get(0); }
-
+		if (mMounts.size() == 1) {
+			return mMounts.get(0);
+		}
+		else if (Environment.getExternalStorageDirectory().getAbsolutePath().equals("/storage/sdcard0")) return "/storage/sdcard1";
 		return null;
 	}
 
@@ -140,13 +142,7 @@ public class StorageList extends Activity {
 			if (fileSystemName.contains(name) == true) { return false; }
 		}
 
-		if (Environment.getExternalStorageDirectory().getAbsolutePath().equals(fileSystemName) == true) {
-			/**
-			 * 안드로이드에서 제공되는 getExternalStorageDirectory() 경로와 같은 경로일 경우에는 추가로
-			 * 삽입된 SDCard가 아니라고 판단하였습니다.
-			 **/
-			return false;
-		}
+		if (Environment.getExternalStorageDirectory().getAbsolutePath().equals(fileSystemName) == true) return false;
 
 		return true;
 	}

@@ -6981,19 +6981,18 @@ com.stericson.RootTools.RootTools -> com.c.a.a:
     java.lang.String utilPath -> c
     int shellDelay -> d
     void setRim(com.stericson.RootTools.internal.RootToolsInternalMethods) -> a
-    com.stericson.RootTools.internal.RootToolsInternalMethods getInternals() -> f
+    com.stericson.RootTools.internal.RootToolsInternalMethods getInternals() -> e
     void closeShell(boolean) -> a
     boolean copyFile(java.lang.String,java.lang.String,boolean,boolean) -> a
     boolean exists(java.lang.String) -> a
     boolean findBinary(java.lang.String) -> b
-    java.lang.String getBusyBoxVersion() -> a
     com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> c
-    java.util.ArrayList getMounts() -> b
+    java.util.ArrayList getMounts() -> a
     java.lang.String getMountedAs(java.lang.String) -> d
-    java.util.Set getPath() -> c
+    java.util.Set getPath() -> b
     com.stericson.RootTools.execution.Shell getShell(boolean) -> b
-    boolean isAccessGiven() -> d
-    boolean isBusyboxAvailable() -> e
+    boolean isAccessGiven() -> c
+    boolean isBusyboxAvailable() -> d
     void offerBusyBox(android.app.Activity) -> a
     boolean remount(java.lang.String,java.lang.String) -> a
     void log(java.lang.String) -> e
@@ -7081,10 +7080,9 @@ com.stericson.RootTools.execution.Shell$Worker -> com.c.a.c.f:
 com.stericson.RootTools.internal.InternalVariables -> com.c.a.d.a:
     boolean accessGiven -> a
     boolean found -> b
-    java.lang.String busyboxVersion -> c
-    java.util.Set path -> d
-    java.util.ArrayList mounts -> e
-    com.stericson.RootTools.containers.Permissions permissions -> f
+    java.util.Set path -> c
+    java.util.ArrayList mounts -> d
+    com.stericson.RootTools.containers.Permissions permissions -> e
 com.stericson.RootTools.internal.Remounter -> com.c.a.d.b:
     boolean remount(java.lang.String,java.lang.String) -> a
     com.stericson.RootTools.containers.Mount findMountPointRecursive(java.lang.String) -> a
@@ -7093,27 +7091,24 @@ com.stericson.RootTools.internal.RootToolsInternalMethods -> com.c.a.d.c:
     boolean returnPath() -> e
     int parsePermissions(java.lang.String) -> a
     boolean copyFile(java.lang.String,java.lang.String,boolean,boolean) -> a
-    boolean checkUtil(java.lang.String) -> g
+    boolean checkUtil(java.lang.String) -> f
     boolean exists(java.lang.String) -> b
     boolean findBinary(java.lang.String) -> c
-    java.lang.String getBusyBoxVersion(java.lang.String) -> d
     boolean isAccessGiven() -> b
-    com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> e
+    com.stericson.RootTools.containers.Permissions getFilePermissionsSymlinks(java.lang.String) -> d
     java.util.ArrayList getMounts() -> c
-    java.lang.String getMountedAs(java.lang.String) -> f
+    java.lang.String getMountedAs(java.lang.String) -> e
     java.util.Set getPath() -> d
     boolean hasUtil(java.lang.String,java.lang.String) -> a
 com.stericson.RootTools.internal.RootToolsInternalMethods$1 -> com.c.a.d.d:
     java.util.List val$result -> c
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$3 -> com.c.a.d.e:
+com.stericson.RootTools.internal.RootToolsInternalMethods$5 -> com.c.a.d.e:
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$5 -> com.c.a.d.f:
-    void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$6 -> com.c.a.d.g:
+com.stericson.RootTools.internal.RootToolsInternalMethods$6 -> com.c.a.d.f:
     com.stericson.RootTools.internal.RootToolsInternalMethods this$0 -> c
     void output(int,java.lang.String) -> a
-com.stericson.RootTools.internal.RootToolsInternalMethods$9 -> com.c.a.d.h:
+com.stericson.RootTools.internal.RootToolsInternalMethods$9 -> com.c.a.d.g:
     java.lang.String val$box -> c
     java.lang.String val$util -> d
     void output(int,java.lang.String) -> a
@@ -9331,29 +9326,30 @@ pe.kmh.fm.MainActivity -> pe.kmh.fm.MainActivity:
     int Others -> N
     int Audio -> O
     int Compressed -> P
+    int Video -> Q
     int Apk -> u
     int Image -> v
     int[] internal_icon -> w
     com.stericson.RootTools.execution.Command cmd -> x
     boolean isRoot -> y
-    boolean ShowHiddenFiles -> Q
+    boolean ShowHiddenFiles -> R
     boolean UseImageLoader -> z
-    boolean AutoRootCheck -> R
-    java.lang.String StartPathPref -> S
+    boolean AutoRootCheck -> S
+    java.lang.String StartPathPref -> T
     java.lang.String payload -> A
     boolean isCracked -> B
     java.io.File f -> C
     pe.kmh.fm.MainActivity$ApkLoader loader -> D
-    android.content.SharedPreferences sharedPrefs -> T
-    android.content.SharedPreferences$Editor editor -> U
-    java.lang.String[] MenuListItems -> V
+    android.content.SharedPreferences sharedPrefs -> U
+    android.content.SharedPreferences$Editor editor -> V
+    java.lang.String[] MenuListItems -> W
     android.support.v4.widget.DrawerLayout MenuLayout -> E
-    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> W
+    com.sherlock.navigationdrawer.compat.SherlockActionBarDrawerToggle MenuToggle -> X
     android.widget.ListView MenuList -> F
     java.lang.StringBuilder sb -> G
     com.android.vending.billing.IInAppBillingService mService -> H
     com.actionbarsherlock.view.ActionMode mActionMode -> I
-    android.content.ServiceConnection mServiceConn -> X
+    android.content.ServiceConnection mServiceConn -> Y
     com.actionbarsherlock.view.ActionMode$Callback mActionModeCallback -> J
     void onStart() -> onStart
     void onCreate(android.os.Bundle) -> onCreate
@@ -9631,13 +9627,14 @@ pe.kmh.fm.MainActivity$RootFileAdapter$ViewHolder -> pe.kmh.fm.ai:
 pe.kmh.fm.SearchActivity -> pe.kmh.fm.SearchActivity:
     java.util.ArrayList filelist -> a
     java.util.ArrayList icon -> b
-    android.content.res.Resources res -> i
+    android.content.res.Resources res -> j
     int Folder -> c
     int Others -> d
     int Audio -> e
     int Compressed -> f
-    int Apk -> g
-    int Image -> h
+    int Video -> g
+    int Apk -> h
+    int Image -> i
     void onCreate(android.os.Bundle) -> onCreate
     void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
     android.graphics.drawable.Drawable getApkIcon(java.lang.String) -> a

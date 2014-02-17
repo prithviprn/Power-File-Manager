@@ -66,7 +66,7 @@
     <string name="AutoPermissionOptionsNotRoot">이 기능은 루팅된 기기에서만 사용 가능합니다!</string>
     <string name="AutoRootCheck">루팅 자동 감지</string>
     <string name="AutoRootCheckSummary">루팅을 자동으로 감지해서 루트 탐색모드로 진입합니다.\n이 옵션을 끄면 루팅을 감지하지 않고 일반모드로만 진입하게 됩니다.</string>
-    <string name="BusyboxRequired">이 앱은 <Data><![CDATA[ <br></br><font color="red">Busybox v1.21</font> ]]> </Data>을 설치해야 작동합니다. 최신 버전의 Busybox는 호환성 문제로 작동되지 않습니다. 설치하신 후, 앱을 재시작 해주세요.</string>
+    <string name="BusyboxRequired">이 앱은 Busybox를 설치해야 작동합니다. 설치하신 후, 앱을 재시작 해주세요.</string>
     <string name="SaveFile">저장</string>
     <string name="Buy">업그레이드</string>
     <string name="AlreadyBuy">이미 구매하셨네요! 프리미엄 버전의 기능을 언락합니다.</string>
@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.6.4 업데이트\n- 전체 선택과 권한 설정에 관련된 치명적인 버그 수정\n\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
+    <string name="UpdateLog">v3.7 업데이트\n- Busybox v1.22.1과의 호환성 확보\n- 내외장 구별기능 향상 (Android 4.4)\n* 루팅된 기기에서 파일목록이 안보이거나 한글파일명이 깨진다면, Busybox를 업데이트 해주세요! 그래도 안되면 리포트 부탁드려요~</string>
 
 </resources>

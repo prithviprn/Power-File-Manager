@@ -31,6 +31,14 @@ public class RootFile extends File {
 		if (!mPath.endsWith("/")) mPath += "/";
 	}
 
+	public RootFile(File f) {
+		super(f.getAbsolutePath());
+
+		String path = f.getAbsolutePath();
+		mPath = path.substring(0, path.lastIndexOf("/"));
+		if (!mPath.endsWith("/")) mPath += "/";
+	}
+
 	@Override
 	public boolean canRead() {
 		// Always TRUE
@@ -99,6 +107,18 @@ public class RootFile extends File {
 		if (!this.isDirectory()) return null;
 		String actualPath = this.getPath().endsWith("/") ? this.getPath() : this.getPath() + "/";
 
+		File[] flist;
+		RootFile[] retlist = null;
+		if (new File(actualPath).canRead()) { // Not Root Area
+			flist = (new File(actualPath)).listFiles();
+			retlist = new RootFile[flist.length];
+			for (int i = 0; i < flist.length; i++) {
+				retlist[i] = new RootFile(flist[i]);
+				if (flist[i].isDirectory()) size.add(-1);
+				else size.add(Integer.valueOf((int) (flist[i].length())));
+			}
+		}
+
 		final String w = "busybox ls -la '" + actualPath + "'";
 
 		outLines = new ArrayList<String>();
@@ -122,6 +142,13 @@ public class RootFile extends File {
 				String nline = "";
 				Matcher matcher = Pattern.compile("\\S+").matcher(line);
 				String[] s = new String[30];
+
+				if (new File(actualPath).canRead()) {
+					matcher.find();
+					perms.add(matcher.group().substring(1));
+					continue;
+				}
+
 				int i = 0;
 				while (matcher.find()) {
 					if (i == 8 && !s[0].startsWith("c") && !s[0].startsWith("b")) {
@@ -151,6 +178,8 @@ public class RootFile extends File {
 		catch (Exception e) {
 			Log.e("PFM", e.getMessage());
 		}
+
+		if (new File(actualPath).canRead()) return retlist;
 
 		return files.toArray(new RootFile[0]);
 	}
@@ -224,7 +253,7 @@ public class RootFile extends File {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public boolean renameTo(File dest) {
 		boolean result = true;

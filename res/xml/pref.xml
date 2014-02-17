@@ -75,22 +75,28 @@
             android:title="Opensource License" >
             <Preference
                 android:key="RootTools"
-                android:title="RootTools" />
+                android:title="RootTools"
+                android:summary="https://github.com/Stericson/RootTools" />
             <Preference
                 android:key="Crouton"
-                android:title="Crouton" />
+                android:title="Crouton"
+                android:summary="https://github.com/keyboardsurfer/Crouton" />
             <Preference
                 android:key="ActionBarSherlock"
-                android:title="ActionBarSherlock" />
+                android:title="ActionBarSherlock"
+                android:summary="https://github.com/JakeWharton/ActionBarSherlock" />
             <Preference
                 android:key="CommonCompress"
-                android:title="Apache Common Compress Library" />
+                android:title="Apache Common Compress Library"
+                android:summary="http://commons.apache.org/proper/commons-compress" />
             <Preference
                 android:key="AUIL"
-                android:title="Android Universal Image Loader" />
+                android:title="Android Universal Image Loader"
+                android:summary="https://github.com/nostra13/Android-Universal-Image-Loader" />
             <Preference
                 android:key="SND"
-                android:title="SherlockNavigationDrawer" />
+                android:title="SherlockNavigationDrawer"
+                android:summary="https://github.com/nicolasjafelle/SherlockNavigationDrawer" />
         </PreferenceScreen>
 
         <Preference

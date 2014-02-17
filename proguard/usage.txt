@@ -1293,6 +1293,8 @@ com.stericson.RootTools.RootTools:
     188:188:public boolean deleteFileOrDirectory(java.lang.String,boolean)
     213:214:public static void fixUtil(java.lang.String,java.lang.String)
     228:228:public static boolean fixUtils(java.lang.String[])
+    246:246:public static java.lang.String getBusyBoxVersion(java.lang.String)
+    253:253:public static java.lang.String getBusyBoxVersion()
     263:263:public static java.util.List getBusyBoxApplets()
     274:274:public static java.util.List getBusyBoxApplets(java.lang.String)
     288:288:public static com.stericson.RootTools.execution.Shell getCustomShell(java.lang.String,int)
@@ -1361,6 +1363,7 @@ com.stericson.RootTools.internal.Installer
 com.stericson.RootTools.internal.InternalVariables:
     protected static java.lang.String[] space
     protected static java.lang.String getSpaceFor
+    protected static java.lang.String busyboxVersion
     protected static java.util.ArrayList symlinks
     protected static java.util.List results
     protected static final java.lang.String PS_REGEX
@@ -1371,6 +1374,7 @@ com.stericson.RootTools.internal.RootToolsInternalMethods:
     479:496:public void fixUtil(java.lang.String,java.lang.String)
     511:529:public boolean fixUtils(java.lang.String[])
     603:627:public java.util.List getBusyBoxApplets(java.lang.String)
+    635:662:public java.lang.String getBusyBoxVersion(java.lang.String)
     670:687:public long getConvertedSpace(java.lang.String)
     700:716:public java.lang.String getInode(java.lang.String)
     769:788:public boolean isNativeToolsReady(int,android.content.Context)
@@ -1389,6 +1393,7 @@ com.stericson.RootTools.internal.RootToolsInternalMethods:
 com.stericson.RootTools.internal.RootToolsInternalMethods$10
 com.stericson.RootTools.internal.RootToolsInternalMethods$11
 com.stericson.RootTools.internal.RootToolsInternalMethods$2
+com.stericson.RootTools.internal.RootToolsInternalMethods$3
 com.stericson.RootTools.internal.RootToolsInternalMethods$4
 com.stericson.RootTools.internal.RootToolsInternalMethods$7
 com.stericson.RootTools.internal.RootToolsInternalMethods$8
@@ -1519,7 +1524,7 @@ pe.kmh.fm.R$style
 pe.kmh.fm.R$styleable
 pe.kmh.fm.R$xml
 pe.kmh.fm.SearchActivity:
-    211:223:public java.lang.String getExtension(java.io.File)
+    214:226:public java.lang.String getExtension(java.io.File)
 pe.kmh.fm.TextEditor:
     static final int JOB_SAVED
     static final int JOB_NOT_SAVED
@@ -1528,7 +1533,7 @@ pe.kmh.fm.prop.FileProperty:
     60:61:public void setChecked(int)
 pe.kmh.fm.prop.RootFile:
     private java.lang.String mPerms
-    260:261:public java.lang.String getPerms()
+    289:290:public java.lang.String getPerms()
 pe.kmh.fm.prop.RootFileProperty:
     30:31:public void setIntPerm(java.lang.String)
 pe.kmh.fm.prop.SearchedRootFileProperty:
