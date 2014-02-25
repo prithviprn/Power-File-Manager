@@ -1276,7 +1276,19 @@ public class MainActivity extends SherlockActivity {
 
 					final int prog = i + 1;
 
-					if (isRoot) {
+					if (!isRoot || (new File(clipboard.get(i)).canRead() && (new File(nowPath).canWrite()))) {
+						try {
+							boolean result = FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath));
+							if (result == false) handler.sendEmptyMessage(-2);
+							else FileUtil.DeleteFile(clipboard.get(i));
+							handler.sendEmptyMessage(prog);
+						}
+						catch (IOException e) {
+							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
+						}
+					}
+					
+					else {
 						final String w = "busybox mv \"" + clipboard.get(i) + "\" \"" + nowPath + "\"";
 						cmd = new Command(0, w) {
 
@@ -1294,17 +1306,7 @@ public class MainActivity extends SherlockActivity {
 							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
 						}
 					}
-					else {
-						try {
-							boolean result = FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath));
-							if (result == false) handler.sendEmptyMessage(-2);
-							else FileUtil.DeleteFile(clipboard.get(i));
-							handler.sendEmptyMessage(prog);
-						}
-						catch (IOException e) {
-							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-						}
-					}
+					
 				}
 
 				handler.sendEmptyMessage(-1);

@@ -43,11 +43,19 @@ public class FileUtil {
 			catch (Exception e) {
 			}
 		}
-		
+
 		return true;
 	}
 
 	public static void RootFileCopy(final RootFile from, final RootFile to) {
+		if (from.canRead() && to.canWrite()) {
+			try {
+				NormalFileCopy((File) from, (File) to);
+			}
+			catch (Exception e) {
+			}
+		}
+		
 		RootTools.remount(to.getAbsolutePath(), "rw");
 		final String from_path = "\"" + from.getAbsolutePath() + "\"";
 		final String to_path = "\"" + to.getAbsolutePath() + "\"";
@@ -108,7 +116,7 @@ public class FileUtil {
 			return t;
 		}
 	}
-	
+
 	public static String getExtension(File file) {
 		String name = file.getName();
 		return getExtension(name);

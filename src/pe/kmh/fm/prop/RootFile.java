@@ -53,6 +53,16 @@ public class RootFile extends File {
 
 	@Override
 	public boolean delete() {
+		File f = new File(this.getPath());
+		if (f.canWrite()) {
+			try {
+				f.delete();
+			}
+			catch (Exception e) {
+			}
+			return true;
+		}
+
 		boolean result = true;
 		RootTools.remount(this.getPath(), "rw");
 		String w = "busybox rm -r '" + this.getPath() + "'";
@@ -225,9 +235,20 @@ public class RootFile extends File {
 
 	@Override
 	public boolean createNewFile() {
+		File f = new File(this.getPath());
+		if ((new File(this.getParent())).canWrite()) {
+			try {
+				f.createNewFile();
+			}
+			catch (Exception e) {
+			}
+			return true;
+		}
+
 		boolean result = true;
+
 		RootTools.remount(this.getPath(), "rw");
-		String w = "busybox touch '" + this.getPath() + "' && chmod 777 '" + this.getPath() + "'";
+		String w = "busybox touch \"" + this.getPath() + "\" && chmod 777 \"" + this.getPath() + "\"";
 		outLines = new ArrayList<String>();
 		try {
 			cmd = new Command(0, w) {
@@ -256,6 +277,16 @@ public class RootFile extends File {
 
 	@Override
 	public boolean renameTo(File dest) {
+		File f = new File(this.getPath());
+		if ((new File(this.getParent())).canWrite()) {
+			try {
+				f.renameTo(dest);
+			}
+			catch (Exception e) {
+			}
+			return true;
+		}
+
 		boolean result = true;
 		RootTools.remount(this.getPath(), "rw");
 		String w = "busybox mv '" + this.getPath() + "' '" + dest.getPath() + "'";
