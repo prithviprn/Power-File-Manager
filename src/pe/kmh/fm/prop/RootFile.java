@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import pe.kmh.fm.util.FileUtil;
+
 import android.util.Log;
 
 import com.stericson.RootTools.RootTools;
@@ -56,7 +58,7 @@ public class RootFile extends File {
 		File f = new File(this.getPath());
 		if (f.canWrite()) {
 			try {
-				f.delete();
+				FileUtil.DeleteFile(this.getPath());
 			}
 			catch (Exception e) {
 			}

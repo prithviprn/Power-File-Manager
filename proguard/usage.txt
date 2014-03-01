@@ -1533,7 +1533,7 @@ pe.kmh.fm.prop.FileProperty:
     60:61:public void setChecked(int)
 pe.kmh.fm.prop.RootFile:
     private java.lang.String mPerms
-    320:321:public java.lang.String getPerms()
+    322:323:public java.lang.String getPerms()
 pe.kmh.fm.prop.RootFileProperty:
     30:31:public void setIntPerm(java.lang.String)
 pe.kmh.fm.prop.SearchedRootFileProperty:
