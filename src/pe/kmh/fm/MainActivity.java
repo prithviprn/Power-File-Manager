@@ -184,10 +184,11 @@ public class MainActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 
 		importPreferences();
-
+		
+		boolean isBusyboxAvailable = true;
 		if (AutoRootCheck && RootTools.isAccessGiven()) {
 			if (!RootTools.isBusyboxAvailable()) {
-
+				isBusyboxAvailable = false;
 				AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
 				aDialog.setTitle("Busybox");
 				aDialog.setMessage(getString(R.string.BusyboxRequired));
@@ -303,7 +304,7 @@ public class MainActivity extends SherlockActivity {
 
 		sb = new StringBuilder();
 
-		LoadList(root);
+		if (isBusyboxAvailable) LoadList(root);
 
 	}
 
@@ -1287,7 +1288,7 @@ public class MainActivity extends SherlockActivity {
 							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
 						}
 					}
-					
+
 					else {
 						final String w = "busybox mv \"" + clipboard.get(i) + "\" \"" + nowPath + "\"";
 						cmd = new Command(0, w) {
@@ -1306,7 +1307,7 @@ public class MainActivity extends SherlockActivity {
 							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
 						}
 					}
-					
+
 				}
 
 				handler.sendEmptyMessage(-1);

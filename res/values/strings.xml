@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.7.2 Update\n- Fix: Deleting folder in Rooted devices.\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.7.3 Update\n- Fix: Force Close on Rooted Devices, without Busybox Installation. \n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>

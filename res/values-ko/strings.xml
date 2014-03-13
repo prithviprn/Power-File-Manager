@@ -101,6 +101,6 @@
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.7.2 업데이트\n- 루팅된 기기에서 폴더삭제가 잘 되지 않았던 문제 수정\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
+    <string name="UpdateLog">v3.7.3 업데이트\n- 루팅된 기기에서 Busybox가 설치되지 않은 경우 강제종료되는 오류 수정\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
 
 </resources>
