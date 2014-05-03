@@ -2,11 +2,12 @@ package pe.kmh.fm.prop;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pe.kmh.fm.util.FileUtil;
-
 import android.util.Log;
 
 import com.stericson.RootTools.RootTools;
@@ -123,11 +124,26 @@ public class RootFile extends File {
 		RootFile[] retlist = null;
 		if (new File(actualPath).canRead()) { // Not Root Area
 			flist = (new File(actualPath)).listFiles();
+			ArrayList<File> arr_flist = new ArrayList<File>();
+			for (File f : flist) {
+				arr_flist.add(f);
+			}
+
+			Comparator<File> sort = new Comparator<File>() {
+
+				@Override
+				public int compare(File a, File b) {
+					return a.getName().compareTo(b.getName());
+				}
+			};
+
+			Collections.sort(arr_flist, sort);
+
 			retlist = new RootFile[flist.length];
 			for (int i = 0; i < flist.length; i++) {
-				retlist[i] = new RootFile(flist[i]);
-				if (flist[i].isDirectory()) size.add(-1);
-				else size.add(Integer.valueOf((int) (flist[i].length())));
+				retlist[i] = new RootFile(arr_flist.get(i));
+				if (arr_flist.get(i).isDirectory()) size.add(-1);
+				else size.add(Integer.valueOf((int) (arr_flist.get(i).length())));
 			}
 		}
 
@@ -155,12 +171,6 @@ public class RootFile extends File {
 				Matcher matcher = Pattern.compile("\\S+").matcher(line);
 				String[] s = new String[30];
 
-				if (new File(actualPath).canRead()) {
-					matcher.find();
-					perms.add(matcher.group().substring(1));
-					continue;
-				}
-
 				int i = 0;
 				while (matcher.find()) {
 					if (i == 8 && !s[0].startsWith("c") && !s[0].startsWith("b")) {
@@ -175,6 +185,12 @@ public class RootFile extends File {
 				}
 
 				if (s[8] == null || s[8].equals(".") || s[8].equals("..") || s[8].equals("")) continue;
+				if (new File(actualPath).canRead()) {
+					perms.add(s[0].substring(1));
+					if (!s[0].startsWith("-")) size.set(perms.size() - 1, -1);
+					continue;
+				}
+
 				nline = s[8];
 				if (s[0].startsWith("c") || s[0].startsWith("b")) nline = s[9];
 

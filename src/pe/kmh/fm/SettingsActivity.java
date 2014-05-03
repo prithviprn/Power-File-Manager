@@ -49,15 +49,10 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 		getSupportActionBar().setTitle(R.string.Setting);
 
-		boolean isPro = getIntent().getBooleanExtra("isPro", false);
 		boolean isRoot = getIntent().getBooleanExtra("isRoot", true);
 
 		if (!isRoot) {
 			getPreferenceScreen().findPreference("AutoPermissionOptions").setSummary(R.string.AutoPermissionOptionsNotRoot);
-			getPreferenceScreen().findPreference("AutoPermissionOptions").setEnabled(false);
-		}
-		else if (!isPro) {
-			getPreferenceScreen().findPreference("AutoPermissionOptions").setSummary(R.string.AutoPermissionOptionsNotPro);
 			getPreferenceScreen().findPreference("AutoPermissionOptions").setEnabled(false);
 		}
 

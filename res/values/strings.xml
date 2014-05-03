@@ -62,16 +62,11 @@
     <string name="UseImageLoaderSummary">Default : On\nIf it\'s too slow, off this option.</string>
     <string name="ForRootUsers">Options about Root Mode</string>
     <string name="AutoPermissonOptions">Auto-Permission Options</string>
-    <string name="AutoPermissionOptionsNotPro">Auto-Permission is for paid users!</string>
     <string name="AutoPermissionOptionsNotRoot">Auto-Permission is for rooted devices!</string>
     <string name="AutoRootCheck">Automatic Root Check</string>
     <string name="AutoRootCheckSummary">Automatic check root permission.\nIf disable this option, always use normal mode exploring.</string>
     <string name="BusyboxRequired">This app requires Busybox. After Install, restart App.</string>
     <string name="SaveFile">Save</string>
-    <string name="Buy">Upgrade to Pro Version</string>
-    <string name="AlreadyBuy">You already bought this :) Unlocked Premium Functions!</string>
-    <string name="BuyProTitle">Upgrade</string>
-    <string name="BuyProMsg">To set multi-file permission (4+ files) and automatic permission set, You should upgrade this app.<Data><![CDATA[ <br></br><font color="red">Just $1.99!</font> ]]> </Data></string>
     <string name="RestartApp">Restarting App is Required after Changed Settings!</string>
     <string name="AskOpenWithTextEditor">Open this file with Text Editor?</string>
     <string name="Yes">Yes</string>
@@ -92,15 +87,13 @@
     <string name="AutoPermissionSetFinished">Auto-Permission Set Finished. Check it!</string>
     <string name="DeleteConfirm">DELETE: Are you sure?</string>
     <string name="CannotShare">No Apps found to share this item.</string>
-    <string name="UnknownErrorDuringisPro">Unknown Error happened during checking the purchased item list.</string>
     <string name="SlideIt">To open menu: Slide left to right!</string>
-    <string name="Crack_Detected">Crack attempt detected. Clear data of Play Store and Re-purchase this item.</string>
     <string name="OpenMenu">Open Menu</string>
     <string name="CloseMenu">Close Menu</string>
     <string name="FirstStart">Welcome</string>
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.7.3 Update\n- Fix: Force Close on Rooted Devices, without Busybox Installation. \n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.7.3 Update\n- Removed In-App Purchases. Now Completely FREE!\n- Fix: some bugs. \n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>

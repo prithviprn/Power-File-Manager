@@ -11,9 +11,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import pe.kmh.fm.prop.FileProperty;
 import pe.kmh.fm.prop.RootFile;
 import pe.kmh.fm.prop.RootFileProperty;
@@ -21,17 +18,12 @@ import pe.kmh.fm.prop.SearchedFileProperty;
 import pe.kmh.fm.util.FileUtil;
 import pe.kmh.fm.util.StorageList;
 import pe.kmh.fm.util.ZipUtil;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -51,12 +43,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
-import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Html;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -77,14 +66,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import angeloid.security.payload.getPayload;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.android.vending.billing.IInAppBillingService;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
@@ -166,25 +153,17 @@ public class MainActivity extends SherlockActivity {
 	static final int REFRESH = -4;
 	static final int SEARCH = -5;
 	static final int REBOOT = -6;
-	static final int BUY = -7;
-	static final int SETTING = -8;
+	static final int SETTING = -7;
 
 	StringBuilder sb;
-	IInAppBillingService mService;
 	ActionMode mActionMode;
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		bindService(new Intent("com.android.vending.billing.InAppBillingService.BIND"), mServiceConn, Context.BIND_AUTO_CREATE);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		importPreferences();
-		
+
 		boolean isBusyboxAvailable = true;
 		if (AutoRootCheck && RootTools.isAccessGiven()) {
 			if (!RootTools.isBusyboxAvailable()) {
@@ -321,33 +300,11 @@ public class MainActivity extends SherlockActivity {
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (mServiceConn != null) {
-			unbindService(mServiceConn);
-		}
-		Crouton.cancelAllCroutons();
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (MenuToggle.onOptionsItemSelected(item)) return true;
 
 		return super.onOptionsItemSelected(item);
 	}
-
-	ServiceConnection mServiceConn = new ServiceConnection() {
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			mService = null;
-		}
-
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mService = IInAppBillingService.Stub.asInterface(service);
-		}
-	};
 
 	ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -452,10 +409,6 @@ public class MainActivity extends SherlockActivity {
 				}
 			}
 
-			// else if (itemId == R.id.Item_info) {
-			// TODO Item Info
-			// }
-
 			return false;
 		}
 
@@ -531,8 +484,7 @@ public class MainActivity extends SherlockActivity {
 				else if (pos == 4) itemId = SEARCH;
 				else if (pos == 5 && !isRoot) itemId = SETTING;
 				else if (pos == 5 && isRoot) itemId = REBOOT;
-				else if (pos == 6) itemId = BUY;
-				else if (pos == 7) itemId = SETTING;
+				else if (pos == 6) itemId = SETTING;
 				else return;
 
 				MenuLayout.closeDrawer(MenuList);
@@ -612,24 +564,8 @@ public class MainActivity extends SherlockActivity {
 
 				else if (itemId == SETTING) {
 					Intent sActivity = new Intent(MainActivity.this, SettingsActivity.class);
-					sActivity.putExtra("isRoot", isRoot).putExtra("isPro", isPro());
-					if (!isCracked) startActivity(sActivity);
-					return;
-				}
-
-				else if (itemId == BUY) {
-					try {
-						// Query Already Purchased
-						if (isPro()) {
-							Crouton.makeText(MainActivity.this, R.string.AlreadyBuy, Style.CONFIRM).show();
-							return;
-						}
-
-						// Purchase it
-						Upgrade();
-					}
-					catch (Exception e) {
-					}
+					sActivity.putExtra("isRoot", isRoot);
+					startActivity(sActivity);
 					return;
 				}
 			}
@@ -1037,34 +973,6 @@ public class MainActivity extends SherlockActivity {
 		if (requestCode == TEXT_EDITOR_REQUEST) {
 			if (resultCode == JOB_SAVED) LoadList(nowPath);
 		}
-
-		if (requestCode == IAB_FINISHED) {
-			String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-
-			if (resultCode == RESULT_OK) {
-				try {
-					JSONObject jo = new JSONObject(purchaseData);
-					if (!(jo.getString("packageName").equals(getPackageName()) && jo.getString("developerPayload").equals(payload) && jo
-							.getString("orderId").startsWith("12999763169054705758"))) {
-						AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
-						ad.setMessage(R.string.Crack_Detected);
-						ad.setCancelable(false);
-						ad.setPositiveButton("OK", new OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								android.os.Process.killProcess(android.os.Process.myPid());
-							}
-
-						});
-						ad.show();
-					}
-				}
-				catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	@Override
@@ -1128,6 +1036,7 @@ public class MainActivity extends SherlockActivity {
 		dialog.setTitle(R.string.Copying);
 		dialog.setMessage(getString(R.string.Wait));
 		dialog.setMax(Clipboard_Count);
+		dialog.setCancelable(false);
 		dialog.show();
 
 		final Handler handler = new Handler() {
@@ -1183,6 +1092,7 @@ public class MainActivity extends SherlockActivity {
 	public void onDeleteBtnPress(View v) {
 		AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
 		aDialog.setMessage(getString(R.string.DeleteConfirm));
+		aDialog.setCancelable(false);
 		aDialog.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface di, int which) {
@@ -1241,6 +1151,7 @@ public class MainActivity extends SherlockActivity {
 		dialog.setTitle(R.string.Moving);
 		dialog.setMessage(getString(R.string.Wait));
 		dialog.setMax(Clipboard_Count);
+		dialog.setCancelable(false);
 		dialog.show();
 
 		final Handler handler = new Handler() {
@@ -1323,14 +1234,6 @@ public class MainActivity extends SherlockActivity {
 	}
 
 	public void onPermBtnPress(View v) {
-		// MULTI-PERMISSION
-		// Pro Ver Check
-		if (Selected_Count > 3 && !isPro()) {
-			Upgrade();
-			Refresh_Screen();
-			return;
-		}
-
 		Context mContext = getApplicationContext();
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 		final View layout = inflater.inflate(R.layout.permset, null);
@@ -1389,55 +1292,52 @@ public class MainActivity extends SherlockActivity {
 	public void Set_Auto_Perm() {
 		if (nowPath.startsWith("/system/app") || nowPath.startsWith("/system/etc") || nowPath.startsWith("/system/fonts")
 				|| nowPath.startsWith("/system/framework") || nowPath.startsWith("/system/media") || nowPath.equals("/system")) {
-			// AUTO-PERMISSION
-			// Pro Ver Check
-			if (isPro()) {
-				String p = null;
-				if (nowPath.startsWith("/system/app")) p = sharedPrefs.getString("SystemApp_APerm", "644");
-				if (nowPath.startsWith("/system/etc")) p = sharedPrefs.getString("SystemEtc_APerm", "644");
-				if (nowPath.startsWith("/system/fonts")) p = sharedPrefs.getString("SystemFonts_APerm", "644");
-				if (nowPath.startsWith("/system/framework")) p = sharedPrefs.getString("SystemFramework_APerm", "644");
-				if (nowPath.startsWith("/system/media")) p = sharedPrefs.getString("SystemMedia_APerm", "644");
-				if (nowPath.equals("/system")) p = sharedPrefs.getString("System_APerm", "644");
-				for (int i = 0; i < Clipboard_Count; i++) {
-					if (new File(nowPath + "/" + new File(clipboard.get(i)).getName()).isFile()) {
-						final String w = "busybox chmod " + p + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
-						cmd = new Command(0, w) {
+			String p = null;
+			if (nowPath.startsWith("/system/app")) p = sharedPrefs.getString("SystemApp_APerm", "644");
+			if (nowPath.startsWith("/system/etc")) p = sharedPrefs.getString("SystemEtc_APerm", "644");
+			if (nowPath.startsWith("/system/fonts")) p = sharedPrefs.getString("SystemFonts_APerm", "644");
+			if (nowPath.startsWith("/system/framework")) p = sharedPrefs.getString("SystemFramework_APerm", "644");
+			if (nowPath.startsWith("/system/media")) p = sharedPrefs.getString("SystemMedia_APerm", "644");
+			if (nowPath.equals("/system")) p = sharedPrefs.getString("System_APerm", "644");
+			for (int i = 0; i < Clipboard_Count; i++) {
+				if (new File(nowPath + "/" + new File(clipboard.get(i)).getName()).isFile()) {
+					final String w = "busybox chmod " + p + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
+					cmd = new Command(0, w) {
 
-							@Override
-							public void output(int id, String line) {
-							}
-						};
+						@Override
+						public void output(int id, String line) {
+						}
+					};
 
-						try {
-							RootTools.getShell(true).add(cmd).waitForFinish();
-						}
-						catch (Exception e) {
-							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-						}
+					try {
+						RootTools.getShell(true).add(cmd).waitForFinish();
 					}
-
-					else {
-						final String w = "busybox chmod 755" + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
-						cmd = new Command(0, w) {
-
-							@Override
-							public void output(int id, String line) {
-							}
-						};
-
-						try {
-							RootTools.getShell(true).add(cmd).waitForFinish();
-						}
-						catch (Exception e) {
-							Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-						}
+					catch (Exception e) {
+						Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
 					}
 				}
 
-				Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
+				else {
+					final String w = "busybox chmod 755" + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
+					cmd = new Command(0, w) {
+
+						@Override
+						public void output(int id, String line) {
+						}
+					};
+
+					try {
+						RootTools.getShell(true).add(cmd).waitForFinish();
+					}
+					catch (Exception e) {
+						Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
+					}
+				}
 			}
+
+			Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
 		}
+
 	}
 
 	public void Refresh_Screen() {
@@ -2087,8 +1987,7 @@ public class MainActivity extends SherlockActivity {
 				else if (pos == 4) dr = res.getDrawable(R.drawable.search_icon_ondark);
 				else if (pos == 5 && !isRoot) dr = res.getDrawable(R.drawable.settings_icon_ondark);
 				else if (pos == 5 && isRoot) dr = res.getDrawable(R.drawable.reboot_icon_ondark);
-				else if (pos == 6) dr = res.getDrawable(R.drawable.buypro_icon_ondark);
-				else if (pos == 7) dr = res.getDrawable(R.drawable.settings_icon_ondark);
+				else if (pos == 6) dr = res.getDrawable(R.drawable.settings_icon_ondark);
 			}
 			else {
 				if (pos == 2) dr = res.getDrawable(R.drawable.storage_icon_onlight);
@@ -2096,8 +1995,7 @@ public class MainActivity extends SherlockActivity {
 				else if (pos == 4) dr = res.getDrawable(R.drawable.search_icon_onlight);
 				else if (pos == 5 && !isRoot) dr = res.getDrawable(R.drawable.settings_icon_onlight);
 				else if (pos == 5 && isRoot) dr = res.getDrawable(R.drawable.reboot_icon_onlight);
-				else if (pos == 6) dr = res.getDrawable(R.drawable.buypro_icon_onlight);
-				else if (pos == 7) dr = res.getDrawable(R.drawable.settings_icon_onlight);
+				else if (pos == 6) dr = res.getDrawable(R.drawable.settings_icon_onlight);
 			}
 			holder.icon.setImageDrawable(dr);
 			return row;
@@ -2197,86 +2095,5 @@ public class MainActivity extends SherlockActivity {
 				else photoToLoad.imageView.setImageResource(stub_id);
 			}
 		}
-	}
-
-	public void Upgrade() {
-		AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
-		ad.setTitle(R.string.BuyProTitle);
-		ad.setMessage(Html.fromHtml(getString(R.string.BuyProMsg)));
-		ad.setPositiveButton(R.string.BuyProTitle, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				try {
-					String sku = "pfm_pro";
-					payload = getPayload.getNextPayload();
-					Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(), sku, "inapp", payload);
-					PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
-					startIntentSenderForResult(pendingIntent.getIntentSender(), IAB_FINISHED, new Intent(), Integer.valueOf(0),
-							Integer.valueOf(0), Integer.valueOf(0));
-				}
-				catch (Exception e) {
-				}
-			}
-		});
-
-		ad.setNegativeButton(R.string.Cancel, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-			}
-		});
-
-		ad.create().show();
-	}
-
-	@SuppressLint("SdCardPath")
-	public boolean isPro() {
-		if (new File("/sdcard/MyData/.DEV").exists()) return true;
-		try {
-			if (mService == null) {
-				Crouton.makeText(MainActivity.this, R.string.UnknownErrorDuringisPro, Style.ALERT).show();
-				return false;
-			}
-			Bundle ownedItems = mService.getPurchases(3, getPackageName(), "inapp", null);
-			int response = ownedItems.getInt("RESPONSE_CODE");
-			ArrayList<String> ownedSkus = null;
-
-			if (response == 0) {
-				ownedSkus = ownedItems.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
-				ArrayList<String> purchaseData = ownedItems.getStringArrayList("INAPP_PURCHASE_DATA_LIST");
-				try {
-					if (purchaseData.size() > 0) {
-						JSONObject jo = new JSONObject(purchaseData.get(0));
-						if (!(jo.getString("packageName").equals(getPackageName()) && jo.getString("orderId").startsWith(
-								"12999763169054705758"))) {
-							isCracked = true;
-							AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
-							ad.setMessage(R.string.Crack_Detected);
-							ad.setCancelable(false);
-							ad.setPositiveButton("OK", new OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									android.os.Process.killProcess(android.os.Process.myPid());
-								}
-
-							});
-							ad.show();
-						}
-					}
-				}
-				catch (JSONException e) {
-					e.printStackTrace();
-				}
-
-			}
-
-			if (response == 0 && ownedSkus.size() > 0 && ownedSkus.get(0).equals("pfm_pro")) return true;
-		}
-		catch (RemoteException e) {
-		}
-
-		return false;
 	}
 }

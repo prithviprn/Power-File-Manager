@@ -18,22 +18,3 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
--keep class com.android.vending.billing.**
-
--keep class android.support.v4.app.** { *; }
--keep interface android.support.v4.app.** { *; }
--keep class com.actionbarsherlock.** { *; }
--keep interface com.actionbarsherlock.** { *; }
--keep class org.apache.commons.compress.** { *; }
--keep interface org.apache.commons.compress.** { *; }
--keep class org.tukaani.** { *; }
--keep interface org.tukaani.** { *; }
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
--dontwarn org.apache.commons.compress.**
--dontwarn com.actionbarsherlock.**
--keepattributes *Annotation*

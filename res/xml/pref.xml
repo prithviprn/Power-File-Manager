@@ -102,6 +102,11 @@
         <Preference
             android:key="Info"
             android:title="Power File Manager" />
+        
+        <Preference
+            android:key="ThanksTo"
+            android:title="Thanks to"
+            android:summary="Thanks to Hwangbyeol Ryu: App Icon Designer." />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -34,7 +34,6 @@
         <item>@string/Refresh</item>
         <item>@string/Search</item>
         <item>@string/Reboot</item>
-        <item>@string/Buy</item>
         <item>@string/Setting</item>
     </string-array>
     

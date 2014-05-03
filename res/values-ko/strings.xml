@@ -62,16 +62,11 @@
     <string name="UseImageLoaderSummary">기본값 : 표시\n로딩이 너무 느리다면 해제해 주세요.</string>
     <string name="ForRootUsers">루트 탐색 옵션</string>
     <string name="AutoPermissonOptions">자동 퍼미션 기능 설정</string>
-    <string name="AutoPermissionOptionsNotPro">자동 퍼미션 기능은 유료 기능입니다!</string>
     <string name="AutoPermissionOptionsNotRoot">이 기능은 루팅된 기기에서만 사용 가능합니다!</string>
     <string name="AutoRootCheck">루팅 자동 감지</string>
     <string name="AutoRootCheckSummary">루팅을 자동으로 감지해서 루트 탐색모드로 진입합니다.\n이 옵션을 끄면 루팅을 감지하지 않고 일반모드로만 진입하게 됩니다.</string>
     <string name="BusyboxRequired">이 앱은 Busybox를 설치해야 작동합니다. 설치하신 후, 앱을 재시작 해주세요.</string>
     <string name="SaveFile">저장</string>
-    <string name="Buy">업그레이드</string>
-    <string name="AlreadyBuy">이미 구매하셨네요! 프리미엄 버전의 기능을 언락합니다.</string>
-    <string name="BuyProTitle">업그레이드</string>
-    <string name="BuyProMsg">4개 이상 파일의 퍼미션을 한 번에 지정하고, 자주 사용되는 경로에 대해서 자동으로 퍼미션을 지정하는 기능을 사용하려면, 이 앱을 업그레이드해야 합니다.\n<Data><![CDATA[ <br></br><font color="red">가격은 1,999원 입니다.\n단, 원칙적으로 환불은 해 드리지 않으니 주의하시길 바랍니다.</font> ]]> </Data></string>
     <string name="RestartApp">설정 변경 후에는 앱을 재시작해주세요!</string>
     <string name="AskOpenWithTextEditor">텍스트 에디터로 이 파일을 열까요?</string>
     <string name="Yes">네</string>
@@ -92,15 +87,13 @@
     <string name="AutoPermissionSetFinished">자동 퍼미션 지정을 완료했습니다. 확인해보세요!</string>
     <string name="DeleteConfirm">선택된 파일을 삭제하시겠습니까?</string>
     <string name="CannotShare">이 항목을 공유할 앱이 존재하지 않습니다.</string>
-    <string name="UnknownErrorDuringisPro">구매 내역을 확인하는 중에 알 수 없는 에러가 발생하였습니다.</string>
     <string name="SlideIt">왼쪽에서 오른쪽으로 슬라이드하면 메뉴가 열립니다!</string>
-    <string name="Crack_Detected">크랙 시도가 감지되었습니다. 구글 플레이 스토어의 데이터를 삭제한 후 다시 정상적으로 사용해 주세요.</string>
     <string name="OpenMenu">메뉴 열기</string>
     <string name="CloseMenu">메뉴 닫기</string>
     <string name="FirstStart">환영합니다</string>
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.7.3 업데이트\n- 루팅된 기기에서 Busybox가 설치되지 않은 경우 강제종료되는 오류 수정\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
+    <string name="UpdateLog">v3.8 업데이트\n- 앱 전면 무료화 (앱 내 구매 제거)\n- 퍼미션 표기 관련 버그 수정\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
 
 </resources>
