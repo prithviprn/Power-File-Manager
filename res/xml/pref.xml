@@ -106,7 +106,7 @@
         <Preference
             android:key="ThanksTo"
             android:title="Thanks to"
-            android:summary="Thanks to Hwangbyeol Ryu: App Icon Designer." />
+            android:summary="Hwangbyeol Ryu: App Icon Designer (version 2.x ~ 3.8)\nRob Beane: App Icon, internal Icon Designer (version 3.8.1~)" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -51,10 +51,12 @@ public class SearchActivity extends SherlockListActivity {
 
 	Resources res;
 	int Folder = R.drawable.folder;
-	int Others = R.drawable.others;
-	int Audio = R.drawable.audio;
-	int Compressed = R.drawable.compressed;
-	int Video = R.drawable.video;
+	int Others;
+	int Audio;
+	int Compressed;
+	int Video;
+	int Check;
+	int Scroll_Image;
 	int Apk = -1;
 	int Image = -2;
 
@@ -68,13 +70,35 @@ public class SearchActivity extends SherlockListActivity {
 		SharedPreferences.Editor editor = sharedPrefs.edit();
 
 		String appTheme = sharedPrefs.getString("AppTheme", "Light");
-		if (appTheme.equals("Light")) setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
-		else if (appTheme.equals("Dark")) setTheme(R.style.Theme_Sherlock);
+		if (appTheme.equals("Light")) {
+			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
+			Others = R.drawable.others_light;
+			Audio = R.drawable.audio_light;
+			Compressed = R.drawable.compressed_light;
+			Video = R.drawable.video_light;
+			Check = R.drawable.check_light;
+			Scroll_Image = R.drawable.image_light;
+		}
+		else if (appTheme.equals("Dark")) {
+			setTheme(R.style.Theme_Sherlock);
+			Others = R.drawable.others_dark;
+			Audio = R.drawable.audio_dark;
+			Compressed = R.drawable.compressed_dark;
+			Video = R.drawable.video_dark;
+			Check = R.drawable.check_dark;
+			Scroll_Image = R.drawable.image_dark;
+		}
 		else {
 			appTheme = "Light";
 			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
 			editor.putString("AppTheme", "Light");
 			editor.commit();
+			Others = R.drawable.others_light;
+			Audio = R.drawable.audio_light;
+			Compressed = R.drawable.compressed_light;
+			Video = R.drawable.video_light;
+			Check = R.drawable.check_light;
+			Scroll_Image = R.drawable.image_light;
 		}
 
 		setContentView(R.layout.search);
@@ -289,7 +313,7 @@ public class SearchActivity extends SherlockListActivity {
 					else loader.DisplayImage(object.get(position).getName(), object.get(position).getPath(), holder.fileicon);
 				}
 				else if (icon.get(position) == Image) {
-					if (isScrolling) holder.fileicon.setImageResource(R.drawable.image);
+					if (isScrolling) holder.fileicon.setImageResource(Scroll_Image);
 					else ImageLoader.getInstance().displayImage("file:/" + object.get(position).getPath(), holder.fileicon);
 				}
 			}

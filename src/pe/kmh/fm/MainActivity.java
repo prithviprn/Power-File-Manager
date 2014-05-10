@@ -111,10 +111,12 @@ public class MainActivity extends SherlockActivity {
 	FileAdapter adapter;
 	Resources res;
 	int Folder = R.drawable.folder;
-	int Others = R.drawable.others;
-	int Audio = R.drawable.audio;
-	int Compressed = R.drawable.compressed;
-	int Video = R.drawable.video;
+	int Others;
+	int Audio;
+	int Compressed;
+	int Video;
+	int Check;
+	int Scroll_Image;
 	int Apk = -1;
 	int Image = -2;
 	int[] internal_icon;
@@ -437,13 +439,35 @@ public class MainActivity extends SherlockActivity {
 		editor = sharedPrefs.edit();
 
 		appTheme = sharedPrefs.getString("AppTheme", "Light");
-		if (appTheme.equals("Light")) setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
-		else if (appTheme.equals("Dark")) setTheme(R.style.Theme_Sherlock);
+		if (appTheme.equals("Light")) {
+			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
+			Others = R.drawable.others_light;
+			Audio = R.drawable.audio_light;
+			Compressed = R.drawable.compressed_light;
+			Video = R.drawable.video_light;
+			Check = R.drawable.check_light;
+			Scroll_Image = R.drawable.image_light;
+		}
+		else if (appTheme.equals("Dark")) {
+			setTheme(R.style.Theme_Sherlock);
+			Others = R.drawable.others_dark;
+			Audio = R.drawable.audio_dark;
+			Compressed = R.drawable.compressed_dark;
+			Video = R.drawable.video_dark;
+			Check = R.drawable.check_dark;
+			Scroll_Image = R.drawable.image_dark;
+		}
 		else {
 			appTheme = "Light";
 			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
 			editor.putString("AppTheme", "Light");
 			editor.commit();
+			Others = R.drawable.others_light;
+			Audio = R.drawable.audio_light;
+			Compressed = R.drawable.compressed_light;
+			Video = R.drawable.video_light;
+			Check = R.drawable.check_light;
+			Scroll_Image = R.drawable.image_light;
 		}
 
 		String Sort = sharedPrefs.getString("SortOption", "Alphabet");
@@ -1772,6 +1796,7 @@ public class MainActivity extends SherlockActivity {
 				holder.filedate = (TextView) convertView.findViewById(R.id.filedate);
 				holder.filesize = (TextView) convertView.findViewById(R.id.filesize);
 				holder.check = (ImageView) convertView.findViewById(R.id.check);
+				holder.check.setBackgroundResource(Check);
 				convertView.setTag(holder);
 			}
 			else holder = (ViewHolder) convertView.getTag();
@@ -1791,10 +1816,10 @@ public class MainActivity extends SherlockActivity {
 					else loader.DisplayImage(object.get(position).getName(), dir, holder.fileicon, position);
 				}
 				else if (internal_icon[position] == Image) {
-					if (isScrolling) holder.fileicon.setImageResource(R.drawable.image);
+					if (isScrolling) holder.fileicon.setImageResource(Scroll_Image);
 					else {
 						if (UseImageLoader) {
-							holder.fileicon.setImageResource(R.drawable.image);
+							holder.fileicon.setImageResource(Scroll_Image);
 							ImageLoader.getInstance().displayImage("file:/" + dir, holder.fileicon, new SimpleImageLoadingListener() {
 
 								@SuppressWarnings("deprecation")
@@ -1807,7 +1832,7 @@ public class MainActivity extends SherlockActivity {
 
 							holder.fileicon.setTag(position);
 						}
-						else holder.fileicon.setImageResource(R.drawable.image);
+						else holder.fileicon.setImageResource(Scroll_Image);
 					}
 				}
 			}
@@ -1876,6 +1901,7 @@ public class MainActivity extends SherlockActivity {
 				holder.fileperm = (TextView) row.findViewById(R.id.fileperm);
 				holder.filesize = (TextView) row.findViewById(R.id.filesize);
 				holder.check = (ImageView) row.findViewById(R.id.check);
+				holder.check.setBackgroundResource(Check);
 				row.setTag(holder);
 			}
 			else holder = (ViewHolder) row.getTag();
@@ -1896,10 +1922,10 @@ public class MainActivity extends SherlockActivity {
 					else loader.DisplayImage(object.get(position).getName(), dir, holder.fileicon, position);
 				}
 				else if (internal_icon[position] == Image) {
-					if (isScrolling) holder.fileicon.setImageResource(R.drawable.image);
+					if (isScrolling) holder.fileicon.setImageResource(Scroll_Image);
 					else {
 						if (UseImageLoader) {
-							holder.fileicon.setImageResource(R.drawable.image);
+							holder.fileicon.setImageResource(Scroll_Image);
 							ImageLoader.getInstance().displayImage("file:/" + dir, holder.fileicon, new SimpleImageLoadingListener() {
 
 								@SuppressWarnings("deprecation")
@@ -1912,7 +1938,7 @@ public class MainActivity extends SherlockActivity {
 
 							holder.fileicon.setTag(position);
 						}
-						else holder.fileicon.setImageResource(R.drawable.image);
+						else holder.fileicon.setImageResource(Scroll_Image);
 					}
 				}
 			}
@@ -1979,8 +2005,8 @@ public class MainActivity extends SherlockActivity {
 			holder.name.setText(object.get(pos));
 
 			Drawable dr = null;
-			if (pos == 0) dr = res.getDrawable(R.drawable.folder);
-			else if (pos == 1) dr = res.getDrawable(R.drawable.others);
+			if (pos == 0) dr = res.getDrawable(Folder);
+			else if (pos == 1) dr = res.getDrawable(Others);
 			if (appTheme.equals("Dark")) {
 				if (pos == 2) dr = res.getDrawable(R.drawable.storage_icon_ondark);
 				else if (pos == 3) dr = res.getDrawable(R.drawable.refresh_icon_ondark);
