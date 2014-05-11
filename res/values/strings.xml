@@ -94,6 +94,6 @@
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.7.3 Update\n- Removed In-App Purchases. Now Completely FREE!\n- Fix: some bugs. \n- Changed some icons\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.8.x Update\n- Removed In-App Purchases. Now Completely FREE!\n- Fix: some bugs. \n- Changed some icons\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>
