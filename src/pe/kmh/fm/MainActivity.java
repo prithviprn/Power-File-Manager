@@ -825,7 +825,9 @@ public class MainActivity extends SherlockActivity {
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {
-					rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
+					if(fileperms == null) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
+							.toString(), filesize, ""));
+					else rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
 							.toString(), filesize, fileperms[i]));
 				}
 				else item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())

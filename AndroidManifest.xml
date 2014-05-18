@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pe.kmh.fm"
-    android:versionCode="88"
-    android:versionName="3.8.2" >
+    android:versionCode="89"
+    android:versionName="3.8.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
