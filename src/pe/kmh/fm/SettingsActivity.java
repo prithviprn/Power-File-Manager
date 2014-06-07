@@ -1,5 +1,6 @@
 package pe.kmh.fm;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,12 +11,14 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.support.v4.content.ContextCompat;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
@@ -57,7 +60,21 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		}
 
 		ListPreference startPath = (ListPreference) getPreferenceScreen().findPreference("StartPath");
-		String extPath = StorageList.getMicroSDCardDirectory();
+		
+		String extPath;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
+
+			if (t_Path_arr.length > 1) {
+				String t_Path = t_Path_arr[1].getAbsolutePath();
+				int point = t_Path.indexOf("Android");
+				extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
+						point - 1);
+			}
+			else extPath = null;
+		}
+		else extPath = StorageList.getMicroSDCardDirectory();
+		
 		String items[] = extPath != null ? new String[3] : new String[2];
 		items[0] = getString(R.string.AutomaticSet);
 		items[1] = Environment.getExternalStorageDirectory().getAbsolutePath() + "\n[" + getString(R.string.InternalStorage) + "]";
