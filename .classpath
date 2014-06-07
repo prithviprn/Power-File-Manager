@@ -12,5 +12,8 @@
 			<attribute name="javadoc_location" value="jar:file:/home/kmh/ADT/work/Libraries/RootTools/RootTools-Javadoc-2.6.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/ActionBarSherlock"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Crouton"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SherlockNavigationDrawer"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

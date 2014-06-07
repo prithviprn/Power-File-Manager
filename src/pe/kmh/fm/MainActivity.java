@@ -45,6 +45,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -825,10 +826,10 @@ public class MainActivity extends SherlockActivity {
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {
-					if(fileperms == null) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
-							.toString(), filesize, ""));
-					else rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
-							.toString(), filesize, fileperms[i]));
+					if (fileperms == null) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format(
+							"yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
+					else rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
+							file.lastModified()).toString(), filesize, fileperms[i]));
 				}
 				else item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
 						.toString(), filesize));
@@ -1613,7 +1614,20 @@ public class MainActivity extends SherlockActivity {
 		AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
 		aDialog.setTitle(getString(R.string.ChangeStorage));
 
-		final String extPath = StorageList.getMicroSDCardDirectory();
+		final String extPath;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
+
+			if (t_Path_arr.length > 1) {
+				String t_Path = t_Path_arr[1].getAbsolutePath();
+				int point = t_Path.indexOf("Android");
+				extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
+						point - 1);
+			}
+			else extPath = null;
+		}
+		else extPath = StorageList.getMicroSDCardDirectory();
+
 		if (extPath == null && !isRoot) {
 			Crouton.makeText(MainActivity.this, R.string.NoExternalStorage, Style.CONFIRM).show();
 			return;
