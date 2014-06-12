@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pe.kmh.fm"
-    android:versionCode="91"
-    android:versionName="3.9.1" >
+    android:versionCode="92"
+    android:versionName="3.10" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -12,6 +12,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -58,6 +59,10 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
+
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="4c3854ec06c45b420682d3bb17779110c1354b2f" />
     </application>
 
 </manifest>

@@ -83,6 +83,8 @@ import com.stericson.RootTools.execution.Command;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
+import com.crashlytics.android.Crashlytics;
+
 public class MainActivity extends SherlockActivity {
 
 	ArrayList<FileProperty> item = null;
@@ -164,7 +166,7 @@ public class MainActivity extends SherlockActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		importPreferences();
 
 		boolean isBusyboxAvailable = true;
@@ -204,11 +206,7 @@ public class MainActivity extends SherlockActivity {
 
 		StartPathPref = sharedPrefs.getString("StartPath", "Automatic");
 		if (StartPathPref.equals("Internal")) root = Environment.getExternalStorageDirectory().toString();
-		else if (StartPathPref.equals("External")) root = StorageList.getMicroSDCardDirectory();
-		if (root == null) {
-			StartPathPref = "External";
-			root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
-		}
+		else if (StartPathPref.equals("External")) root = getExternalSdPath();
 
 		findViewById(R.id.CopyBtn).setVisibility(View.GONE);
 		findViewById(R.id.PasteBtn).setVisibility(View.GONE);
@@ -287,7 +285,6 @@ public class MainActivity extends SherlockActivity {
 		sb = new StringBuilder();
 
 		if (isBusyboxAvailable) LoadList(root);
-
 	}
 
 	@Override
@@ -439,6 +436,9 @@ public class MainActivity extends SherlockActivity {
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = sharedPrefs.edit();
 
+		boolean crashActivation = sharedPrefs.getBoolean("CrashlyticsActivation", true);
+		if(crashActivation) { Log.d("PowerFileManager", "Crashlytics Enabled"); Crashlytics.start(this); }
+		
 		appTheme = sharedPrefs.getString("AppTheme", "Light");
 		if (appTheme.equals("Light")) {
 			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
@@ -826,7 +826,7 @@ public class MainActivity extends SherlockActivity {
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {
-					if (fileperms == null) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format(
+					if (fileperms == null || fileperms.length <= i) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format(
 							"yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
 					else rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
 							file.lastModified()).toString(), filesize, fileperms[i]));
@@ -1614,19 +1614,7 @@ public class MainActivity extends SherlockActivity {
 		AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
 		aDialog.setTitle(getString(R.string.ChangeStorage));
 
-		final String extPath;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
-
-			if (t_Path_arr.length > 1) {
-				String t_Path = t_Path_arr[1].getAbsolutePath();
-				int point = t_Path.indexOf("Android");
-				extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
-						point - 1);
-			}
-			else extPath = null;
-		}
-		else extPath = StorageList.getMicroSDCardDirectory();
+		final String extPath = getExternalSdPath();
 
 		if (extPath == null && !isRoot) {
 			Crouton.makeText(MainActivity.this, R.string.NoExternalStorage, Style.CONFIRM).show();
@@ -1764,6 +1752,24 @@ public class MainActivity extends SherlockActivity {
 		Drawable icon = appInfo.loadIcon(getPackageManager());
 		if (icon == null) icon = res.getDrawable(R.drawable.android);
 		return icon;
+	}
+
+	public String getExternalSdPath() {
+		String extPath;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
+
+			if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
+				String t_Path = t_Path_arr[1].getAbsolutePath();
+				int point = t_Path.indexOf("Android");
+				extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
+						point - 1);
+			}
+			else extPath = null;
+		}
+		else extPath = StorageList.getMicroSDCardDirectory();
+
+		return extPath;
 	}
 
 	public class FileAdapter extends BaseAdapter {

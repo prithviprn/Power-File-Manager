@@ -44,7 +44,7 @@
     <string name="Search">Search</string>
     <string name="Search_Hint">Name of Searching File</string>
     <string name="Searching">Searching..</string>
-    <string name="Design">DESIGN</string>
+    <string name="Basics">BASIC SETTINGS</string>
     <string name="ThemeSetting">App Theme</string>
     <string name="Light_DarkActionBar">Light Theme (Dark ActionBar)</string>
     <string name="Dark">Dark Theme</string>
@@ -65,6 +65,8 @@
     <string name="AutoPermissionOptionsNotRoot">Auto-Permission is for rooted devices!</string>
     <string name="AutoRootCheck">Automatic Root Check</string>
     <string name="AutoRootCheckSummary">Automatic check root permission.\nIf disable this option, always use normal mode exploring.</string>
+    <string name="CrashInfoSetting">Automatic Crash Report</string>
+    <string name="CrashInfoSummary">Send crash information automatically. (no privacy information included)</string>
     <string name="BusyboxRequired">This app requires Busybox. After Install, restart App.</string>
     <string name="SaveFile">Save</string>
     <string name="RestartApp">Restarting App is Required after Changed Settings!</string>
@@ -94,6 +96,6 @@
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.9 Update\n- Improved External Memory finding algorithm (for Android 4.4 Kitkat)\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
+    <string name="UpdateLog">v3.10 Update\n- Add: Crash Analytics Feature (Just a crash information: no privacy infos. If you don\'t want to report the crash info, then you can off it in Settings.)\n* If you have an critical bug in Root Mode, Then update Busybox!</string>
 
 </resources>

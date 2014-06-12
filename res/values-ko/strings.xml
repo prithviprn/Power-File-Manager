@@ -44,7 +44,7 @@
     <string name="Search">검색</string>
     <string name="Search_Hint">검색할 파일의 이름</string>
     <string name="Searching">검색 중..</string>
-    <string name="Design">디자인</string>
+    <string name="Basics">기본 설정</string>
     <string name="ThemeSetting">테마</string>
     <string name="Light_DarkActionBar">화이트 테마</string>
     <string name="Dark">블랙 테마</string>
@@ -65,6 +65,8 @@
     <string name="AutoPermissionOptionsNotRoot">이 기능은 루팅된 기기에서만 사용 가능합니다!</string>
     <string name="AutoRootCheck">루팅 자동 감지</string>
     <string name="AutoRootCheckSummary">루팅을 자동으로 감지해서 루트 탐색모드로 진입합니다.\n이 옵션을 끄면 루팅을 감지하지 않고 일반모드로만 진입하게 됩니다.</string>
+    <string name="CrashInfoSetting">자동 오류 보고</string>
+    <string name="CrashInfoSummary">오류정보를 자동으로 보고합니다. 개인정보는 포함되지 않습니다.</string>
     <string name="BusyboxRequired">이 앱은 Busybox를 설치해야 작동합니다. 설치하신 후, 앱을 재시작 해주세요.</string>
     <string name="SaveFile">저장</string>
     <string name="RestartApp">설정 변경 후에는 앱을 재시작해주세요!</string>
@@ -94,6 +96,6 @@
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.9 업데이트\n- 외장메모리 인식 관련 수정 (Android 4.4 Kitkat 대응)\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
+    <string name="UpdateLog">v3.10 업데이트\n- 자동 오류 리포트 기능 추가(앱에 오류가 발생하면 자동으로 리포트합니다. 이 때, 개인정보는 전혀 포함되지 않으며, 원치 않을 시에는 설정에서 해제하실 수 있습니다.)\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
 
 </resources>
