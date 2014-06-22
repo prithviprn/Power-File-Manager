@@ -109,8 +109,8 @@ public class SearchActivity extends SherlockListActivity {
 		filelist = intent.getParcelableArrayListExtra("filelist");
 
 		res = getResources();
-
-		final int psize = filelist.size();
+		
+		final int psize = filelist != null ? filelist.size() : 0;
 		Thread getIcons = new Thread() {
 
 			public void run() {

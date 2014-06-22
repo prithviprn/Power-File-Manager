@@ -30,16 +30,26 @@ public class RootFile extends File {
 	public RootFile(String path) {
 		super(path);
 
-		mPath = path.substring(0, path.lastIndexOf("/"));
-		if (!mPath.endsWith("/")) mPath += "/";
+		try {
+			mPath = path.substring(0, path.lastIndexOf("/"));
+			if (!mPath.endsWith("/")) mPath += "/";
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public RootFile(File f) {
 		super(f.getAbsolutePath());
 
-		String path = f.getAbsolutePath();
-		mPath = path.substring(0, path.lastIndexOf("/"));
-		if (!mPath.endsWith("/")) mPath += "/";
+		try {
+			String path = f.getAbsolutePath();
+			mPath = path.substring(0, path.lastIndexOf("/"));
+			if (!mPath.endsWith("/")) mPath += "/";
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -125,10 +135,11 @@ public class RootFile extends File {
 		if (new File(actualPath).canRead()) { // Not Root Area
 			flist = (new File(actualPath)).listFiles();
 			ArrayList<File> arr_flist = new ArrayList<File>();
-			for (File f : flist) {
-				arr_flist.add(f);
+			if (flist != null) {
+				for (File f : flist) {
+					arr_flist.add(f);
+				}
 			}
-
 			Comparator<File> sort = new Comparator<File>() {
 
 				@Override

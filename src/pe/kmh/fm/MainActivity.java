@@ -166,7 +166,7 @@ public class MainActivity extends SherlockActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		importPreferences();
 
 		boolean isBusyboxAvailable = true;
@@ -402,8 +402,14 @@ public class MainActivity extends SherlockActivity {
 					PackageManager packageManager = getPackageManager();
 					List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
 					boolean isIntentSafe = activities.size() > 0;
-					if (isIntentSafe) startActivity(intent);
-					else Crouton.makeText(MainActivity.this, R.string.CannotShare, Style.ALERT).show();
+					try {
+						if (isIntentSafe) startActivity(intent);
+						else Crouton.makeText(MainActivity.this, R.string.CannotShare, Style.ALERT).show();
+					}
+					catch (Exception e) {
+						Crouton.makeText(MainActivity.this, R.string.CannotShare, Style.ALERT).show();
+						e.printStackTrace();
+					}
 					Refresh_Screen();
 					return false;
 				}
@@ -437,8 +443,11 @@ public class MainActivity extends SherlockActivity {
 		editor = sharedPrefs.edit();
 
 		boolean crashActivation = sharedPrefs.getBoolean("CrashlyticsActivation", true);
-		if(crashActivation) { Log.d("PowerFileManager", "Crashlytics Enabled"); Crashlytics.start(this); }
-		
+		if (crashActivation) {
+			Log.d("PowerFileManager", "Crashlytics Enabled");
+			Crashlytics.start(this);
+		}
+
 		appTheme = sharedPrefs.getString("AppTheme", "Light");
 		if (appTheme.equals("Light")) {
 			setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
@@ -826,8 +835,8 @@ public class MainActivity extends SherlockActivity {
 				String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
 				if (isRoot && i < filesizes.length) filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 				if (isRoot) {
-					if (fileperms == null || fileperms.length <= i) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format(
-							"yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
+					if (fileperms == null || fileperms.length <= i) rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
+							.format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
 					else rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
 							file.lastModified()).toString(), filesize, fileperms[i]));
 				}
@@ -1483,8 +1492,13 @@ public class MainActivity extends SherlockActivity {
 		PackageManager packageManager = getPackageManager();
 		List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
 		boolean isIntentSafe = activities.size() > 0;
-		if (isIntentSafe) startActivity(intent);
-		else return false;
+		try {
+			if (isIntentSafe) startActivity(intent);
+			else return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 

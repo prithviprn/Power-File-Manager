@@ -60,12 +60,12 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		}
 
 		ListPreference startPath = (ListPreference) getPreferenceScreen().findPreference("StartPath");
-		
+
 		String extPath;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
 
-			if (t_Path_arr.length > 1) {
+			if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
 				String t_Path = t_Path_arr[1].getAbsolutePath();
 				int point = t_Path.indexOf("Android");
 				extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
@@ -74,7 +74,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			else extPath = null;
 		}
 		else extPath = StorageList.getMicroSDCardDirectory();
-		
+
 		String items[] = extPath != null ? new String[3] : new String[2];
 		items[0] = getString(R.string.AutomaticSet);
 		items[1] = Environment.getExternalStorageDirectory().getAbsolutePath() + "\n[" + getString(R.string.InternalStorage) + "]";
