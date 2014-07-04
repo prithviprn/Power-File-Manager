@@ -17,8 +17,6 @@
 
 package com.sherlock.navigationdrawer.compat;
 
-import java.lang.reflect.Method;
-
 import android.R;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -29,9 +27,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.lang.reflect.Method;
+
 /**
  * This class encapsulates some awful hacks.
- *
+ * <p/>
  * Before JB-MR2 (API 18) it was not possible to change the home-as-up indicator glyph
  * in an action bar without some really gross hacks. Since the MR2 SDK is not published as of
  * this writing, the new API is accessed via reflection here if available.
@@ -39,12 +39,12 @@ import android.widget.ImageView;
 public class SherlockActionBarDrawerToggleHoneycomb {
     private static final String TAG = "SherlockActionBarDrawerToggleHoneycomb";
 
-    private static final int[] THEME_ATTRS = new int[] {
+    private static final int[] THEME_ATTRS = new int[]{
             R.attr.homeAsUpIndicator
     };
 
     public static Object setActionBarUpIndicator(Object info, Activity activity,
-            Drawable drawable, int contentDescRes) {
+                                                 Drawable drawable, int contentDescRes) {
         if (info == null) {
             info = new SetIndicatorInfo(activity);
         }
@@ -66,7 +66,7 @@ public class SherlockActionBarDrawerToggleHoneycomb {
     }
 
     public static Object setActionBarDescription(Object info, Activity activity,
-            int contentDescRes) {
+                                                 int contentDescRes) {
         if (info == null) {
             info = new SetIndicatorInfo(activity);
         }

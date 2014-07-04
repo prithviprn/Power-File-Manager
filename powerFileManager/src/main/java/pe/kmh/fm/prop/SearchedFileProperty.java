@@ -5,54 +5,53 @@ import android.os.Parcelable;
 
 public class SearchedFileProperty extends FileProperty implements Parcelable {
 
-	private String FilePath;
+    public static final Parcelable.Creator<SearchedFileProperty> CREATOR = new Parcelable.Creator<SearchedFileProperty>() {
 
-	public SearchedFileProperty(String _icon, String _name, String _date, String _size, String _path) {
-		super(_icon, _name, _date, _size);
-		FilePath = _path;
-	}
+        @Override
+        public SearchedFileProperty createFromParcel(Parcel source) {
+            return new SearchedFileProperty(source);
+        }
 
-	public SearchedFileProperty(Parcel in) {
-		readFromParcel(in);
-	}
+        @Override
+        public SearchedFileProperty[] newArray(int size) {
+            return new SearchedFileProperty[size];
+        }
 
-	public String getPath() {
-		return FilePath;
-	}
+    };
+    private String FilePath;
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+    public SearchedFileProperty(String _icon, String _name, String _date, String _size, String _path) {
+        super(_icon, _name, _date, _size);
+        FilePath = _path;
+    }
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(super.getIcon());
-		dest.writeString(super.getName());
-		dest.writeString(FilePath);
-		dest.writeString(super.getDate());
-		dest.writeString(super.getSize());
-	}
+    public SearchedFileProperty(Parcel in) {
+        readFromParcel(in);
+    }
 
-	public void readFromParcel(Parcel in) {
-		super.setIcon(in.readString());
-		super.setName(in.readString());
-		FilePath = in.readString();
-		super.setDate(in.readString());
-		super.setSize(in.readString());
-	}
+    public String getPath() {
+        return FilePath;
+    }
 
-	public static final Parcelable.Creator<SearchedFileProperty> CREATOR = new Parcelable.Creator<SearchedFileProperty>() {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-		@Override
-		public SearchedFileProperty createFromParcel(Parcel source) {
-			return new SearchedFileProperty(source);
-		}
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(super.getIcon());
+        dest.writeString(super.getName());
+        dest.writeString(FilePath);
+        dest.writeString(super.getDate());
+        dest.writeString(super.getSize());
+    }
 
-		@Override
-		public SearchedFileProperty[] newArray(int size) {
-			return new SearchedFileProperty[size];
-		}
-
-	};
+    public void readFromParcel(Parcel in) {
+        super.setIcon(in.readString());
+        super.setName(in.readString());
+        FilePath = in.readString();
+        super.setDate(in.readString());
+        super.setSize(in.readString());
+    }
 }

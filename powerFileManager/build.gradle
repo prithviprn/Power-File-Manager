@@ -2,28 +2,37 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "20.0.0"
-
+    buildToolsVersion '20.0.0'
     defaultConfig {
-        applicationId "pe.kmh.fm"
+        applicationId 'pe.kmh.fm'
         minSdkVersion 8
         targetSdkVersion 19
     }
-
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    productFlavors {
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    compile project(':crouton')
     compile project(':sherlockNavigationDrawer')
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.android.support:support-v4:+'
+    compile 'de.keyboardsurfer.android.widget:crouton:1.8.4@aar'
     compile files('libs/Commons-Compress-1.5.jar')
     compile files('libs/crashlytics.jar')
     compile files('libs/RootTools-2.6.jar')

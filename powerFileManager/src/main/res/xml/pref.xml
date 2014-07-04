@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/Basics" >
+    <PreferenceCategory android:title="@string/Basics">
         <ListPreference
             android:defaultValue="Light"
             android:entries="@array/themes"
@@ -14,7 +14,7 @@
             android:summary="@string/CrashInfoSummary"
             android:title="@string/CrashInfoSetting" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/ViewSetting" >
+    <PreferenceCategory android:title="@string/ViewSetting">
         <ListPreference
             android:defaultValue="Alphabet"
             android:entries="@array/SortOptions"
@@ -38,10 +38,10 @@
             android:key="StartPath"
             android:title="@string/StartPath" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/ForRootUsers" >
+    <PreferenceCategory android:title="@string/ForRootUsers">
         <PreferenceScreen
             android:key="AutoPermissionOptions"
-            android:title="@string/AutoPermissonOptions" >
+            android:title="@string/AutoPermissonOptions">
             <EditTextPreference
                 android:defaultValue="644"
                 android:key="SystemApp_APerm"
@@ -74,10 +74,10 @@
             android:summary="@string/AutoRootCheckSummary"
             android:title="@string/AutoRootCheck" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/AppInfo" >
+    <PreferenceCategory android:title="@string/AppInfo">
         <PreferenceScreen
             android:key="OpenLicense"
-            android:title="Opensource License" >
+            android:title="Opensource License">
             <Preference
                 android:key="RootTools"
                 android:summary="https://github.com/Stericson/RootTools"

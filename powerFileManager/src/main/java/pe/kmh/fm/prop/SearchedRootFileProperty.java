@@ -5,56 +5,55 @@ import android.os.Parcelable;
 
 public class SearchedRootFileProperty extends RootFileProperty implements Parcelable {
 
-	private String FilePath;
+    public static final Parcelable.Creator<SearchedRootFileProperty> CREATOR = new Parcelable.Creator<SearchedRootFileProperty>() {
 
-	public SearchedRootFileProperty(String _icon, String _name, String _date, String _size, String _perm, String _path) {
-		super(_icon, _name, _date, _size, _perm);
-		FilePath = _path;
-	}
+        @Override
+        public SearchedRootFileProperty createFromParcel(Parcel source) {
+            return new SearchedRootFileProperty(source);
+        }
 
-	public SearchedRootFileProperty(Parcel in) {
-		readFromParcel(in);
-	}
+        @Override
+        public SearchedRootFileProperty[] newArray(int size) {
+            return new SearchedRootFileProperty[size];
+        }
 
-	public String getPath() {
-		return FilePath;
-	}
+    };
+    private String FilePath;
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+    public SearchedRootFileProperty(String _icon, String _name, String _date, String _size, String _perm, String _path) {
+        super(_icon, _name, _date, _size, _perm);
+        FilePath = _path;
+    }
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(super.getIcon());
-		dest.writeString(super.getName());
-		dest.writeString(FilePath);
-		dest.writeString(super.getDate());
-		dest.writeString(super.getSize());
-		dest.writeString(super.getPerm());
-	}
+    public SearchedRootFileProperty(Parcel in) {
+        readFromParcel(in);
+    }
 
-	public void readFromParcel(Parcel in) {
-		super.setIcon(in.readString());
-		super.setName(in.readString());
-		FilePath = in.readString();
-		super.setDate(in.readString());
-		super.setSize(in.readString());
-		super.setPerm(in.readString());
-	}
+    public String getPath() {
+        return FilePath;
+    }
 
-	public static final Parcelable.Creator<SearchedRootFileProperty> CREATOR = new Parcelable.Creator<SearchedRootFileProperty>() {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-		@Override
-		public SearchedRootFileProperty createFromParcel(Parcel source) {
-			return new SearchedRootFileProperty(source);
-		}
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(super.getIcon());
+        dest.writeString(super.getName());
+        dest.writeString(FilePath);
+        dest.writeString(super.getDate());
+        dest.writeString(super.getSize());
+        dest.writeString(super.getPerm());
+    }
 
-		@Override
-		public SearchedRootFileProperty[] newArray(int size) {
-			return new SearchedRootFileProperty[size];
-		}
-
-	};
+    public void readFromParcel(Parcel in) {
+        super.setIcon(in.readString());
+        super.setName(in.readString());
+        FilePath = in.readString();
+        super.setDate(in.readString());
+        super.setSize(in.readString());
+        super.setPerm(in.readString());
+    }
 }

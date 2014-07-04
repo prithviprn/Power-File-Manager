@@ -1,3 +1,2 @@
-include ':crouton'
 include ':sherlockNavigationDrawer'
 include ':powerFileManager'

@@ -35,75 +35,27 @@ import android.view.View;
  * This class provides a handy way to tie together the functionality of
  * {@link DrawerLayout} and the framework <code>ActionBar</code> to implement the recommended
  * design for navigation drawers.
- *
+ * <p/>
  * <p>To use <code>ActionBarDrawerToggle</code>, create one in your Activity and call through
  * to the following methods corresponding to your Activity callbacks:</p>
- *
+ * <p/>
  * <ul>
  * <li>{@link Activity#onConfigurationChanged(android.content.res.Configuration) onConfigurationChanged}</li>
  * <li>{@link Activity#onOptionsItemSelected(android.view.MenuItem) onOptionsItemSelected}</li>
  * </ul>
- *
+ * <p/>
  * <p>Call {@link #syncState()} from your <code>Activity</code>'s
  * {@link Activity#onPostCreate(android.os.Bundle) onPostCreate} to synchronize the indicator
  * with the state of the linked DrawerLayout after <code>onRestoreInstanceState</code>
  * has occurred.</p>
- *
+ * <p/>
  * <p><code>ActionBarDrawerToggle</code> can be used directly as a
  * {@link DrawerLayout.DrawerListener}, or if you are already providing your own listener,
  * call through to each of the listener methods from your own.</p>
  */
 public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
-    private interface ActionBarDrawerToggleImpl {
-        Drawable getThemeUpIndicator(Activity activity);
-        Object setActionBarUpIndicator(Object info, Activity activity,
-                Drawable themeImage, int contentDescRes);
-        Object setActionBarDescription(Object info, Activity activity, int contentDescRes);
-    }
-
-    private static class ActionBarDrawerToggleImplCompat implements ActionBarDrawerToggleImpl {
-        @Override
-        public Drawable getThemeUpIndicator(Activity activity) {
-        	return SherlockActionBarDrawerToggleCompat.getThemeUpIndicator(activity);
-        }
-
-        @Override
-        public Object setActionBarUpIndicator(Object info, Activity activity,
-                Drawable themeImage, int contentDescRes) {
-        	return SherlockActionBarDrawerToggleCompat.setActionBarUpIndicator(info, activity,
-                    themeImage, contentDescRes);
-        }
-
-        @Override
-        public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
-        	return SherlockActionBarDrawerToggleCompat.setActionBarDescription(info, activity,
-                    contentDescRes);
-        }
-    }
-
-    private static class ActionBarDrawerToggleImplHC implements ActionBarDrawerToggleImpl {
-        @Override
-        public Drawable getThemeUpIndicator(Activity activity) {
-            return SherlockActionBarDrawerToggleHoneycomb.getThemeUpIndicator(activity);
-        }
-
-        @Override
-        public Object setActionBarUpIndicator(Object info, Activity activity,
-                Drawable themeImage, int contentDescRes) {
-            return SherlockActionBarDrawerToggleHoneycomb.setActionBarUpIndicator(info, activity,
-                    themeImage, contentDescRes);
-        }
-
-        @Override
-        public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
-            return SherlockActionBarDrawerToggleHoneycomb.setActionBarDescription(info, activity,
-                    contentDescRes);
-        }
-    }
-
     private static final ActionBarDrawerToggleImpl IMPL;
-
     static {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 11) {
@@ -112,44 +64,40 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
             IMPL = new ActionBarDrawerToggleImplCompat();
         }
     }
-
     // android.R.id.home as defined by public API in v11
     private static final int ID_HOME = 0x0102002c;
-
     private final Activity mActivity;
     private final DrawerLayout mDrawerLayout;
+    private final int mDrawerImageResource;
+    private final int mOpenDrawerContentDescRes;
+    private final int mCloseDrawerContentDescRes;
     private boolean mDrawerIndicatorEnabled = true;
 
     private Drawable mThemeImage;
     private Drawable mDrawerImage;
     private SlideDrawable mSlider;
-    private final int mDrawerImageResource;
-    private final int mOpenDrawerContentDescRes;
-    private final int mCloseDrawerContentDescRes;
-
     private Object mSetIndicatorInfo;
-
     /**
      * Construct a new ActionBarDrawerToggle.
-     *
+     * <p/>
      * <p>The given {@link Activity} will be linked to the specified {@link DrawerLayout}.
      * The provided drawer indicator drawable will animate slightly off-screen as the drawer
      * is opened, indicating that in the open state the drawer will move off-screen when pressed
      * and in the closed state the drawer will move on-screen when pressed.</p>
-     *
+     * <p/>
      * <p>String resources must be provided to describe the open/close drawer actions for
      * accessibility services.</p>
      *
-     * @param activity The Activity hosting the drawer
-     * @param drawerLayout The DrawerLayout to link to the given Activity's ActionBar
-     * @param drawerImageRes A Drawable resource to use as the drawer indicator
-     * @param openDrawerContentDescRes A String resource to describe the "open drawer" action
-     *                                 for accessibility
+     * @param activity                  The Activity hosting the drawer
+     * @param drawerLayout              The DrawerLayout to link to the given Activity's ActionBar
+     * @param drawerImageRes            A Drawable resource to use as the drawer indicator
+     * @param openDrawerContentDescRes  A String resource to describe the "open drawer" action
+     *                                  for accessibility
      * @param closeDrawerContentDescRes A String resource to describe the "close drawer" action
      *                                  for accessibility
      */
     public SherlockActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout,
-            int drawerImageRes, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
+                                         int drawerImageRes, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
         mActivity = activity;
         mDrawerLayout = drawerLayout;
         mDrawerImageResource = drawerImageRes;
@@ -164,7 +112,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
 
     /**
      * Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout.
-     *
+     * <p/>
      * <p>This should be called from your <code>Activity</code>'s
      * {@link Activity#onPostCreate(android.os.Bundle) onPostCreate} method to synchronize after
      * the DrawerLayout's instance state has been restored, and any other time when the state
@@ -181,13 +129,22 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         if (mDrawerIndicatorEnabled) {
             mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo, mActivity,
                     mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
-                    mOpenDrawerContentDescRes : mCloseDrawerContentDescRes);
+                            mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
+            );
         }
     }
 
     /**
+     * @return true if the enhanced drawer indicator is enabled, false otherwise
+     * @see #setDrawerIndicatorEnabled(boolean)
+     */
+    public boolean isDrawerIndicatorEnabled() {
+        return mDrawerIndicatorEnabled;
+    }
+
+    /**
      * Enable or disable the drawer indicator. The indicator defaults to enabled.
-     *
+     * <p/>
      * <p>When the indicator is disabled, the <code>ActionBar</code> will revert to displaying
      * the home-as-up indicator provided by the <code>Activity</code>'s theme in the
      * <code>android.R.attr.homeAsUpIndicator</code> attribute instead of the animated
@@ -200,21 +157,14 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
             if (enable) {
                 mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo,
                         mActivity, mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
-                        mOpenDrawerContentDescRes : mCloseDrawerContentDescRes);
+                                mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
+                );
             } else {
                 mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo,
                         mActivity, mThemeImage, 0);
             }
             mDrawerIndicatorEnabled = enable;
         }
-    }
-
-    /**
-     * @return true if the enhanced drawer indicator is enabled, false otherwise
-     * @see #setDrawerIndicatorEnabled(boolean)
-     */
-    public boolean isDrawerIndicatorEnabled() {
-        return mDrawerIndicatorEnabled;
     }
 
     /**
@@ -256,7 +206,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
      * ActionBarDrawerToggle instance directly as your DrawerLayout's listener, you should call
      * through to this method from your own listener object.
      *
-     * @param drawerView The child view that was moved
+     * @param drawerView  The child view that was moved
      * @param slideOffset The new offset of this drawer within its range, from 0-1
      */
     @Override
@@ -306,31 +256,79 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
      * {@link DrawerLayout.DrawerListener} callback method. If you do not use your
      * ActionBarDrawerToggle instance directly as your DrawerLayout's listener, you should call
      * through to this method from your own listener object.
-     * 
+     *
      * @param newState The new drawer motion state
      */
     @Override
     public void onDrawerStateChanged(int newState) {
     }
 
+    private interface ActionBarDrawerToggleImpl {
+        Drawable getThemeUpIndicator(Activity activity);
+
+        Object setActionBarUpIndicator(Object info, Activity activity,
+                                       Drawable themeImage, int contentDescRes);
+
+        Object setActionBarDescription(Object info, Activity activity, int contentDescRes);
+    }
+
+    private static class ActionBarDrawerToggleImplCompat implements ActionBarDrawerToggleImpl {
+        @Override
+        public Drawable getThemeUpIndicator(Activity activity) {
+            return SherlockActionBarDrawerToggleCompat.getThemeUpIndicator(activity);
+        }
+
+        @Override
+        public Object setActionBarUpIndicator(Object info, Activity activity,
+                                              Drawable themeImage, int contentDescRes) {
+            return SherlockActionBarDrawerToggleCompat.setActionBarUpIndicator(info, activity,
+                    themeImage, contentDescRes);
+        }
+
+        @Override
+        public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
+            return SherlockActionBarDrawerToggleCompat.setActionBarDescription(info, activity,
+                    contentDescRes);
+        }
+    }
+
+    private static class ActionBarDrawerToggleImplHC implements ActionBarDrawerToggleImpl {
+        @Override
+        public Drawable getThemeUpIndicator(Activity activity) {
+            return SherlockActionBarDrawerToggleHoneycomb.getThemeUpIndicator(activity);
+        }
+
+        @Override
+        public Object setActionBarUpIndicator(Object info, Activity activity,
+                                              Drawable themeImage, int contentDescRes) {
+            return SherlockActionBarDrawerToggleHoneycomb.setActionBarUpIndicator(info, activity,
+                    themeImage, contentDescRes);
+        }
+
+        @Override
+        public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
+            return SherlockActionBarDrawerToggleHoneycomb.setActionBarDescription(info, activity,
+                    contentDescRes);
+        }
+    }
+
     private static class SlideDrawable extends Drawable implements Drawable.Callback {
+        private final Rect mTmpRect = new Rect();
         private Drawable mWrapped;
         private float mOffset;
         private float mOffsetBy;
-
-        private final Rect mTmpRect = new Rect();
 
         public SlideDrawable(Drawable wrapped) {
             mWrapped = wrapped;
         }
 
+        public float getOffset() {
+            return mOffset;
+        }
+
         public void setOffset(float offset) {
             mOffset = offset;
             invalidateSelf();
-        }
-
-        public float getOffset() {
-            return mOffset;
         }
 
         public void setOffsetBy(float offsetBy) {
@@ -348,13 +346,13 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         }
 
         @Override
-        public void setChangingConfigurations(int configs) {
-            mWrapped.setChangingConfigurations(configs);
+        public int getChangingConfigurations() {
+            return mWrapped.getChangingConfigurations();
         }
 
         @Override
-        public int getChangingConfigurations() {
-            return mWrapped.getChangingConfigurations();
+        public void setChangingConfigurations(int configs) {
+            mWrapped.setChangingConfigurations(configs);
         }
 
         @Override

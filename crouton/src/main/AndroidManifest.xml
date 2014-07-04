@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright 2012 Neofonie Mobile GmbH
-  ~ Copyright 2012 - 2013 Benjamin Weiss
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2012 - 2014 Benjamin Weiss
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,11 +14,6 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.keyboardsurfer.mobile.app.android.widget.crouton"
-    android:versionCode="1"
-    android:versionName="1.8.1">
-    
-    <uses-sdk android:minSdkVersion="4" />
+<manifest package="de.keyboardsurfer.mobile.app.android.widget.crouton">
 
 </manifest>

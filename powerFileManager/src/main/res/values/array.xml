@@ -4,29 +4,30 @@
         <item>@string/Light_DarkActionBar</item>
         <item>@string/Dark</item>
     </string-array>
-    
+
     <string-array name="themesValues">
         <item>Light</item>
         <item>Dark</item>
     </string-array>
-    
+
     <string-array name="SortOptions">
         <item>@string/Alphabet</item>
         <item>@string/FolderFirst</item>
         <item>@string/ABC</item>
     </string-array>
-    
+
     <string-array name="SortOptionsValues">
         <item>Alphabet</item>
         <item>FolderFirst</item>
         <item>ABC</item>
     </string-array>
-    
+
     <string-array name="StartPath">
         <item>Automatic</item>
         <item>Internal</item>
         <item>External</item>
     </string-array>
+
     <string-array name="RootModeMenuItems">
         <item>@string/newFolder</item>
         <item>@string/newFile</item>
@@ -36,7 +37,7 @@
         <item>@string/Reboot</item>
         <item>@string/Setting</item>
     </string-array>
-    
+
     <string-array name="NormalModeMenuItems">
         <item>@string/newFolder</item>
         <item>@string/newFile</item>
@@ -45,5 +46,5 @@
         <item>@string/Search</item>
         <item>@string/Setting</item>
     </string-array>
-    
+
 </resources>

@@ -95,7 +95,8 @@
     <string name="FirstStart">환영합니다</string>
     <string name="UpdateLogDialog">업데이트 내역</string>
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
+    <string name="UnknownError">알 수 없는 오류가 발생했습니다.</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v3.10.1 업데이트\n- 앱 안정성 향상\n* 문제가 발생하면 앱 리뷰에 쓰지 마시고 강제종료시 나타나는 신고버튼을 통해 신고해 주세요!</string>
+    <string name="UpdateLog">v3.11 업데이트\n- 다양한 버그 수정\n- 일부 렉 제거</string>
 
 </resources>
