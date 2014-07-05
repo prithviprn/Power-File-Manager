@@ -48,14 +48,14 @@ public class Style {
 
     static {
         ALERT = new Builder()
-                .setBackgroundColorValue(holoRedLight)
-                .build();
+            .setBackgroundColorValue(holoRedLight)
+            .build();
         CONFIRM = new Builder()
-                .setBackgroundColorValue(holoGreenLight)
-                .build();
+            .setBackgroundColorValue(holoGreenLight)
+            .build();
         INFO = new Builder()
-                .setBackgroundColorValue(holoBlueLight)
-                .build();
+            .setBackgroundColorValue(holoBlueLight)
+            .build();
     }
 
     /**
@@ -227,32 +227,32 @@ public class Style {
     @Override
     public String toString() {
         return "Style{" +
-                "configuration=" + configuration +
-                ", backgroundColorResourceId=" + backgroundColorResourceId +
-                ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
-                ", backgroundColorValue=" + backgroundColorValue +
-                ", isTileEnabled=" + isTileEnabled +
-                ", textColorResourceId=" + textColorResourceId +
-                ", textColorValue=" + textColorValue +
-                ", heightInPixels=" + heightInPixels +
-                ", heightDimensionResId=" + heightDimensionResId +
-                ", widthInPixels=" + widthInPixels +
-                ", widthDimensionResId=" + widthDimensionResId +
-                ", gravity=" + gravity +
-                ", imageDrawable=" + imageDrawable +
-                ", imageResId=" + imageResId +
-                ", imageScaleType=" + imageScaleType +
-                ", textSize=" + textSize +
-                ", textShadowColorResId=" + textShadowColorResId +
-                ", textShadowRadius=" + textShadowRadius +
-                ", textShadowDy=" + textShadowDy +
-                ", textShadowDx=" + textShadowDx +
-                ", textAppearanceResId=" + textAppearanceResId +
-                ", paddingInPixels=" + paddingInPixels +
-                ", paddingDimensionResId=" + paddingDimensionResId +
-                ", fontName=" + fontName +
-                ", fontNameResId=" + fontNameResId +
-                '}';
+            "configuration=" + configuration +
+            ", backgroundColorResourceId=" + backgroundColorResourceId +
+            ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
+            ", backgroundColorValue=" + backgroundColorValue +
+            ", isTileEnabled=" + isTileEnabled +
+            ", textColorResourceId=" + textColorResourceId +
+            ", textColorValue=" + textColorValue +
+            ", heightInPixels=" + heightInPixels +
+            ", heightDimensionResId=" + heightDimensionResId +
+            ", widthInPixels=" + widthInPixels +
+            ", widthDimensionResId=" + widthDimensionResId +
+            ", gravity=" + gravity +
+            ", imageDrawable=" + imageDrawable +
+            ", imageResId=" + imageResId +
+            ", imageScaleType=" + imageScaleType +
+            ", textSize=" + textSize +
+            ", textShadowColorResId=" + textShadowColorResId +
+            ", textShadowRadius=" + textShadowRadius +
+            ", textShadowDy=" + textShadowDy +
+            ", textShadowDx=" + textShadowDx +
+            ", textAppearanceResId=" + textAppearanceResId +
+            ", paddingInPixels=" + paddingInPixels +
+            ", paddingDimensionResId=" + paddingDimensionResId +
+            ", fontName=" + fontName +
+            ", fontNameResId=" + fontNameResId +
+            '}';
     }
 
     /**

@@ -597,7 +597,7 @@ public class MainActivity extends SherlockActivity {
                     return;
                 }
 
-                if(path.size() == 0) return;
+                if (path.size() == 0) return;
                 if (isRoot) f = new RootFile(path.get(position));
                 else f = new File(path.get(position));
 
@@ -646,7 +646,7 @@ public class MainActivity extends SherlockActivity {
                                 if (!sb.toString().endsWith("/")) sb.append("/");
 
                                 final ProgressDialog pdialog = ProgressDialog.show(MainActivity.this, getString(R.string.Unzipping),
-                                        getString(R.string.Wait), true);
+                                    getString(R.string.Wait), true);
 
                                 final Handler handler = new Handler() {
 
@@ -681,27 +681,27 @@ public class MainActivity extends SherlockActivity {
                         alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
 
                         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.No),
-                                new DialogInterface.OnClickListener() {
+                            new DialogInterface.OnClickListener() {
 
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
                                 }
+                            }
                         );
 
                         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.Yes),
-                                new DialogInterface.OnClickListener() {
+                            new DialogInterface.OnClickListener() {
 
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(MainActivity.this, TextEditor.class);
-                                        intent.putExtra("filepath", f.getPath());
-                                        if (isRoot)
-                                            intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
-                                        intent.putExtra("isRoot", isRoot);
-                                        startActivityForResult(intent, TEXT_EDITOR_REQUEST);
-                                    }
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, TextEditor.class);
+                                    intent.putExtra("filepath", f.getPath());
+                                    if (isRoot)
+                                        intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
+                                    intent.putExtra("isRoot", isRoot);
+                                    startActivityForResult(intent, TEXT_EDITOR_REQUEST);
                                 }
+                            }
                         );
 
                         alertDialog.show();
@@ -768,7 +768,7 @@ public class MainActivity extends SherlockActivity {
     }
 
     private void LoadList(String dirPath) {
-        if(dirPath == null) return;
+        if (dirPath == null) return;
         int path_len = myPath.getText().toString().length();
         if (path_len - tag_len < dirPath.length()) nowlevel++; // Go into
         else if (path_len - tag_len > dirPath.length()) nowlevel--; // Go back
@@ -790,7 +790,7 @@ public class MainActivity extends SherlockActivity {
 
         else files = f.listFiles();
 
-        if(files == null) {
+        if (files == null) {
             Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
             files = new File[0];
         }
@@ -818,13 +818,13 @@ public class MainActivity extends SherlockActivity {
                 if (isRoot) {
                     if (fileperms == null || fileperms.length <= i)
                         rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
-                                .format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
+                            .format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
                     else
                         rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
-                                file.lastModified()).toString(), filesize, fileperms[i]));
+                            file.lastModified()).toString(), filesize, fileperms[i]));
                 } else
                     item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
-                            .toString(), filesize));
+                        .toString(), filesize));
             }
         }
 
@@ -894,8 +894,7 @@ public class MainActivity extends SherlockActivity {
         if (mActionMode != null) mActionMode.finish();
     }
 
-    public void sortList()
-    {
+    public void sortList() {
         final int psize = path.size();
 
         if (!isRoot && SortFlag != ALPHABET_ORDER) // ABCabc Order
@@ -948,15 +947,14 @@ public class MainActivity extends SherlockActivity {
                 else Files.add(i);
             }
 
-            ArrayList<RootFileProperty> temp_rootitem = new ArrayList<RootFileProperty>(rootitem);
-            ArrayList<FileProperty> temp_item = new ArrayList<FileProperty>(item);
+            ArrayList<RootFileProperty> temp_rootitem = isRoot ? new ArrayList<RootFileProperty>(rootitem) : null;
+            ArrayList<FileProperty> temp_item = isRoot ? null : new ArrayList<FileProperty>(item);
 
-            if(isRoot) {
+            if (isRoot) {
                 rootitem.clear();
                 for (Integer it : Folders) rootitem.add(temp_rootitem.get(it));
                 for (Integer it : Files) rootitem.add(temp_rootitem.get(it));
-            }
-            else {
+            } else {
                 item.clear();
                 for (Integer it : Folders) item.add(temp_item.get(it));
                 for (Integer it : Files) item.add(temp_item.get(it));
@@ -1282,7 +1280,7 @@ public class MainActivity extends SherlockActivity {
 
     public void Set_Auto_Perm() {
         if (nowPath.startsWith("/system/app") || nowPath.startsWith("/system/etc") || nowPath.startsWith("/system/fonts")
-                || nowPath.startsWith("/system/framework") || nowPath.startsWith("/system/media") || nowPath.equals("/system")) {
+            || nowPath.startsWith("/system/framework") || nowPath.startsWith("/system/media") || nowPath.equals("/system")) {
             String p = null;
             if (nowPath.startsWith("/system/app"))
                 p = sharedPrefs.getString("SystemApp_APerm", "644");
@@ -1591,7 +1589,7 @@ public class MainActivity extends SherlockActivity {
         }
         if (!(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD))
             Crouton.makeText(MainActivity.this, R.string.ShownDataCanIncorrect,
-                    Style.INFO).show();
+                Style.INFO).show();
         else
             Crouton.makeText(MainActivity.this, R.string.CannotGetStorageDataOnFroyo, Style.ALERT).show();
 
@@ -1712,7 +1710,7 @@ public class MainActivity extends SherlockActivity {
             else {
                 if (list[i].getName().contains(Name))
                     arr.add(new SearchedFileProperty(FileUtil.getExtension(list[i]), list[i].getName(), DateFormat.format(
-                            "yyyy.MM.dd kk:mm", list[i].lastModified()).toString(), "", list[i].getAbsolutePath()));
+                        "yyyy.MM.dd kk:mm", list[i].lastModified()).toString(), "", list[i].getAbsolutePath()));
             }
         }
 
@@ -1739,7 +1737,7 @@ public class MainActivity extends SherlockActivity {
                 String t_Path = t_Path_arr[1].getAbsolutePath();
                 int point = t_Path.indexOf("Android");
                 extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
-                        point - 1);
+                    point - 1);
             } else extPath = null;
         } else extPath = StorageList.getMicroSDCardDirectory();
 
@@ -2082,7 +2080,7 @@ public class MainActivity extends SherlockActivity {
                 if (imageViewReused(photoToLoad)) return;
                 icon[photoToLoad.pos] = getApkIcon(photoToLoad.b);
                 if (icon[photoToLoad.pos].getClass() == NinePatchDrawable.class
-                        || icon[photoToLoad.pos].getClass() == StateListDrawable.class)
+                    || icon[photoToLoad.pos].getClass() == StateListDrawable.class)
                     icon[photoToLoad.pos] = res.getDrawable(R.drawable.android);
 
                 Bitmap bmp = ((BitmapDrawable) icon[photoToLoad.pos]).getBitmap();

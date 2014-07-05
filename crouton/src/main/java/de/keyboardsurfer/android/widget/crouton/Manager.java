@@ -234,7 +234,7 @@ final class Manager extends Handler {
             ViewGroup.LayoutParams params = croutonView.getLayoutParams();
             if (null == params) {
                 params =
-                        new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
             // display Crouton in ViewGroup is it has been supplied
             if (null != crouton.getViewGroup()) {
@@ -274,7 +274,7 @@ final class Manager extends Handler {
                         announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
                         if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
                             sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                                    crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+                                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
                         }
                     }
                 }
@@ -284,7 +284,7 @@ final class Manager extends Handler {
 
     private boolean shouldAddViewWithoutPosition(ViewGroup croutonViewGroup) {
         return croutonViewGroup instanceof FrameLayout || croutonViewGroup instanceof AdapterView ||
-                croutonViewGroup instanceof RelativeLayout;
+            croutonViewGroup instanceof RelativeLayout;
     }
 
     @TargetApi(19)
@@ -450,14 +450,15 @@ final class Manager extends Handler {
     @Override
     public String toString() {
         return "Manager{" +
-                "croutonQueue=" + croutonQueue +
-                '}';
+            "croutonQueue=" + croutonQueue +
+            '}';
     }
 
     private static final class Messages {
         public static final int DISPLAY_CROUTON = 0xc2007;
         public static final int ADD_CROUTON_TO_VIEW = 0xc20074dd;
         public static final int REMOVE_CROUTON = 0xc2007de1;
+
         private Messages() { /* no-op */ }
     }
 }

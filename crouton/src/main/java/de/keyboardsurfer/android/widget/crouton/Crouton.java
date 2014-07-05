@@ -243,7 +243,7 @@ public final class Crouton {
      */
     public static Crouton makeText(Activity activity, int textResourceId, Style style, int viewGroupResId) {
         return makeText(activity, activity.getString(textResourceId), style,
-                (ViewGroup) activity.findViewById(viewGroupResId));
+            (ViewGroup) activity.findViewById(viewGroupResId));
     }
 
 
@@ -353,7 +353,7 @@ public final class Crouton {
     public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId,
                                 final Configuration configuration) {
         makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).setConfiguration(configuration)
-                .show();
+            .show();
     }
 
 
@@ -466,19 +466,19 @@ public final class Crouton {
      */
     public static String getLicenseText() {
         return "This application uses the Crouton library.\n\n" +
-                "Copyright 2012 - 2013 Benjamin Weiss \n" +
-                "\n" +
-                "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
-                "you may not use this file except in compliance with the License.\n" +
-                "You may obtain a copy of the License at\n" +
-                "\n" +
-                "   http://www.apache.org/licenses/LICENSE-2.0\n" +
-                "\n" +
-                "Unless required by applicable law or agreed to in writing, software\n" +
-                "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
-                "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
-                "See the License for the specific language governing permissions and\n" +
-                "limitations under the License.";
+            "Copyright 2012 - 2013 Benjamin Weiss \n" +
+            "\n" +
+            "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
+            "you may not use this file except in compliance with the License.\n" +
+            "You may obtain a copy of the License at\n" +
+            "\n" +
+            "   http://www.apache.org/licenses/LICENSE-2.0\n" +
+            "\n" +
+            "Unless required by applicable law or agreed to in writing, software\n" +
+            "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
+            "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
+            "See the License for the specific language governing permissions and\n" +
+            "limitations under the License.";
     }
 
     /**
@@ -545,18 +545,18 @@ public final class Crouton {
     @Override
     public String toString() {
         return "Crouton{" +
-                "text=" + text +
-                ", style=" + style +
-                ", configuration=" + configuration +
-                ", customView=" + customView +
-                ", onClickListener=" + onClickListener +
-                ", activity=" + activity +
-                ", viewGroup=" + viewGroup +
-                ", croutonView=" + croutonView +
-                ", inAnimation=" + inAnimation +
-                ", outAnimation=" + outAnimation +
-                ", lifecycleCallback=" + lifecycleCallback +
-                '}';
+            "text=" + text +
+            ", style=" + style +
+            ", configuration=" + configuration +
+            ", customView=" + customView +
+            ", onClickListener=" + onClickListener +
+            ", activity=" + activity +
+            ", viewGroup=" + viewGroup +
+            ", croutonView=" + croutonView +
+            ", inAnimation=" + inAnimation +
+            ", outAnimation=" + outAnimation +
+            ", lifecycleCallback=" + lifecycleCallback +
+            '}';
     }
 
     /**
@@ -688,7 +688,7 @@ public final class Crouton {
             widthSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
         } else {
             widthSpec = View.MeasureSpec.makeMeasureSpec(activity.getWindow().getDecorView().getMeasuredWidth(),
-                    View.MeasureSpec.AT_MOST);
+                View.MeasureSpec.AT_MOST);
         }
 
         view.measure(widthSpec, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
@@ -726,7 +726,7 @@ public final class Crouton {
         }
 
         croutonView.setLayoutParams(
-                new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
+            new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
 
         // set background
         if (this.style.backgroundColorValue != Style.NOT_SET) {
@@ -751,7 +751,7 @@ public final class Crouton {
     private RelativeLayout initializeContentView(final Resources resources) {
         RelativeLayout contentView = new RelativeLayout(this.activity);
         contentView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT));
+            RelativeLayout.LayoutParams.MATCH_PARENT));
 
         // set padding
         int padding = this.style.paddingInPixels;
@@ -773,7 +773,7 @@ public final class Crouton {
         TextView text = initializeTextView(resources);
 
         RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams.WRAP_CONTENT);
         if (null != image) {
             textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
         }
@@ -833,7 +833,7 @@ public final class Crouton {
         if (this.text != null) {
             SpannableString s = new SpannableString(this.text);
             s.setSpan(new TypefaceSpan(text.getContext(), fontName), 0, s.length(),
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             text.setText(s);
         }
     }
@@ -865,8 +865,8 @@ public final class Crouton {
         }
 
         RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT);
         imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
 

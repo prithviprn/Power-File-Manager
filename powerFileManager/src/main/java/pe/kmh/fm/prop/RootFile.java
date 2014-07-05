@@ -129,7 +129,7 @@ public class RootFile extends File {
         RootFile[] retlist = null;
         if (new File(actualPath).canRead()) { // Not Root Area
             flist = (new File(actualPath)).listFiles();
-            if(flist == null) return null;
+            if (flist == null) return null;
             ArrayList<File> arr_flist = new ArrayList<File>();
             if (flist != null) {
                 for (File f : flist) {
@@ -148,7 +148,7 @@ public class RootFile extends File {
 
             retlist = new RootFile[flist.length];
             for (int i = 0; i < flist.length; i++) {
-                if(arr_flist.get(i) != null) {
+                if (arr_flist.get(i) != null) {
                     retlist[i] = new RootFile(arr_flist.get(i));
                     if (arr_flist.get(i).isDirectory()) size.add(-1);
                     else size.add(Integer.valueOf((int) (arr_flist.get(i).length())));
@@ -316,8 +316,7 @@ public class RootFile extends File {
                     if (line.indexOf("\n") > -1) {
                         for (String s : line.split("\n"))
                             output(id, s);
-                    }
-                    else outLines.add(line);
+                    } else outLines.add(line);
                 }
             };
 

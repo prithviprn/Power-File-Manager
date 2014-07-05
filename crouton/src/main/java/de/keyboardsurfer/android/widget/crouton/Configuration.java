@@ -73,18 +73,18 @@ public class Configuration {
     @Override
     public String toString() {
         return "Configuration{" +
-                "durationInMilliseconds=" + durationInMilliseconds +
-                ", inAnimationResId=" + inAnimationResId +
-                ", outAnimationResId=" + outAnimationResId +
-                '}';
+            "durationInMilliseconds=" + durationInMilliseconds +
+            ", inAnimationResId=" + inAnimationResId +
+            ", outAnimationResId=" + outAnimationResId +
+            '}';
     }
 
     /**
      * Creates a {@link Builder} to build a {@link Configuration} upon.
      */
     public static class Builder {
-        private int inAnimationResId = 0;        private int durationInMilliseconds = DURATION_SHORT;
-        private int outAnimationResId = 0;
+        private int inAnimationResId = 0;
+        private int outAnimationResId = 0;        private int durationInMilliseconds = DURATION_SHORT;
 
         /**
          * Set the durationInMilliseconds option of the {@link Crouton}.
@@ -133,6 +133,8 @@ public class Configuration {
         public Configuration build() {
             return new Configuration(this);
         }
+
+
 
 
     }

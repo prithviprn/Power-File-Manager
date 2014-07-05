@@ -1,6 +1,5 @@
 package pe.kmh.fm.util;
 
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.stericson.RootTools.RootTools;
@@ -62,7 +61,7 @@ public class FileUtil {
         else if (from.isDirectory()) {
             RootFile files[] = from.listFiles();
             String dir = "\"" + to.getAbsolutePath()
-                    + from.getAbsolutePath().substring(from.getAbsolutePath().lastIndexOf("/"), from.getAbsolutePath().length()) + "\"";
+                + from.getAbsolutePath().substring(from.getAbsolutePath().lastIndexOf("/"), from.getAbsolutePath().length()) + "\"";
             int len = files.length;
 
             new RootFile(dir.substring(1, dir.length() - 1)).mkdirs();
@@ -70,7 +69,7 @@ public class FileUtil {
             for (int i = 0; i < len; i++) {
                 if ((new RootFile(from.getAbsolutePath() + "/" + files[i].getName())).isDirectory())
                     RootFileCopy(
-                            new RootFile(from.getAbsolutePath() + "/" + files[i].getName()), new RootFile(dir.substring(1, dir.length() - 1)));
+                        new RootFile(from.getAbsolutePath() + "/" + files[i].getName()), new RootFile(dir.substring(1, dir.length() - 1)));
 
                 else
                     RootTools.copyFile("\"" + from.getAbsolutePath() + "/" + files[i].getName() + "\"", dir, false, true);
@@ -122,7 +121,7 @@ public class FileUtil {
 
     public static String getExtension(String name) {
         String ext = "";
-        if(name.lastIndexOf(".") != -1)  ext = name.substring(name.lastIndexOf(".") + 1);
+        if (name.lastIndexOf(".") != -1) ext = name.substring(name.lastIndexOf(".") + 1);
         return ext.toLowerCase();
     }
 

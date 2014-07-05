@@ -187,7 +187,7 @@ public class SearchActivity extends SherlockListActivity {
         String extension = temp.toString();
         String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
         if (mimeType == null || extension.toLowerCase().equals("xml") || extension.toLowerCase().equals("txt")
-                || runFile(file, mimeType) == false) {
+            || runFile(file, mimeType) == false) {
             AlertDialog alertDialog = new AlertDialog.Builder(SearchActivity.this).create();
             alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
 

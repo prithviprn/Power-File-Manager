@@ -68,7 +68,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
                 String t_Path = t_Path_arr[1].getAbsolutePath();
                 int point = t_Path.indexOf("Android");
                 extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
-                        point - 1);
+                    point - 1);
             } else extPath = null;
         } else extPath = StorageList.getMicroSDCardDirectory();
 

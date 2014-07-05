@@ -39,8 +39,8 @@ final class DefaultAnimationsBuilder {
     static Animation buildDefaultSlideInDownAnimation(View croutonView) {
         if (!areLastMeasuredInAnimationHeightAndCurrentEqual(croutonView) || (null == slideInDownAnimation)) {
             slideInDownAnimation = new TranslateAnimation(
-                    0, 0,                               // X: from, to
-                    -croutonView.getMeasuredHeight(), 0 // Y: from, to
+                0, 0,                               // X: from, to
+                -croutonView.getMeasuredHeight(), 0 // Y: from, to
             );
             slideInDownAnimation.setDuration(DURATION);
             setLastInAnimationHeight(croutonView.getMeasuredHeight());
@@ -55,8 +55,8 @@ final class DefaultAnimationsBuilder {
     static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
         if (!areLastMeasuredOutAnimationHeightAndCurrentEqual(croutonView) || (null == slideOutUpAnimation)) {
             slideOutUpAnimation = new TranslateAnimation(
-                    0, 0,                               // X: from, to
-                    0, -croutonView.getMeasuredHeight() // Y: from, to
+                0, 0,                               // X: from, to
+                0, -croutonView.getMeasuredHeight() // Y: from, to
             );
             slideOutUpAnimation.setDuration(DURATION);
             setLastOutAnimationHeight(croutonView.getMeasuredHeight());

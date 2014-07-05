@@ -40,7 +40,7 @@ public class SherlockActionBarDrawerToggleHoneycomb {
     private static final String TAG = "SherlockActionBarDrawerToggleHoneycomb";
 
     private static final int[] THEME_ATTRS = new int[]{
-            R.attr.homeAsUpIndicator
+        R.attr.homeAsUpIndicator
     };
 
     public static Object setActionBarUpIndicator(Object info, Activity activity,
@@ -97,9 +97,9 @@ public class SherlockActionBarDrawerToggleHoneycomb {
         SetIndicatorInfo(Activity activity) {
             try {
                 setHomeAsUpIndicator = ActionBar.class.getDeclaredMethod("setHomeAsUpIndicator",
-                        Drawable.class);
+                    Drawable.class);
                 setHomeActionContentDescription = ActionBar.class.getDeclaredMethod(
-                        "setHomeActionContentDescription", Integer.TYPE);
+                    "setHomeActionContentDescription", Integer.TYPE);
 
                 // If we got the method we won't need the stuff below.
                 return;

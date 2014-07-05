@@ -56,6 +56,7 @@ import android.view.View;
 public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     private static final ActionBarDrawerToggleImpl IMPL;
+
     static {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 11) {
@@ -64,6 +65,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
             IMPL = new ActionBarDrawerToggleImplCompat();
         }
     }
+
     // android.R.id.home as defined by public API in v11
     private static final int ID_HOME = 0x0102002c;
     private final Activity mActivity;
@@ -77,6 +79,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
     private Drawable mDrawerImage;
     private SlideDrawable mSlider;
     private Object mSetIndicatorInfo;
+
     /**
      * Construct a new ActionBarDrawerToggle.
      * <p/>
@@ -128,8 +131,8 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
 
         if (mDrawerIndicatorEnabled) {
             mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo, mActivity,
-                    mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
-                            mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
+                mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
+                    mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
             );
         }
     }
@@ -156,12 +159,12 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         if (enable != mDrawerIndicatorEnabled) {
             if (enable) {
                 mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo,
-                        mActivity, mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
-                                mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
+                    mActivity, mSlider, mDrawerLayout.isDrawerOpen(GravityCompat.START) ?
+                        mOpenDrawerContentDescRes : mCloseDrawerContentDescRes
                 );
             } else {
                 mSetIndicatorInfo = IMPL.setActionBarUpIndicator(mSetIndicatorInfo,
-                        mActivity, mThemeImage, 0);
+                    mActivity, mThemeImage, 0);
             }
             mDrawerIndicatorEnabled = enable;
         }
@@ -232,7 +235,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         mSlider.setOffset(1.f);
         if (mDrawerIndicatorEnabled) {
             mSetIndicatorInfo = IMPL.setActionBarDescription(mSetIndicatorInfo, mActivity,
-                    mOpenDrawerContentDescRes);
+                mOpenDrawerContentDescRes);
         }
     }
 
@@ -248,7 +251,7 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         mSlider.setOffset(0.f);
         if (mDrawerIndicatorEnabled) {
             mSetIndicatorInfo = IMPL.setActionBarDescription(mSetIndicatorInfo, mActivity,
-                    mCloseDrawerContentDescRes);
+                mCloseDrawerContentDescRes);
         }
     }
 
@@ -282,13 +285,13 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         public Object setActionBarUpIndicator(Object info, Activity activity,
                                               Drawable themeImage, int contentDescRes) {
             return SherlockActionBarDrawerToggleCompat.setActionBarUpIndicator(info, activity,
-                    themeImage, contentDescRes);
+                themeImage, contentDescRes);
         }
 
         @Override
         public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
             return SherlockActionBarDrawerToggleCompat.setActionBarDescription(info, activity,
-                    contentDescRes);
+                contentDescRes);
         }
     }
 
@@ -302,13 +305,13 @@ public class SherlockActionBarDrawerToggle implements DrawerLayout.DrawerListene
         public Object setActionBarUpIndicator(Object info, Activity activity,
                                               Drawable themeImage, int contentDescRes) {
             return SherlockActionBarDrawerToggleHoneycomb.setActionBarUpIndicator(info, activity,
-                    themeImage, contentDescRes);
+                themeImage, contentDescRes);
         }
 
         @Override
         public Object setActionBarDescription(Object info, Activity activity, int contentDescRes) {
             return SherlockActionBarDrawerToggleHoneycomb.setActionBarDescription(info, activity,
-                    contentDescRes);
+                contentDescRes);
         }
     }
 
