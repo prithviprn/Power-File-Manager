@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -135,6 +136,11 @@ public class MainActivity extends SherlockActivity {
     int[] internal_icon;
     Command cmd;
     boolean isRoot = false;
+    boolean goBack;
+
+    RootFileAdapter rootAdapter;
+    FileAdapter normalAdapter;
+
     ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         @Override
@@ -510,22 +516,12 @@ public class MainActivity extends SherlockActivity {
                 mDrawerHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (itemId == NEW_FOLDER) {
-                            MakeNewFolder();
-                            return;
-                        } else if (itemId == NEW_FILE) {
-                            MakeNewFile();
-                            return;
-                        } else if (itemId == CHANGE_STORAGE) {
-                            ChangeStorage();
-                            return;
-                        } else if (itemId == REFRESH) {
-                            LoadList(nowPath);
-                            return;
-                        } else if (itemId == SEARCH) {
-                            InitializeSearch();
-                            return;
-                        } else if (itemId == REBOOT) {
+                        if (itemId == NEW_FOLDER)  MakeNewFolder();
+                        else if (itemId == NEW_FILE)  MakeNewFile();
+                        else if (itemId == CHANGE_STORAGE) ChangeStorage();
+                        else if (itemId == REFRESH) LoadList(nowPath);
+                        else if (itemId == SEARCH) InitializeSearch();
+                        else if (itemId == REBOOT) {
                             AlertDialog.Builder ad1 = new AlertDialog.Builder(MainActivity.this);
 
                             String[] items = {"Reboot", "Recovery"};
@@ -568,13 +564,10 @@ public class MainActivity extends SherlockActivity {
                             });
 
                             ad1.create().show();
-
-                            return;
                         } else if (itemId == SETTING) {
                             Intent sActivity = new Intent(MainActivity.this, SettingsActivity.class);
                             sActivity.putExtra("isRoot", isRoot);
                             startActivity(sActivity);
-                            return;
                         }
                     }
                 }, 250);
@@ -768,38 +761,32 @@ public class MainActivity extends SherlockActivity {
     }
 
     private void LoadList(String dirPath) {
+        LoadListTask task = new LoadListTask();
+        task.execute(dirPath, null, null);
+    }
+
+    private void LoadRootList(String dirPath) {
         if (dirPath == null) return;
         int path_len = myPath.getText().toString().length();
         if (path_len - tag_len < dirPath.length()) nowlevel++; // Go into
         else if (path_len - tag_len > dirPath.length()) nowlevel--; // Go back
         nowPath = dirPath;
-        if (!isRoot) item.clear();
-        if (isRoot) rootitem.clear();
+        rootitem.clear();
         path.clear();
 
-        if (isRoot) f = new RootFile(dirPath);
-        else f = new File(dirPath);
+        f = new RootFile(dirPath);
 
-        File[] files = null;
-        String[] fileperms = null;
-        Integer[] filesizes = null;
+        File[] files = ((RootFile) f).listFiles();
+        String[] fileperms = ((RootFile) f).listPerms();
+        Integer[] filesizes = ((RootFile) f).listSizes();
 
-        if (isRoot) files = ((RootFile) f).listFiles();
-        if (isRoot) fileperms = ((RootFile) f).listPerms();
-        if (isRoot) filesizes = ((RootFile) f).listSizes();
+        if (files == null) files = new File[0];
 
-        else files = f.listFiles();
-
-        if (files == null) {
-            Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
-            files = new File[0];
-        }
         for (int i = 0; i <= MAX_LIST_ITEMS; i++) isSelected[i] = View.GONE;
         Selected_Count = 0;
 
         if (!dirPath.equals(root)) {
-            if (isRoot) rootitem.add(new RootFileProperty("FOLDER", "", getString(R.string.ParentFolder), "", ""));
-            else item.add(new FileProperty("FOLDER", "", getString(R.string.ParentFolder), ""));
+            rootitem.add(new RootFileProperty("FOLDER", "", getString(R.string.ParentFolder), "", ""));
             path.add(f.getParent());
         }
 
@@ -808,23 +795,20 @@ public class MainActivity extends SherlockActivity {
             File file = files[i];
 
             if ((ShowHiddenFiles || !file.isHidden()) && file.canRead()) {
-                boolean isDir = isRoot ? file.isDirectory() : file.isDirectory();
+                boolean isDir = file.isDirectory();
 
                 path.add(file.getPath());
                 String icontype = isDir ? "FOLDER" : FileUtil.getExtension(file);
                 String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
-                if (isRoot && i < filesizes.length)
+                if (i < filesizes.length)
                     filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
-                if (isRoot) {
-                    if (fileperms == null || fileperms.length <= i)
-                        rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
-                            .format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
-                    else
-                        rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
-                            file.lastModified()).toString(), filesize, fileperms[i]));
-                } else
-                    item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
-                        .toString(), filesize));
+
+                if (fileperms == null || fileperms.length <= i)
+                    rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
+                        .format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
+                else
+                    rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
+                        file.lastModified()).toString(), filesize, fileperms[i]));
             }
         }
 
@@ -833,10 +817,7 @@ public class MainActivity extends SherlockActivity {
         final int psize = path.size();
 
         if (!dirPath.equals(root)) {
-            if (isRoot)
-                rootitem.set(0, new RootFileProperty("FOLDER", "../", getString(R.string.ParentFolder), "", ""));
-            else
-                item.set(0, new FileProperty("FOLDER", "../", getString(R.string.ParentFolder), ""));
+            rootitem.set(0, new RootFileProperty("FOLDER", "../", getString(R.string.ParentFolder), "", ""));
             path.set(0, f.getParent());
         }
 
@@ -845,7 +826,7 @@ public class MainActivity extends SherlockActivity {
 
         String mimeType, ico;
         for (int i = 0; i < psize; i++) {
-            ico = isRoot ? rootitem.get(i).getIcon() : item.get(i).getIcon();
+            ico = rootitem.get(i).getIcon();
             if (ico.equals("FOLDER")) internal_icon[i] = Folder;
             else {
                 mimeType = FileUtil.getMIME(ico);
@@ -861,35 +842,90 @@ public class MainActivity extends SherlockActivity {
             }
         }
 
-        if (isRoot) {
-            RootFileAdapter adapter = new RootFileAdapter(rootitem);
-            if (path_len - tag_len <= dirPath.length()) // Go Into
-            {
-                list_state_index[nowlevel] = list.getFirstVisiblePosition();
-                list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
-                list.setAdapter(adapter);
-            } else if (path_len - tag_len > dirPath.length()) // Go Back
-            {
-                list.setAdapter(adapter);
-                list.setSelectionFromTop(list_state_index[nowlevel + 1], list_state_top[nowlevel + 1]);
-            }
-        } else {
-            FileAdapter adapter = new FileAdapter(item);
-            if (path_len - tag_len <= dirPath.length()) // Go Into
-            {
-                list_state_index[nowlevel] = list.getFirstVisiblePosition();
-                list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
-                list.setAdapter(adapter);
-            } else if (path_len - tag_len > dirPath.length()) // Go Back
-            {
-                list.setAdapter(adapter);
-                list.setSelectionFromTop(list_state_index[nowlevel + 1], list_state_top[nowlevel + 1]);
+
+        rootAdapter = new RootFileAdapter(rootitem);
+        if (path_len - tag_len <= dirPath.length()) // Go Into
+        {
+            list_state_index[nowlevel] = list.getFirstVisiblePosition();
+            list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
+        }
+        else if (path_len - tag_len > dirPath.length()) goBack = true;
+
+        if (mActionMode != null) mActionMode.finish();
+    }
+
+    public void LoadNormalList(String dirPath) {
+        if (dirPath == null) return;
+        int path_len = myPath.getText().toString().length();
+        if (path_len - tag_len < dirPath.length()) nowlevel++; // Go into
+        else if (path_len - tag_len > dirPath.length()) nowlevel--; // Go back
+        nowPath = dirPath;
+        item.clear();
+        path.clear();
+
+        f = new File(dirPath);
+
+        File[] files = f.listFiles();
+
+        if (files == null) files = new File[0];
+
+        for (int i = 0; i <= MAX_LIST_ITEMS; i++) isSelected[i] = View.GONE;
+        Selected_Count = 0;
+
+        if (!dirPath.equals(root)) {
+            item.add(new FileProperty("FOLDER", "", getString(R.string.ParentFolder), ""));
+            path.add(f.getParent());
+        }
+
+        for (File file : files) {
+            if ((ShowHiddenFiles || !file.isHidden()) && file.canRead()) {
+                boolean isDir = file.isDirectory();
+
+                path.add(file.getPath());
+                String icontype = isDir ? "FOLDER" : FileUtil.getExtension(file);
+                String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
+                item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
+                    .toString(), filesize));
             }
         }
 
-        if (path_len - tag_len == dirPath.length())
-            list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
-        myPath.setText(getString(R.string.Path) + " " + dirPath);
+        sortList();
+
+        final int psize = path.size();
+
+        if (!dirPath.equals(root)) {
+            item.set(0, new FileProperty("FOLDER", "../", getString(R.string.ParentFolder), ""));
+            path.set(0, f.getParent());
+        }
+
+        icon = new Drawable[psize];
+        internal_icon = new int[psize];
+
+        String mimeType, ico;
+        for (int i = 0; i < psize; i++) {
+            ico = item.get(i).getIcon();
+            if (ico.equals("FOLDER")) internal_icon[i] = Folder;
+            else {
+                mimeType = FileUtil.getMIME(ico);
+                if (ico.equals("zip") || ico.equals("7z") || ico.equals("rar") || ico.equals("tar"))
+                    internal_icon[i] = Compressed;
+                else if (mimeType == null) internal_icon[i] = Others;
+                else if (mimeType.startsWith("image")) internal_icon[i] = Image;
+                else if (mimeType.startsWith("audio")) internal_icon[i] = Audio;
+                else if (ico.equals("avi") || ico.equals("wmv") || ico.equals("mkv") || ico.equals("mp4"))
+                    internal_icon[i] = Video;
+                else if (!ico.equals("apk")) internal_icon[i] = Others;
+                else if (ico.equals("apk")) internal_icon[i] = Apk;
+            }
+        }
+
+        normalAdapter = new FileAdapter(item);
+        if (path_len - tag_len <= dirPath.length()) // Go Into
+        {
+            list_state_index[nowlevel] = list.getFirstVisiblePosition();
+            list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
+        }
+        else if (path_len - tag_len > dirPath.length()) goBack = true;
 
         if (mActionMode != null) mActionMode.finish();
     }
@@ -978,6 +1014,9 @@ public class MainActivity extends SherlockActivity {
 
     @Override
     public void onBackPressed() {
+        if (isRoot && rootAdapter.isScrolling) list.smoothScrollBy(0, 0);
+        if (!isRoot && normalAdapter.isScrolling) list.smoothScrollBy(0, 0);
+
         if (MenuLayout.isDrawerOpen(MenuList)) MenuLayout.closeDrawer(MenuList);
         else if (nowlevel > 0 && Selected_Count == 0 && path.size() > 0) LoadList(path.get(0));
         else if (nowlevel >= 0 && (Selected_Count > 0 || Clipboard_Count > 0)) {
@@ -1186,7 +1225,7 @@ public class MainActivity extends SherlockActivity {
                     if (!isRoot || (new File(clipboard.get(i)).canRead() && (new File(nowPath).canWrite()))) {
                         try {
                             boolean result = FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath));
-                            if (result == false) handler.sendEmptyMessage(-2);
+                            if (!result) handler.sendEmptyMessage(-2);
                             else FileUtil.DeleteFile(clipboard.get(i));
                             handler.sendEmptyMessage(prog);
                         } catch (IOException e) {
@@ -1673,8 +1712,7 @@ public class MainActivity extends SherlockActivity {
                     @Override
                     public void run() {
 
-                        ArrayList<SearchedFileProperty> arr = null;
-                        arr = Search(nowPath, sfilename, new ArrayList<SearchedFileProperty>());
+                        ArrayList<SearchedFileProperty> arr = Search(nowPath, sfilename, new ArrayList<SearchedFileProperty>());
 
                         Intent searchActivity = new Intent(MainActivity.this, SearchActivity.class);
                         searchActivity.putParcelableArrayListExtra("filelist", arr);
@@ -1704,13 +1742,13 @@ public class MainActivity extends SherlockActivity {
         if (file.equals(null)) return null;
         File list[] = file.listFiles();
         if (list == null) return null;
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].isDirectory() && (ShowHiddenFiles || !file.isHidden()))
-                Search(list[i].getAbsolutePath(), Name, arr);
+        for (File it : list) {
+            if (it.isDirectory() && (ShowHiddenFiles || !file.isHidden()))
+                Search(it.getAbsolutePath(), Name, arr);
             else {
-                if (list[i].getName().contains(Name))
-                    arr.add(new SearchedFileProperty(FileUtil.getExtension(list[i]), list[i].getName(), DateFormat.format(
-                        "yyyy.MM.dd kk:mm", list[i].lastModified()).toString(), "", list[i].getAbsolutePath()));
+                if (it.getName().contains(Name))
+                    arr.add(new SearchedFileProperty(FileUtil.getExtension(it), it.getName(), DateFormat.format(
+                        "yyyy.MM.dd kk:mm", it.lastModified()).toString(), "", it.getAbsolutePath()));
             }
         }
 
@@ -1736,28 +1774,62 @@ public class MainActivity extends SherlockActivity {
             if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
                 String t_Path = t_Path_arr[1].getAbsolutePath();
                 int point = t_Path.indexOf("Android");
-                extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
-                    point - 1);
+                extPath = (ContextCompat.getExternalFilesDirs(getApplicationContext(), ""))[1].getAbsolutePath().substring(0, point - 1);
             } else extPath = null;
         } else extPath = StorageList.getMicroSDCardDirectory();
 
         return extPath;
     }
 
+    public class LoadListTask extends AsyncTask<String, Void, Void> {
+        ProgressDialog pd;
+        String dirPath;
+
+        @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(MainActivity.this);
+            pd.setIndeterminate(false);
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage("Loading...");
+            pd.setCancelable(false);
+            pd.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            goBack = false;
+            dirPath = params[0];
+            if (isRoot) LoadRootList(dirPath);
+            else LoadNormalList(dirPath);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (pd.isShowing()) pd.dismiss();
+
+            if (isRoot) list.setAdapter(rootAdapter);
+            else list.setAdapter(normalAdapter);
+
+            if (goBack == true) list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
+
+            myPath.setText(getString(R.string.Path) + " " + dirPath);
+            super.onPostExecute(result);
+        }
+
+    }
     public class FileAdapter extends BaseAdapter {
 
         boolean isScrolling = false;
-        String filename, filedate, filesize, txtPerm;
-        String file, mimeType;
+        String filename, filedate, filesize;
         String s;
-        Drawable dr;
-        ViewHolder holder;
         private ArrayList<FileProperty> object;
 
         public FileAdapter(ArrayList<FileProperty> object) {
             super();
             this.object = object;
-            loader = new ApkLoader(getApplicationContext());
+            loader = new ApkLoader();
             s = nowPath.endsWith("/") ? nowPath : nowPath + "/";
         }
 
@@ -1854,16 +1926,14 @@ public class MainActivity extends SherlockActivity {
 
         boolean isScrolling = false;
         String filename, filedate, fileperm, filesize;
-        String file, mimeType;
         String s;
         ViewHolder holder;
-        Drawable dr;
         private ArrayList<RootFileProperty> object;
 
         public RootFileAdapter(ArrayList<RootFileProperty> object) {
             super();
             this.object = object;
-            loader = new ApkLoader(getApplicationContext());
+            loader = new ApkLoader();
             s = nowPath.endsWith("/") ? nowPath : nowPath + "/";
         }
 
@@ -2029,7 +2099,7 @@ public class MainActivity extends SherlockActivity {
         ExecutorService executorService;
         boolean isScrolling = false;
 
-        public ApkLoader(Context context) {
+        public ApkLoader() {
             executorService = Executors.newFixedThreadPool(5);
         }
 
@@ -2046,8 +2116,7 @@ public class MainActivity extends SherlockActivity {
 
         boolean imageViewReused(PhotoToLoad photoToLoad) {
             String tag = imageViews.get(photoToLoad.imageView);
-            if (tag == null || !tag.equals(photoToLoad.url)) return true;
-            return false;
+            return tag == null || !tag.equals(photoToLoad.url);
         }
 
         // Task for the queue
