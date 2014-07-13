@@ -2,7 +2,7 @@
 <manifest package="pe.kmh.fm"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="96"
-          android:versionName="3.12">
+          android:versionName="4.0">
 
     <uses-sdk
         android:minSdkVersion="8"

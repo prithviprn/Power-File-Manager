@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import pe.kmh.fm.prop.RootFile;
+import pe.kmh.fm.util.FileUtil;
 
 public class TextEditor extends SherlockActivity {
 
@@ -70,24 +71,24 @@ public class TextEditor extends SherlockActivity {
     }
 
     public void onFileSaveBtnPress(View v) {
+        RootFile to = new RootFile(filepath);
         if (isRoot) {
             RootTools.remount(new RootFile(filepath).getParent(), "rw");
-            Editable data = e.getText();
-            String p = data.toString();
+            to = new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp/" + new File(filepath).getName());
+        }
 
-            File f = new File(Environment.getExternalStorageDirectory().toString() + "/temp/TMP.tmp");
-            new File(Environment.getExternalStorageDirectory().toString() + "/temp/").mkdir();
-            try {
-                f.createNewFile();
-            } catch (IOException e1) {
-            }
+        try {
+            FileWriter fw = new FileWriter(to);
+            fw.write(e.getText().toString());
+            fw.close();
 
-            try {
-                FileWriter fw = new FileWriter(f);
-                fw.write(p);
-                fw.close();
-
-                RootTools.copyFile(f.getAbsolutePath(), filepath, false, true);
+            if (isRoot)
+            {
+                RootTools.remount(new RootFile(filepath).getParent(), "rw");
+                RootFile from = new RootFile(filepath);
+                from.delete();
+                RootFile fromDir = new RootFile(from.getParent());
+                FileUtil.RootFileCopy(to, fromDir);
                 String w = "busybox chmod " + perm + " " + filepath;
 
                 try {
@@ -101,16 +102,9 @@ public class TextEditor extends SherlockActivity {
                     RootTools.getShell(true).add(cmd).waitForFinish();
                 } catch (Exception e) {
                 }
-            } catch (IOException e1) {
             }
-        } else {
-            try {
-                FileWriter fw = new FileWriter(new File(filepath));
-                fw.write(e.getText().toString());
-                fw.close();
-            } catch (IOException e) {
-            }
-
+            new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp").delete();
+        } catch (IOException e) {
         }
 
         setResult(JOB_SAVED);
@@ -138,41 +132,27 @@ public class TextEditor extends SherlockActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
+            RootFile to = new RootFile(new RootFile(filepath).getParent());
             if (isRoot) {
-                try {
-                    String w = "busybox cat \"" + filepath + "\"";
-                    Command cmd = new Command(0, w) {
-
-                        @Override
-                        public void output(int id, String line) {
-                            if (line.indexOf("\n") > -1) {
-                                for (String s : line.split("\n"))
-                                    output(id, s);
-                            } else if (!outLines.toString().equals(""))
-                                outLines.append("\n" + line);
-                            else outLines.append(line);
-                        }
-                    };
-
-                    RootTools.getShell(true).add(cmd).waitForFinish();
-                } catch (Exception ex) {
-                    Log.e("Exception", ex.getMessage());
-                }
-            } else {
-                try {
-                    @SuppressWarnings("resource")
-                    Scanner s = new Scanner(new FileInputStream(filepath)).useDelimiter("\n");
-                    if (!s.hasNext()) return null;
-                    while (true) {
-                        outLines.append(s.next());
-                        if (s.hasNext()) outLines.append("\n");
-                        else break;
-                    }
-
-                    s.close();
-                } catch (FileNotFoundException e) {
-                }
+                new File(Environment.getExternalStorageDirectory().toString() + "/temp/").mkdirs();
+                to = new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp");
+                RootTools.remount(new RootFile(filepath).getParent(), "rw");
+                FileUtil.RootFileCopy(new RootFile(filepath), to);
             }
+
+            try {
+                @SuppressWarnings("resource")
+                Scanner s = new Scanner(new FileInputStream(to.getAbsolutePath() + "/" + new File(filepath).getName())).useDelimiter("\n");
+                if (!s.hasNext()) return null;
+                while (true) {
+                    outLines.append(s.next());
+                    if (s.hasNext()) outLines.append("\n");
+                    else break;
+                }
+
+                s.close();
+            } catch (FileNotFoundException e) {
+        }
             return null;
         }
 

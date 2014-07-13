@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -390,7 +391,6 @@ public class MainActivity extends SherlockActivity {
 
         if (appName.equals(pi.packageName) && !buildNo.equals(pi.versionName)) // Update
         {
-            // TODO Update Log Window
             AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
             aDialog.setTitle(getString(R.string.UpdateLogDialog));
             aDialog.setMessage(getString(R.string.UpdateLog));

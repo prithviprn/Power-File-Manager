@@ -97,6 +97,6 @@
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="UnknownError">Some error occured.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v3.11 Update\n- Fix some bugs\n- Removed some lags</string>
+    <string name="UpdateLog">v4.0 Update\n- Fix: many bugs\n- Improved speed of Text Editor, File Copy\n- Improved Stability</string>
 
 </resources>
