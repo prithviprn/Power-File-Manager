@@ -1,8 +1,13 @@
 package pe.kmh.fm.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.webkit.MimeTypeMap;
 
 import com.stericson.RootTools.RootTools;
+import com.stericson.RootTools.execution.Command;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +15,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
+import pe.kmh.fm.PFMApp;
 import pe.kmh.fm.prop.RootFile;
 
 public class FileUtil {
@@ -143,5 +150,72 @@ public class FileUtil {
         if (perm.charAt(8) == 'x') ret += 1;
 
         return ret;
+    }
+
+    public static String getExternalSdPath() {
+        Context appContext = PFMApp.getContext();
+        String extPath;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            File[] t_Path_arr = ContextCompat.getExternalFilesDirs(appContext, "");
+
+            if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
+                String t_Path = t_Path_arr[1].getAbsolutePath();
+                int point = t_Path.indexOf("Android");
+                extPath = (ContextCompat.getExternalFilesDirs(appContext, ""))[1].getAbsolutePath().substring(0, point - 1);
+            } else extPath = null;
+        } else extPath = StorageList.getMicroSDCardDirectory();
+
+        return extPath;
+    }
+
+    public static int Set_Auto_Perm(String nowPath, SharedPreferences sharedPrefs, int Clipboard_Count, ArrayList<String> clipboard) {
+        if (nowPath.startsWith("/system/app") || nowPath.startsWith("/system/etc") || nowPath.startsWith("/system/fonts")
+            || nowPath.startsWith("/system/framework") || nowPath.startsWith("/system/media") || nowPath.equals("/system")) {
+            String p = null;
+            if (nowPath.startsWith("/system/app"))
+                p = sharedPrefs.getString("SystemApp_APerm", "644");
+            if (nowPath.startsWith("/system/etc"))
+                p = sharedPrefs.getString("SystemEtc_APerm", "644");
+            if (nowPath.startsWith("/system/fonts"))
+                p = sharedPrefs.getString("SystemFonts_APerm", "644");
+            if (nowPath.startsWith("/system/framework"))
+                p = sharedPrefs.getString("SystemFramework_APerm", "644");
+            if (nowPath.startsWith("/system/media"))
+                p = sharedPrefs.getString("SystemMedia_APerm", "644");
+            if (nowPath.equals("/system")) p = sharedPrefs.getString("System_APerm", "644");
+            for (int i = 0; i < Clipboard_Count; i++) {
+                if (new File(nowPath + "/" + new File(clipboard.get(i)).getName()).isFile()) {
+                    final String w = "busybox chmod " + p + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
+                    Command cmd = new Command(0, w) {
+
+                        @Override
+                        public void output(int id, String line) {
+                        }
+                    };
+
+                    try {
+                        RootTools.getShell(true).add(cmd).waitForFinish();
+                    } catch (Exception e) {
+                        return -1;
+                    }
+                } else {
+                    final String w = "busybox chmod 755" + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
+                    Command cmd = new Command(0, w) {
+
+                        @Override
+                        public void output(int id, String line) {
+                        }
+                    };
+
+                    try {
+                        RootTools.getShell(true).add(cmd).waitForFinish();
+                    } catch (Exception e) {
+                        return -1;
+                    }
+                }
+            }
+            return 1;
+        }
+        return 0;
     }
 }

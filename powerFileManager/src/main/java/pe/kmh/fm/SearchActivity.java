@@ -236,22 +236,6 @@ public class SearchActivity extends SherlockListActivity {
         return icon;
     }
 
-    public String getExtension(File file) {
-        String name = file.getName();
-        int length = name.length() - 1;
-        if (length < 0) return "";
-        sb = new StringBuilder();
-        while (true) {
-            if (name.charAt(length) != '.') sb.append(name.charAt(length--));
-            else break;
-            if (length <= 0) return "";
-        }
-
-        StringBuilder temp = new StringBuilder();
-        if (sb != null) temp = sb.reverse();
-        return temp.toString();
-    }
-
     public String getMIME(String ext) {
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
     }

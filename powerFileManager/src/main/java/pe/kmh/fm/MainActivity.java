@@ -36,6 +36,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.AbsListView;
@@ -90,9 +91,11 @@ public class MainActivity extends SherlockActivity {
     static final int FOLDER_FIRST = 1; // Folder First
     static final int ABC_ORDER = 2; // ABCDE---abcde---xyz
     static final int ALPHABET_ORDER = 3; // AbcDeFgH--XyZ
+
     // Activity RequestCode
     static final int TEXT_EDITOR_REQUEST = 1;
     static final int JOB_SAVED = 1;
+
     // Icons Numbers
     static final int NEW_FOLDER = -1;
     static final int NEW_FILE = -2;
@@ -101,7 +104,13 @@ public class MainActivity extends SherlockActivity {
     static final int SEARCH = -5;
     static final int REBOOT = -6;
     static final int SETTING = -7;
+
     final int MAX_LIST_ITEMS = 2000;
+
+    static final int NORMAL = 0;
+    static final int GO_BACK = 1;
+    static final int REFRESHING = 2;
+
     int list_state_index[] = new int[MAX_LIST_ITEMS + 1];
     int list_state_top[] = new int[MAX_LIST_ITEMS + 1];
     int isSelected[] = new int[MAX_LIST_ITEMS + 1];
@@ -136,7 +145,7 @@ public class MainActivity extends SherlockActivity {
     int[] internal_icon;
     Command cmd;
     boolean isRoot = false;
-    boolean goBack;
+    int goBack;
 
     RootFileAdapter rootAdapter;
     FileAdapter normalAdapter;
@@ -330,7 +339,7 @@ public class MainActivity extends SherlockActivity {
         StartPathPref = sharedPrefs.getString("StartPath", "Automatic");
         if (StartPathPref.equals("Internal"))
             root = Environment.getExternalStorageDirectory().toString();
-        else if (StartPathPref.equals("External")) root = getExternalSdPath();
+        else if (StartPathPref.equals("External")) root = FileUtil.getExternalSdPath();
 
         findViewById(R.id.CopyBtn).setVisibility(View.GONE);
         findViewById(R.id.PasteBtn).setVisibility(View.GONE);
@@ -849,9 +858,9 @@ public class MainActivity extends SherlockActivity {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
             list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
         }
-        else if (path_len - tag_len > dirPath.length()) goBack = true;
+        else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
 
-        if (mActionMode != null) mActionMode.finish();
+        if (path_len - tag_len == dirPath.length()) goBack = REFRESHING;
     }
 
     public void LoadNormalList(String dirPath) {
@@ -925,9 +934,9 @@ public class MainActivity extends SherlockActivity {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
             list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
         }
-        else if (path_len - tag_len > dirPath.length()) goBack = true;
+        else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
 
-        if (mActionMode != null) mActionMode.finish();
+        if (path_len - tag_len == dirPath.length()) goBack = REFRESHING;
     }
 
     public void sortList() {
@@ -1085,7 +1094,10 @@ public class MainActivity extends SherlockActivity {
             public void handleMessage(Message msg) {
                 int mes = msg.what;
                 if (mes == -1) {
-                    Set_Auto_Perm();
+                    int result = FileUtil.Set_Auto_Perm(nowPath, sharedPrefs, Clipboard_Count, clipboard);
+                    if (result == 1) Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
+                    else if (result == -1) Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
+
                     LoadList(nowPath);
                 } else if (mes == -2) {
                     Toast.makeText(getApplicationContext(), getString(R.string.CannotCopy), Toast.LENGTH_SHORT).show();
@@ -1197,7 +1209,10 @@ public class MainActivity extends SherlockActivity {
             public void handleMessage(Message msg) {
                 int mes = msg.what;
                 if (mes == -1) {
-                    Set_Auto_Perm();
+                    int result = FileUtil.Set_Auto_Perm(nowPath, sharedPrefs, Clipboard_Count, clipboard);
+                    if (result == 1) Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
+                    else if (result == -1) Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
+
                     LoadList(nowPath);
                 } else if (mes == -2) {
                     Toast.makeText(getApplicationContext(), getString(R.string.CannotMove), Toast.LENGTH_SHORT).show();
@@ -1315,58 +1330,6 @@ public class MainActivity extends SherlockActivity {
         ad.show();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-
-    public void Set_Auto_Perm() {
-        if (nowPath.startsWith("/system/app") || nowPath.startsWith("/system/etc") || nowPath.startsWith("/system/fonts")
-            || nowPath.startsWith("/system/framework") || nowPath.startsWith("/system/media") || nowPath.equals("/system")) {
-            String p = null;
-            if (nowPath.startsWith("/system/app"))
-                p = sharedPrefs.getString("SystemApp_APerm", "644");
-            if (nowPath.startsWith("/system/etc"))
-                p = sharedPrefs.getString("SystemEtc_APerm", "644");
-            if (nowPath.startsWith("/system/fonts"))
-                p = sharedPrefs.getString("SystemFonts_APerm", "644");
-            if (nowPath.startsWith("/system/framework"))
-                p = sharedPrefs.getString("SystemFramework_APerm", "644");
-            if (nowPath.startsWith("/system/media"))
-                p = sharedPrefs.getString("SystemMedia_APerm", "644");
-            if (nowPath.equals("/system")) p = sharedPrefs.getString("System_APerm", "644");
-            for (int i = 0; i < Clipboard_Count; i++) {
-                if (new File(nowPath + "/" + new File(clipboard.get(i)).getName()).isFile()) {
-                    final String w = "busybox chmod " + p + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
-                    cmd = new Command(0, w) {
-
-                        @Override
-                        public void output(int id, String line) {
-                        }
-                    };
-
-                    try {
-                        RootTools.getShell(true).add(cmd).waitForFinish();
-                    } catch (Exception e) {
-                        Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-                    }
-                } else {
-                    final String w = "busybox chmod 755" + " \"" + nowPath + "/" + new File(clipboard.get(i)).getName() + "\"";
-                    cmd = new Command(0, w) {
-
-                        @Override
-                        public void output(int id, String line) {
-                        }
-                    };
-
-                    try {
-                        RootTools.getShell(true).add(cmd).waitForFinish();
-                    } catch (Exception e) {
-                        Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-                    }
-                }
-            }
-
-            Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
-        }
-
     }
 
     public void Refresh_Screen() {
@@ -1620,7 +1583,7 @@ public class MainActivity extends SherlockActivity {
         AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
         aDialog.setTitle(getString(R.string.ChangeStorage));
 
-        final String extPath = getExternalSdPath();
+        final String extPath = FileUtil.getExternalSdPath();
 
         if (extPath == null && !isRoot) {
             Crouton.makeText(MainActivity.this, R.string.NoExternalStorage, Style.CONFIRM).show();
@@ -1766,21 +1729,6 @@ public class MainActivity extends SherlockActivity {
         return icon;
     }
 
-    public String getExternalSdPath() {
-        String extPath;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            File[] t_Path_arr = ContextCompat.getExternalFilesDirs(getApplicationContext(), "");
-
-            if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
-                String t_Path = t_Path_arr[1].getAbsolutePath();
-                int point = t_Path.indexOf("Android");
-                extPath = (ContextCompat.getExternalFilesDirs(getApplicationContext(), ""))[1].getAbsolutePath().substring(0, point - 1);
-            } else extPath = null;
-        } else extPath = StorageList.getMicroSDCardDirectory();
-
-        return extPath;
-    }
-
     public class LoadListTask extends AsyncTask<String, Void, Void> {
         ProgressDialog pd;
         String dirPath;
@@ -1792,13 +1740,14 @@ public class MainActivity extends SherlockActivity {
             pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pd.setMessage("Loading...");
             pd.setCancelable(false);
+            pd.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             pd.show();
             super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            goBack = false;
+            goBack = NORMAL;
             dirPath = params[0];
             if (isRoot) LoadRootList(dirPath);
             else LoadNormalList(dirPath);
@@ -1812,7 +1761,13 @@ public class MainActivity extends SherlockActivity {
             if (isRoot) list.setAdapter(rootAdapter);
             else list.setAdapter(normalAdapter);
 
-            if (goBack == true) list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
+            if (goBack == GO_BACK)
+                list.setSelectionFromTop(list_state_index[nowlevel+1], list_state_top[nowlevel+1]);
+
+            if (goBack == REFRESHING)
+                list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
+
+            if (mActionMode != null) mActionMode.finish();
 
             myPath.setText(getString(R.string.Path) + " " + dirPath);
             super.onPostExecute(result);

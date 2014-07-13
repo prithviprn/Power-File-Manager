@@ -48,7 +48,6 @@ public class TextEditor extends SherlockActivity {
         if (appTheme.equals("Light")) setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
         else if (appTheme.equals("Dark")) setTheme(R.style.Theme_Sherlock);
         else {
-            appTheme = "Light";
             setTheme(R.style.Theme_Sherlock_Light_DarkActionBar);
             editor.putString("AppTheme", "Light");
             editor.commit();
