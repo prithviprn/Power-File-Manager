@@ -24,7 +24,6 @@ public class RootFile extends File {
     private String mPath;
     private Long mSize = null;
     private Command cmd;
-    private Command command;
 
     public RootFile(String path) {
         super(path);

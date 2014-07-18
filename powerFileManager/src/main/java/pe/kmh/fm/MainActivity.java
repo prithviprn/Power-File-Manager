@@ -147,9 +147,25 @@ public class MainActivity extends SherlockActivity {
     Command cmd;
     boolean isRoot = false;
     int goBack;
+    boolean loading = false;
 
     RootFileAdapter rootAdapter;
     FileAdapter normalAdapter;
+
+    boolean ShowHiddenFiles;
+    boolean UseImageLoader;
+    boolean AutoRootCheck;
+    String StartPathPref;
+    File f;
+    ApkLoader loader;
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
+    String[] MenuListItems;
+    DrawerLayout MenuLayout;
+    SherlockActionBarDrawerToggle MenuToggle;
+    ListView MenuList;
+    StringBuilder sb;
+    ActionMode mActionMode;
 
     ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -281,20 +297,6 @@ public class MainActivity extends SherlockActivity {
             if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
         }
     };
-    boolean ShowHiddenFiles;
-    boolean UseImageLoader;
-    boolean AutoRootCheck;
-    String StartPathPref;
-    File f;
-    ApkLoader loader;
-    SharedPreferences sharedPrefs;
-    SharedPreferences.Editor editor;
-    String[] MenuListItems;
-    DrawerLayout MenuLayout;
-    SherlockActionBarDrawerToggle MenuToggle;
-    ListView MenuList;
-    StringBuilder sb;
-    ActionMode mActionMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -755,10 +757,10 @@ public class MainActivity extends SherlockActivity {
                 } else {
                     if (isRoot) ((RootFileAdapter) list.getAdapter()).isScrolling = false;
                     else ((FileAdapter) list.getAdapter()).isScrolling = false;
-
-                    ((BaseAdapter) list.getAdapter()).notifyDataSetChanged();
                     loader.isScrolling = false;
                 }
+
+                ((BaseAdapter) list.getAdapter()).notifyDataSetChanged();
             }
 
             @Override
@@ -1023,14 +1025,13 @@ public class MainActivity extends SherlockActivity {
 
     @Override
     public void onBackPressed() {
-        if (isRoot && rootAdapter.isScrolling) list.smoothScrollBy(0, 0);
-        if (!isRoot && normalAdapter.isScrolling) list.smoothScrollBy(0, 0);
+        if (rootAdapter != null && isRoot && rootAdapter.isScrolling) list.smoothScrollBy(0, 0);
+        if (normalAdapter != null && !isRoot && normalAdapter.isScrolling) list.smoothScrollBy(0, 0);
 
         if (MenuLayout.isDrawerOpen(MenuList)) MenuLayout.closeDrawer(MenuList);
         else if (nowlevel > 0 && Selected_Count == 0 && path.size() > 0) LoadList(path.get(0));
         else if (nowlevel >= 0 && (Selected_Count > 0 || Clipboard_Count > 0)) {
-            for (int i = 0; i <= MAX_LIST_ITEMS; i++)
-                isSelected[i] = View.GONE;
+            for (int i = 0; i <= MAX_LIST_ITEMS; i++) isSelected[i] = View.GONE;
             Selected_Count = 0;
             Clipboard_Count = 0;
             if (showMultiSelectToast)
@@ -1735,6 +1736,7 @@ public class MainActivity extends SherlockActivity {
 
         @Override
         protected void onPreExecute() {
+            loading = true;
             pd = new ProgressDialog(MainActivity.this);
             pd.setIndeterminate(false);
             pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -1770,6 +1772,8 @@ public class MainActivity extends SherlockActivity {
             if (mActionMode != null) mActionMode.finish();
 
             myPath.setText(getString(R.string.Path) + " " + dirPath);
+
+            loading = false;
             super.onPostExecute(result);
         }
 
@@ -1806,6 +1810,9 @@ public class MainActivity extends SherlockActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
+
+            if (loading) return convertView;
+
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
                 convertView = inflater.inflate(R.layout.row, parent, false);
@@ -1910,6 +1917,9 @@ public class MainActivity extends SherlockActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
+
+            if (loading) return convertView;
+
             if (row == null) {
                 LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
                 row = inflater.inflate(R.layout.rootrow, parent, false);
