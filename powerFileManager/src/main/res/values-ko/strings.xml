@@ -95,6 +95,6 @@
     <string name="GotoPlayStore">플레이 스토어로 이동</string>
     <string name="UnknownError">알 수 없는 오류가 발생했습니다.</string>
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
-    <string name="UpdateLog">v4.0.2 업데이트\n- 일부 유저에게 발생하던 버그 수정\n- 안정성 향상\n- 안드로이드 2.2 프로요 지원 종료</string>
+    <string name="UpdateLog">v4.0.3 업데이트\n- 일부 유저에게 발생하던 버그 수정\n- 안정성 향상\n- 안드로이드 2.2 프로요 지원 종료</string>
 
 </resources>

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     package="pe.kmh.fm"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="98"
-    android:versionName="4.0.2">
-
-    <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="19"/>
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <permission android:name="android.permission.INSTALL_PACKAGES"/>
 

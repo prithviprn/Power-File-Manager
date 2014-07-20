@@ -110,6 +110,8 @@ public class MainActivity extends SherlockActivity {
     int isSelected[] = new int[MAX_LIST_ITEMS + 1];
     ArrayList<FileProperty> item = null;
     ArrayList<RootFileProperty> rootitem = null;
+    ArrayList<FileProperty> newitem = null;
+    ArrayList<RootFileProperty> newrootitem = null;
     ArrayList<String> path = null;
     Drawable[] icon;
     ArrayList<String> clipboard = new ArrayList<String>();
@@ -319,6 +321,10 @@ public class MainActivity extends SherlockActivity {
 
         if (!isRoot) item = new ArrayList<FileProperty>();
         else rootitem = new ArrayList<RootFileProperty>();
+
+        if (!isRoot) newitem = new ArrayList<FileProperty>();
+        else newrootitem = new ArrayList<RootFileProperty>();
+        
         path = new ArrayList<String>();
 
         if (isRoot) setContentView(R.layout.root_mode);
@@ -773,7 +779,7 @@ public class MainActivity extends SherlockActivity {
         if (path_len - tag_len < dirPath.length()) nowlevel++; // Go into
         else if (path_len - tag_len > dirPath.length()) nowlevel--; // Go back
         nowPath = dirPath;
-        rootitem.clear();
+        newrootitem.clear();
         path.clear();
 
         f = new RootFile(dirPath);
@@ -791,7 +797,7 @@ public class MainActivity extends SherlockActivity {
         Selected_Count = 0;
 
         if (!dirPath.equals(root)) {
-            rootitem.add(new RootFileProperty("FOLDER", "", getString(R.string.ParentFolder), "", ""));
+            newrootitem.add(new RootFileProperty("FOLDER", "", getString(R.string.ParentFolder), "", ""));
             path.add(f.getParent());
         }
 
@@ -809,10 +815,10 @@ public class MainActivity extends SherlockActivity {
                     filesize = isDir ? "" : FileUtil.formatFileSize(filesizes[i]);
 
                 if (fileperms == null || fileperms.length <= i)
-                    rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
+                    newrootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat
                         .format("yyyy.MM.dd kk:mm", file.lastModified()).toString(), filesize, ""));
                 else
-                    rootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
+                    newrootitem.add(new RootFileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm",
                         file.lastModified()).toString(), filesize, fileperms[i]));
             }
         }
@@ -822,7 +828,7 @@ public class MainActivity extends SherlockActivity {
         final int psize = path.size();
 
         if (!dirPath.equals(root)) {
-            rootitem.set(0, new RootFileProperty("FOLDER", "../", getString(R.string.ParentFolder), "", ""));
+            newrootitem.set(0, new RootFileProperty("FOLDER", "../", getString(R.string.ParentFolder), "", ""));
             path.set(0, f.getParent());
         }
 
@@ -831,7 +837,7 @@ public class MainActivity extends SherlockActivity {
 
         String mimeType, ico;
         for (int i = 0; i < psize; i++) {
-            ico = rootitem.get(i).getIcon();
+            ico = newrootitem.get(i).getIcon();
             if (ico.equals("FOLDER")) internal_icon[i] = Folder;
             else {
                 mimeType = FileUtil.getMIME(ico);
@@ -847,8 +853,6 @@ public class MainActivity extends SherlockActivity {
             }
         }
 
-
-        rootAdapter = new RootFileAdapter(rootitem);
         if (path_len - tag_len <= dirPath.length()) // Go Into
         {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
@@ -864,7 +868,7 @@ public class MainActivity extends SherlockActivity {
         if (path_len - tag_len < dirPath.length()) nowlevel++; // Go into
         else if (path_len - tag_len > dirPath.length()) nowlevel--; // Go back
         nowPath = dirPath;
-        item.clear();
+        newitem.clear();
         path.clear();
 
         f = new File(dirPath);
@@ -880,7 +884,7 @@ public class MainActivity extends SherlockActivity {
         Selected_Count = 0;
 
         if (!dirPath.equals(root)) {
-            item.add(new FileProperty("FOLDER", "", getString(R.string.ParentFolder), ""));
+            newitem.add(new FileProperty("FOLDER", "", getString(R.string.ParentFolder), ""));
             path.add(f.getParent());
         }
 
@@ -891,7 +895,7 @@ public class MainActivity extends SherlockActivity {
                 path.add(file.getPath());
                 String icontype = isDir ? "FOLDER" : FileUtil.getExtension(file);
                 String filesize = isDir ? "" : FileUtil.formatFileSize(file.length());
-                item.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
+                newitem.add(new FileProperty(icontype, file.getName(), DateFormat.format("yyyy.MM.dd kk:mm", file.lastModified())
                     .toString(), filesize));
             }
         }
@@ -901,7 +905,7 @@ public class MainActivity extends SherlockActivity {
         final int psize = path.size();
 
         if (!dirPath.equals(root)) {
-            item.set(0, new FileProperty("FOLDER", "../", getString(R.string.ParentFolder), ""));
+            newitem.set(0, new FileProperty("FOLDER", "../", getString(R.string.ParentFolder), ""));
             path.set(0, f.getParent());
         }
 
@@ -910,7 +914,7 @@ public class MainActivity extends SherlockActivity {
 
         String mimeType, ico;
         for (int i = 0; i < psize; i++) {
-            ico = item.get(i).getIcon();
+            ico = newitem.get(i).getIcon();
             if (ico.equals("FOLDER")) internal_icon[i] = Folder;
             else {
                 mimeType = FileUtil.getMIME(ico);
@@ -926,7 +930,6 @@ public class MainActivity extends SherlockActivity {
             }
         }
 
-        normalAdapter = new FileAdapter(item);
         if (path_len - tag_len <= dirPath.length()) // Go Into
         {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
@@ -949,7 +952,7 @@ public class MainActivity extends SherlockActivity {
                 }
             };
 
-            Collections.sort(item, sort);
+            Collections.sort(newitem, sort);
             Collections.sort(path);
         }
 
@@ -971,10 +974,10 @@ public class MainActivity extends SherlockActivity {
             };
 
             if (isRoot) {
-                Collections.sort(rootitem, sort_items);
+                Collections.sort(newrootitem, sort_items);
                 Collections.sort(path, sort_strs);
             } else {
-                Collections.sort(item, sort_items);
+                Collections.sort(newitem, sort_items);
                 Collections.sort(path, sort_strs);
             }
         }
@@ -984,22 +987,22 @@ public class MainActivity extends SherlockActivity {
             ArrayList<Integer> Files = new ArrayList<Integer>();
 
             for (int i = 0; i < psize; i++) {
-                if (isRoot && rootitem.get(i).getIcon().equals("FOLDER")) Folders.add(i);   // Root
-                else if (!isRoot && item.get(i).getIcon().equals("FOLDER")) Folders.add(i); // Not root
+                if (isRoot && newrootitem.get(i).getIcon().equals("FOLDER")) Folders.add(i);   // Root
+                else if (!isRoot && newitem.get(i).getIcon().equals("FOLDER")) Folders.add(i); // Not root
                 else Files.add(i);
             }
 
-            ArrayList<RootFileProperty> temp_rootitem = isRoot ? new ArrayList<RootFileProperty>(rootitem) : null;
-            ArrayList<FileProperty> temp_item = isRoot ? null : new ArrayList<FileProperty>(item);
+            ArrayList<RootFileProperty> temp_rootitem = isRoot ? new ArrayList<RootFileProperty>(newrootitem) : null;
+            ArrayList<FileProperty> temp_item = isRoot ? null : new ArrayList<FileProperty>(newitem);
 
             if (isRoot) {
-                rootitem.clear();
-                for (Integer it : Folders) rootitem.add(temp_rootitem.get(it));
-                for (Integer it : Files) rootitem.add(temp_rootitem.get(it));
+                newrootitem.clear();
+                for (Integer it : Folders) newrootitem.add(temp_rootitem.get(it));
+                for (Integer it : Files) newrootitem.add(temp_rootitem.get(it));
             } else {
-                item.clear();
-                for (Integer it : Folders) item.add(temp_item.get(it));
-                for (Integer it : Files) item.add(temp_item.get(it));
+                newitem.clear();
+                for (Integer it : Folders) newitem.add(temp_item.get(it));
+                for (Integer it : Files) newitem.add(temp_item.get(it));
             }
 
             ArrayList<String> temp_path = new ArrayList<String>(path);
@@ -1764,6 +1767,12 @@ public class MainActivity extends SherlockActivity {
         @Override
         protected void onPostExecute(Void result) {
             if (pd.isShowing()) pd.dismiss();
+
+            if (isRoot) { rootitem.clear(); rootitem.addAll(newrootitem); }
+            else { item.clear(); item.addAll(newitem); }
+
+            if (isRoot) rootAdapter = new RootFileAdapter(rootitem);
+            else normalAdapter = new FileAdapter(item);
 
             if (isRoot) list.setAdapter(rootAdapter);
             else list.setAdapter(normalAdapter);

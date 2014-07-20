@@ -95,6 +95,6 @@
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="UnknownError">Some error occured.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v4.0.2 Update\n- Fix: bugs for some users\n- Improved Stability\n-Removed support for Android 2.2 Froyo</string>
+    <string name="UpdateLog">v4.0.3 Update\n- Fix: bugs for some users\n- Improved Stability\n-Removed support for Android 2.2 Froyo</string>
 
 </resources>
