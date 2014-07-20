@@ -1,7 +1,8 @@
-<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
-                                        xmlns:android="http://schemas.android.com/apk/res/android"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -90,7 +91,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#FFF"
-        android:choiceMode="singleChoice"
-        android:dividerHeight="1dp"/>
+        android:choiceMode="singleChoice"/>
 
 </android.support.v4.widget.DrawerLayout>

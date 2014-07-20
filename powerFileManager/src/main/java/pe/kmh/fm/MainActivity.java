@@ -22,14 +22,11 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -84,7 +81,6 @@ import pe.kmh.fm.prop.RootFile;
 import pe.kmh.fm.prop.RootFileProperty;
 import pe.kmh.fm.prop.SearchedFileProperty;
 import pe.kmh.fm.util.FileUtil;
-import pe.kmh.fm.util.StorageList;
 import pe.kmh.fm.util.ZipUtil;
 
 public class MainActivity extends SherlockActivity {
@@ -105,13 +101,10 @@ public class MainActivity extends SherlockActivity {
     static final int SEARCH = -5;
     static final int REBOOT = -6;
     static final int SETTING = -7;
-
-    final int MAX_LIST_ITEMS = 2000;
-
     static final int NORMAL = 0;
     static final int GO_BACK = 1;
     static final int REFRESHING = 2;
-
+    final int MAX_LIST_ITEMS = 2000;
     int list_state_index[] = new int[MAX_LIST_ITEMS + 1];
     int list_state_top[] = new int[MAX_LIST_ITEMS + 1];
     int isSelected[] = new int[MAX_LIST_ITEMS + 1];
@@ -148,10 +141,8 @@ public class MainActivity extends SherlockActivity {
     boolean isRoot = false;
     int goBack;
     boolean loading = false;
-
     RootFileAdapter rootAdapter;
     FileAdapter normalAdapter;
-
     boolean ShowHiddenFiles;
     boolean UseImageLoader;
     boolean AutoRootCheck;
@@ -527,8 +518,8 @@ public class MainActivity extends SherlockActivity {
                 mDrawerHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (itemId == NEW_FOLDER)  MakeNewFolder();
-                        else if (itemId == NEW_FILE)  MakeNewFile();
+                        if (itemId == NEW_FOLDER) MakeNewFolder();
+                        else if (itemId == NEW_FILE) MakeNewFile();
                         else if (itemId == CHANGE_STORAGE) ChangeStorage();
                         else if (itemId == REFRESH) LoadList(nowPath);
                         else if (itemId == SEARCH) InitializeSearch();
@@ -791,7 +782,10 @@ public class MainActivity extends SherlockActivity {
         String[] fileperms = ((RootFile) f).listPerms();
         Integer[] filesizes = ((RootFile) f).listSizes();
 
-        if (files == null) files = new File[0];
+        if (files == null) {
+            showCrouton(R.string.UnknownError, Style.ALERT);
+            files = new File[0];
+        }
 
         for (int i = 0; i <= MAX_LIST_ITEMS; i++) isSelected[i] = View.GONE;
         Selected_Count = 0;
@@ -859,8 +853,7 @@ public class MainActivity extends SherlockActivity {
         {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
             list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
-        }
-        else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
+        } else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
 
         if (path_len - tag_len == dirPath.length()) goBack = REFRESHING;
     }
@@ -878,7 +871,10 @@ public class MainActivity extends SherlockActivity {
 
         File[] files = f.listFiles();
 
-        if (files == null) files = new File[0];
+        if (files == null) {
+            showCrouton(R.string.UnknownError, Style.ALERT);
+            files = new File[0];
+        }
 
         for (int i = 0; i <= MAX_LIST_ITEMS; i++) isSelected[i] = View.GONE;
         Selected_Count = 0;
@@ -935,8 +931,7 @@ public class MainActivity extends SherlockActivity {
         {
             list_state_index[nowlevel] = list.getFirstVisiblePosition();
             list_state_top[nowlevel] = list.getChildAt(0) == null ? 0 : list.getChildAt(0).getTop();
-        }
-        else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
+        } else if (path_len - tag_len > dirPath.length()) goBack = GO_BACK;
 
         if (path_len - tag_len == dirPath.length()) goBack = REFRESHING;
     }
@@ -1590,11 +1585,8 @@ public class MainActivity extends SherlockActivity {
             Crouton.makeText(MainActivity.this, R.string.NoExternalStorage, Style.CONFIRM).show();
             return;
         }
-        if (!(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD))
-            Crouton.makeText(MainActivity.this, R.string.ShownDataCanIncorrect,
-                Style.INFO).show();
-        else
-            Crouton.makeText(MainActivity.this, R.string.CannotGetStorageDataOnFroyo, Style.ALERT).show();
+
+        Crouton.makeText(MainActivity.this, R.string.ShownDataCanIncorrect, Style.INFO).show();
 
         String[] items = isRoot && extPath != null ? new String[3] : new String[2];
 
@@ -1730,6 +1722,19 @@ public class MainActivity extends SherlockActivity {
         return icon;
     }
 
+    public void showCrouton(final int msgId, final Style style) {
+        showCrouton(getString(msgId), style);
+    }
+
+    public void showCrouton(final String msg, final Style style) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Crouton.makeText(MainActivity.this, msg, style);
+            }
+        });
+    }
+
     public class LoadListTask extends AsyncTask<String, Void, Void> {
         ProgressDialog pd;
         String dirPath;
@@ -1763,8 +1768,11 @@ public class MainActivity extends SherlockActivity {
             if (isRoot) list.setAdapter(rootAdapter);
             else list.setAdapter(normalAdapter);
 
+            if (isRoot) rootAdapter.notifyDataSetChanged();
+            else normalAdapter.notifyDataSetChanged();
+
             if (goBack == GO_BACK)
-                list.setSelectionFromTop(list_state_index[nowlevel+1], list_state_top[nowlevel+1]);
+                list.setSelectionFromTop(list_state_index[nowlevel + 1], list_state_top[nowlevel + 1]);
 
             if (goBack == REFRESHING)
                 list.setSelectionFromTop(list_state_index[nowlevel], list_state_top[nowlevel]);
@@ -1778,6 +1786,7 @@ public class MainActivity extends SherlockActivity {
         }
 
     }
+
     public class FileAdapter extends BaseAdapter {
 
         boolean isScrolling = false;

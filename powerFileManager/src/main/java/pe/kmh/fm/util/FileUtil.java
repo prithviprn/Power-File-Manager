@@ -154,7 +154,7 @@ public class FileUtil {
             if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
                 String t_Path = t_Path_arr[1].getAbsolutePath();
                 int point = t_Path.indexOf("Android");
-                extPath = (ContextCompat.getExternalFilesDirs(appContext, ""))[1].getAbsolutePath().substring(0, point - 1);
+                extPath = t_Path.substring(0, point - 1);
             } else extPath = null;
         } else extPath = StorageList.getMicroSDCardDirectory();
 

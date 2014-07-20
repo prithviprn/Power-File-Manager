@@ -8,8 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -82,8 +80,7 @@ public class TextEditor extends SherlockActivity {
             fw.write(e.getText().toString());
             fw.close();
 
-            if (isRoot)
-            {
+            if (isRoot) {
                 RootTools.remount(new RootFile(filepath).getParent(), "rw");
                 RootFile from = new RootFile(filepath);
                 from.delete();
@@ -152,7 +149,7 @@ public class TextEditor extends SherlockActivity {
 
                 s.close();
             } catch (FileNotFoundException e) {
-        }
+            }
             return null;
         }
 

@@ -1,7 +1,11 @@
 package pe.kmh.fm;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
@@ -29,7 +33,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
     SharedPreferences sharedPrefs;
     OnSharedPreferenceChangeListener ospcl;
-
+    boolean isChanged = false;
     @SuppressLint("InlinedApi")
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle savedInstanceState) {
@@ -67,8 +71,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
             if (t_Path_arr.length > 1 && t_Path_arr[1] != null) {
                 String t_Path = t_Path_arr[1].getAbsolutePath();
                 int point = t_Path.indexOf("Android");
-                extPath = ((File[]) (ContextCompat.getExternalFilesDirs(getApplicationContext(), "")))[1].getAbsolutePath().substring(0,
-                    point - 1);
+                extPath = (t_Path.substring(0, point - 1));
             } else extPath = null;
         } else extPath = StorageList.getMicroSDCardDirectory();
 
@@ -85,6 +88,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 Refresh_Screen();
+                isChanged = true;
             }
         };
         Refresh_Screen();
@@ -178,6 +182,15 @@ public class SettingsActivity extends SherlockPreferenceActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Crouton.cancelAllCroutons();
+        if (isChanged) {
+            Context mContext = getApplicationContext();
+            Intent mStartActivity = new Intent(mContext, MainActivity.class);
+            int mPendingIntentId = 123456;
+            PendingIntent mPendingIntent = PendingIntent.getActivity(mContext, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+            System.exit(0);
+            Crouton.cancelAllCroutons();
+        }
     }
 }

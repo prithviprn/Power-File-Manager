@@ -84,7 +84,7 @@ public class Configuration {
      */
     public static class Builder {
         private int inAnimationResId = 0;
-        private int outAnimationResId = 0;        private int durationInMilliseconds = DURATION_SHORT;
+        private int outAnimationResId = 0;
 
         /**
          * Set the durationInMilliseconds option of the {@link Crouton}.
@@ -97,7 +97,7 @@ public class Configuration {
             this.durationInMilliseconds = duration;
 
             return this;
-        }
+        }        private int durationInMilliseconds = DURATION_SHORT;
 
         /**
          * The resource id for the in animation.

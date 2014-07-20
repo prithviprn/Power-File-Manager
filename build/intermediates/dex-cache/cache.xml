@@ -18,7 +18,7 @@
         jar="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\PowerFileManager\sherlockNavigationDrawer\unspecified\classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="e5f2a6807a5a7dc08e8bd1ca7f64cfbd146b303c"/>
+        sha1="4be554f78b50d2bbfc15c41044786086ab78502b"/>
     <item
         dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\crashlytics-11ac99961e4c005dd5a0919fa11bdee30a0b9d12.jar"
         jar="D:\App\Android\PowerFileManager\powerFileManager\libs\crashlytics.jar"

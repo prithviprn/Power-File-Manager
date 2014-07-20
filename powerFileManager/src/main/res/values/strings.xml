@@ -40,7 +40,6 @@
     <string name="NoExternalStorage">No External Memory</string>
     <string name="Unknown">Unknown</string>
     <string name="ShownDataCanIncorrect">Now Shown Internal/External Memory Data is just guess, So it can be incorrect data.</string>
-    <string name="CannotGetStorageDataOnFroyo">Cannot get Internal/External Memory Data on Android 2.2 Froyo.</string>
     <string name="Search">Search</string>
     <string name="Search_Hint">Name of Searching File</string>
     <string name="Searching">Searching..</string>
@@ -69,7 +68,7 @@
     <string name="CrashInfoSummary">Send crash information automatically. (no privacy information included)</string>
     <string name="BusyboxRequired">This app requires Busybox. After Install, restart App.</string>
     <string name="SaveFile">Save</string>
-    <string name="RestartApp">Restarting App is Required after Changed Settings!</string>
+    <string name="RestartApp">After changing settings the app will restart automatically.</string>
     <string name="AskOpenWithTextEditor">Open this file with Text Editor?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
@@ -79,7 +78,6 @@
     <string name="Opening">Opening File..</string>
     <string name="ToUnZip">Destination to Unzip</string>
     <string name="Share">Share</string>
-    <string name="Item_info">Details</string>
     <string name="Reboot">Reboot</string>
     <string name="RebootConfirm">REBOOT: Are you sure?</string>
     <string name="SomeDevicesNotOK">In some devices, may not work.</string>
@@ -97,6 +95,6 @@
     <string name="GotoPlayStore">Go to Play Store</string>
     <string name="UnknownError">Some error occured.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
-    <string name="UpdateLog">v4.0.1 Update\n- Fix: many bugs\n- Improved Stability</string>
+    <string name="UpdateLog">v4.0.2 Update\n- Fix: bugs for some users\n- Improved Stability\n-Removed support for Android 2.2 Froyo</string>
 
 </resources>

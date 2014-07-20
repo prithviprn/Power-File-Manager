@@ -17,14 +17,14 @@
 ** limitations under the License.
 */
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@android:id/text1"
-          android:textAppearance="?attr/dropDownHintAppearance"
-          android:singleLine="true"
-          android:layout_marginLeft="3dip"
-          android:layout_marginTop="3dip"
-          android:layout_marginRight="3dip"
-          android:layout_marginBottom="3dip"
+<TextView android:id="@android:id/text1"
+          xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
-<!-- From: file:/Users/jw/dev/ActionBarSherlock/target/checkout/actionbarsherlock/res/layout/abs__simple_dropdown_hint.xml -->
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="3dip"
+          android:layout_marginLeft="3dip"
+          android:layout_marginRight="3dip"
+          android:layout_marginTop="3dip"
+          android:singleLine="true"
+          android:textAppearance="?attr/dropDownHintAppearance"/>
+    <!-- From: file:/Users/jw/dev/ActionBarSherlock/target/checkout/actionbarsherlock/res/layout/abs__simple_dropdown_hint.xml -->
