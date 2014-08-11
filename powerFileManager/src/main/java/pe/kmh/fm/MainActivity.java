@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StatFs;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.DateFormat;
@@ -104,7 +105,7 @@ public class MainActivity extends SherlockActivity {
     static final int NORMAL = 0;
     static final int GO_BACK = 1;
     static final int REFRESHING = 2;
-    final int MAX_LIST_ITEMS = 2000;
+    final int MAX_LIST_ITEMS = 30000;
     int list_state_index[] = new int[MAX_LIST_ITEMS + 1];
     int list_state_top[] = new int[MAX_LIST_ITEMS + 1];
     int isSelected[] = new int[MAX_LIST_ITEMS + 1];
@@ -118,7 +119,7 @@ public class MainActivity extends SherlockActivity {
     int Clipboard_Count = 0;
     ListView list;
     String root;
-    TextView myPath;
+    TextView myPath, freespacerate;
     int tag_len;
     int nowlevel = -1;
     int Selected_Count = 0;
@@ -141,25 +142,6 @@ public class MainActivity extends SherlockActivity {
     int[] internal_icon;
     Command cmd;
     boolean isRoot = false;
-    int goBack;
-    boolean loading = false;
-    RootFileAdapter rootAdapter;
-    FileAdapter normalAdapter;
-    boolean ShowHiddenFiles;
-    boolean UseImageLoader;
-    boolean AutoRootCheck;
-    String StartPathPref;
-    File f;
-    ApkLoader loader;
-    SharedPreferences sharedPrefs;
-    SharedPreferences.Editor editor;
-    String[] MenuListItems;
-    DrawerLayout MenuLayout;
-    SherlockActionBarDrawerToggle MenuToggle;
-    ListView MenuList;
-    StringBuilder sb;
-    ActionMode mActionMode;
-
     ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         @Override
@@ -290,6 +272,24 @@ public class MainActivity extends SherlockActivity {
             if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
         }
     };
+    int goBack;
+    boolean loading = false;
+    RootFileAdapter rootAdapter;
+    FileAdapter normalAdapter;
+    boolean ShowHiddenFiles;
+    boolean UseImageLoader;
+    boolean AutoRootCheck;
+    String StartPathPref;
+    File f;
+    ApkLoader loader;
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
+    String[] MenuListItems;
+    DrawerLayout MenuLayout;
+    SherlockActionBarDrawerToggle MenuToggle;
+    ListView MenuList;
+    StringBuilder sb;
+    ActionMode mActionMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -324,7 +324,7 @@ public class MainActivity extends SherlockActivity {
 
         if (!isRoot) newitem = new ArrayList<FileProperty>();
         else newrootitem = new ArrayList<RootFileProperty>();
-        
+
         path = new ArrayList<String>();
 
         if (isRoot) setContentView(R.layout.root_mode);
@@ -333,6 +333,7 @@ public class MainActivity extends SherlockActivity {
         res = getResources();
 
         myPath = (TextView) findViewById(R.id.path);
+        freespacerate = (TextView) findViewById(R.id.freespacerate);
 
         root = isRoot ? "/" : Environment.getExternalStorageDirectory().toString();
 
@@ -592,6 +593,7 @@ public class MainActivity extends SherlockActivity {
             @SuppressWarnings("rawtypes")
             @Override
             public void onItemClick(AdapterView parent, View view, final int position, long id) {
+                if (loading) return;
                 if (Selected_Count > 0) // If now Selecting File/Dirs
                 {
                     SelectItem(parent, position);
@@ -1079,11 +1081,16 @@ public class MainActivity extends SherlockActivity {
     }
 
     public void onPasteBtnPress(View v) {
+        // Count files
+        int count = 0;
+        for (int i = 0; i < Clipboard_Count; i++)
+            count += isRoot ? FileUtil.countDirEntries_Root(clipboard.get(i)) : FileUtil.countDirEntries_noRoot(clipboard.get(i));
+
         final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setTitle(R.string.Copying);
         dialog.setMessage(getString(R.string.Wait));
-        dialog.setMax(Clipboard_Count);
+        dialog.setMax(count);
         dialog.setCancelable(false);
         dialog.show();
 
@@ -1099,10 +1106,10 @@ public class MainActivity extends SherlockActivity {
 
                     LoadList(nowPath);
                 } else if (mes == -2) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.CannotCopy), Toast.LENGTH_SHORT).show();
+                    Crouton.makeText(MainActivity.this, getString(R.string.CannotCopy), Style.ALERT).show();
                 } else {
-                    dialog.setProgress(mes);
-                    dialog.setMessage(clipboard.get(mes - 1));
+                    dialog.setProgress(dialog.getProgress() + 1);
+                    dialog.setMessage(msg.getData().getString("data"));
                 }
             }
         };
@@ -1118,9 +1125,8 @@ public class MainActivity extends SherlockActivity {
                             continue;
                         }
                         if (isRoot)
-                            FileUtil.RootFileCopy(new RootFile(clipboard.get(i)), new RootFile(nowPath));
-                        else FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath));
-                        handler.sendEmptyMessage(i + 1);
+                            FileUtil.RootFileCopy(new RootFile(clipboard.get(i)), new RootFile(nowPath), handler);
+                        else FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath), handler);
                     }
                 } catch (IOException e) {
                     Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
@@ -1161,7 +1167,6 @@ public class MainActivity extends SherlockActivity {
                     public void run() {
                         int i = 0;
                         while (true) {
-                            Log.d("PFM", path.get(i));
                             if (isSelected[i] == View.VISIBLE) {
                                 if (isRoot) new RootFile(path.get(i)).delete();
                                 else FileUtil.DeleteFile(path.get(i));
@@ -1195,10 +1200,9 @@ public class MainActivity extends SherlockActivity {
 
     public void onMoveBtnPress(View v) {
         final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setTitle(R.string.Moving);
         dialog.setMessage(getString(R.string.Wait));
-        dialog.setMax(Clipboard_Count);
         dialog.setCancelable(false);
         dialog.show();
 
@@ -1213,11 +1217,9 @@ public class MainActivity extends SherlockActivity {
                     else if (result == -1) Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
 
                     LoadList(nowPath);
+
                 } else if (mes == -2) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.CannotMove), Toast.LENGTH_SHORT).show();
-                } else {
-                    dialog.setProgress(mes);
-                    dialog.setMessage(clipboard.get(mes - 1));
+                    Crouton.makeText(MainActivity.this, getString(R.string.CannotMove), Style.ALERT).show();
                 }
             }
         };
@@ -1234,24 +1236,16 @@ public class MainActivity extends SherlockActivity {
                         continue;
                     }
 
-                    final int prog = i + 1;
-
                     if (!isRoot || (new File(clipboard.get(i)).canRead() && (new File(nowPath).canWrite()))) {
-                        try {
-                            boolean result = FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath));
-                            if (!result) handler.sendEmptyMessage(-2);
-                            else FileUtil.DeleteFile(clipboard.get(i));
-                            handler.sendEmptyMessage(prog);
-                        } catch (IOException e) {
-                            Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
-                        }
+                        File from = new File(clipboard.get(i));
+                        File to = new File(nowPath + "/" + from.getName());
+                        from.renameTo(to);
                     } else {
                         final String w = "busybox mv \"" + clipboard.get(i) + "\" \"" + nowPath + "\"";
                         cmd = new Command(0, w) {
 
                             @Override
                             public void output(int id, String line) {
-                                handler.sendEmptyMessage(prog);
                             }
                         };
 
@@ -1741,6 +1735,8 @@ public class MainActivity extends SherlockActivity {
     public class LoadListTask extends AsyncTask<String, Void, Void> {
         ProgressDialog pd;
         String dirPath;
+        String freespace, allspace, ratefree;
+        boolean freespaceflag = false;
 
         @Override
         protected void onPreExecute() {
@@ -1757,6 +1753,20 @@ public class MainActivity extends SherlockActivity {
 
         @Override
         protected Void doInBackground(String... params) {
+            try {
+                StatFs stat = new StatFs(params[0]);
+                long bytesAvailable = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
+                freespace = FileUtil.formatFileSize(bytesAvailable);
+
+                long bytesAll = (long) stat.getBlockSize() * (long) stat.getBlockCount();
+                allspace = FileUtil.formatFileSize(bytesAll);
+
+                float rate = (float) bytesAvailable / (float) bytesAll * 100.0f;
+                ratefree = " [ " + String.format("%.2f", rate) + "% ]";
+                if (bytesAll != 0) freespaceflag = true;
+            } catch (Exception e) {
+            }
+
             goBack = NORMAL;
             dirPath = params[0];
             if (isRoot) LoadRootList(dirPath);
@@ -1768,8 +1778,13 @@ public class MainActivity extends SherlockActivity {
         protected void onPostExecute(Void result) {
             if (pd.isShowing()) pd.dismiss();
 
-            if (isRoot) { rootitem.clear(); rootitem.addAll(newrootitem); }
-            else { item.clear(); item.addAll(newitem); }
+            if (isRoot) {
+                rootitem.clear();
+                rootitem.addAll(newrootitem);
+            } else {
+                item.clear();
+                item.addAll(newitem);
+            }
 
             if (isRoot) rootAdapter = new RootFileAdapter(rootitem);
             else normalAdapter = new FileAdapter(item);
@@ -1788,7 +1803,12 @@ public class MainActivity extends SherlockActivity {
 
             if (mActionMode != null) mActionMode.finish();
 
+            String freesp = freespaceflag ? getString(R.string.Freespace) + " " + freespace + " / " + allspace + ratefree : "";
             myPath.setText(getString(R.string.Path) + " " + dirPath);
+            if (freespaceflag) {
+                freespacerate.setVisibility(View.VISIBLE);
+                freespacerate.setText(freesp);
+            } else freespacerate.setVisibility(View.GONE);
 
             loading = false;
             super.onPostExecute(result);

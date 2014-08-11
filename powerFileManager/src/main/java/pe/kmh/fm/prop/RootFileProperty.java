@@ -26,10 +26,6 @@ public class RootFileProperty extends FileProperty {
         return intPerm;
     }
 
-    public void setIntPerm(String _intperm) {
-        intPerm = _intperm;
-    }
-
     public String calcPerm(String perm) {
         if (perm.length() < 9) return String.format("%s [ERR]", FilePerm);
         int ret = 0;

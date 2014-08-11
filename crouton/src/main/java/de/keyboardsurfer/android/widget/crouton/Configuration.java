@@ -97,7 +97,7 @@ public class Configuration {
             this.durationInMilliseconds = duration;
 
             return this;
-        }        private int durationInMilliseconds = DURATION_SHORT;
+        }
 
         /**
          * The resource id for the in animation.
@@ -110,7 +110,7 @@ public class Configuration {
             this.inAnimationResId = inAnimationResId;
 
             return this;
-        }
+        }        private int durationInMilliseconds = DURATION_SHORT;
 
         /**
          * The resource id for the out animation

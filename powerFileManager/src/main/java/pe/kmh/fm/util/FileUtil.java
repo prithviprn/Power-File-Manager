@@ -3,7 +3,11 @@ package pe.kmh.fm.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.stericson.RootTools.RootTools;
@@ -22,15 +26,28 @@ import pe.kmh.fm.prop.RootFile;
 
 public class FileUtil {
 
-    public static boolean NormalFileCopy(final File from, final File to) throws IOException {
+    static int file_count = 0;
+
+    public static void RootFileCopy(final RootFile from, final RootFile to) {
+        RootFileCopy(from, to, null);
+    }
+
+    public static boolean NormalFileCopy(final File from, final File to, Handler handler) throws IOException {
         if (from.getParent().equals(to.getAbsolutePath())) return false;
         if (from.isDirectory()) {
             File TargetFolder = new File(to, from.getName());
             if (!TargetFolder.exists()) TargetFolder.mkdirs();
             String[] children = from.list();
             for (int i = 0; i < children.length; i++)
-                NormalFileCopy(new File(from, children[i]), new File(TargetFolder.toString()));
+                NormalFileCopy(new File(from, children[i]), new File(TargetFolder.toString()), handler);
         } else {
+            if (handler != null) {
+                Message msg = new Message();
+                Bundle data = new Bundle();
+                data.putString("data", from.getName());
+                msg.setData(data);
+                handler.sendMessage(msg);
+            }
             String s = from.getName();
             File Target = makeFile(to, s);
             if (Target == null) return false;
@@ -53,26 +70,43 @@ public class FileUtil {
         return true;
     }
 
-    public static void RootFileCopy(final RootFile from, final RootFile to) {
+    public static void RootFileCopy(final RootFile from, final RootFile to, Handler handler) {
         RootTools.remount(to.getAbsolutePath(), "rw");
         final String from_path = "\"" + from.getAbsolutePath() + "\"";
         final String to_path = "\"" + to.getAbsolutePath() + "\"";
-        if (from.isFile()) RootTools.copyFile(from_path, to_path, false, true);
-        else if (from.isDirectory()) {
+        if (from.isFile()) {
+            RootTools.copyFile(from_path, to_path, false, true);
+            if (handler != null) {
+                Message msg = new Message();
+                Bundle data = new Bundle();
+                data.putString("data", from.getName());
+                msg.setData(data);
+                handler.sendMessage(msg);
+            }
+        } else if (from.isDirectory()) {
             RootFile files[] = from.listFiles();
             String dir = "\"" + to.getAbsolutePath()
                 + from.getAbsolutePath().substring(from.getAbsolutePath().lastIndexOf("/"), from.getAbsolutePath().length()) + "\"";
+            Log.d("PFM", "Dir = " + dir.substring(1, dir.length() - 1));
             int len = files.length;
 
-            new RootFile(dir.substring(1, dir.length() - 1)).mkdirs();
+            new RootFile(dir.substring(1, dir.length() - 1)).mkdir();
 
             for (int i = 0; i < len; i++) {
                 if ((new RootFile(from.getAbsolutePath() + "/" + files[i].getName())).isDirectory())
                     RootFileCopy(
-                        new RootFile(from.getAbsolutePath() + "/" + files[i].getName()), new RootFile(dir.substring(1, dir.length() - 1)));
+                        new RootFile(from.getAbsolutePath() + "/" + files[i].getName()), new RootFile(dir.substring(1, dir.length() - 1)), handler);
 
-                else
+                else {
+                    if (handler != null) {
+                        Message msg = new Message();
+                        Bundle data = new Bundle();
+                        data.putString("data", files[i].getName());
+                        msg.setData(data);
+                        handler.sendMessage(msg);
+                    }
                     RootTools.copyFile("\"" + from.getAbsolutePath() + "/" + files[i].getName() + "\"", dir, false, true);
+                }
             }
         }
     }
@@ -210,5 +244,60 @@ public class FileUtil {
             return 1;
         }
         return 0;
+    }
+
+    public static int countDirEntries_Root(String dir) {
+        // find . -type f | wc -l [Files]
+        // find . -type l | wc -l [Links]
+
+        if (!new File(dir).isDirectory()) return 1;
+        final String w1 = "cd " + dir + " && " + "find . -type f | wc -l";
+        Command cmd1 = new Command(0, w1) {
+
+            @Override
+            public void output(int id, String line) {
+                file_count += Integer.parseInt(line);
+            }
+        };
+
+        try {
+            RootTools.getShell(true).add(cmd1).waitForFinish();
+        } catch (Exception e) {
+            return -1;
+        }
+
+        final String w2 = "cd " + dir + " && " + "find . -type l | wc -l";
+        Command cmd2 = new Command(0, w2) {
+
+            @Override
+            public void output(int id, String line) {
+                file_count += Integer.parseInt(line);
+            }
+        };
+
+        try {
+            RootTools.getShell(true).add(cmd2).waitForFinish();
+        } catch (Exception e) {
+            return -1;
+        }
+
+        return file_count;
+    }
+
+    public static int countDirEntries_noRoot(String dirPath) {
+        File f = new File(dirPath);
+        if (!f.isDirectory()) return 1;
+        File[] files = f.listFiles();
+        int count = 0;
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (file.isDirectory()) {
+                    count += countDirEntries_noRoot(file.getAbsolutePath());
+                } else count++;
+            }
+        }
+
+        return count;
     }
 }

@@ -34,6 +34,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
     SharedPreferences sharedPrefs;
     OnSharedPreferenceChangeListener ospcl;
     boolean isChanged = false;
+
     @SuppressLint("InlinedApi")
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle savedInstanceState) {

@@ -76,12 +76,22 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textIsSelectable="false"/>
 
+            <TextView
+                android:id="@+id/freespacerate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/path"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textIsSelectable="false"/>
+
             <ListView
                 android:id="@+id/MainList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/BottomLayout"
-                android:layout_below="@id/path"/>
+                android:layout_below="@id/freespacerate"/>
         </RelativeLayout>
     </FrameLayout>
 
