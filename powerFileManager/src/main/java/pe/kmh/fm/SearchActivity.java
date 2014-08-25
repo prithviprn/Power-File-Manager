@@ -244,7 +244,7 @@ public class SearchActivity extends SherlockListActivity {
 
         boolean isScrolling;
         String fileicon, filename, filepath, filedate, filesize;
-        ApkLoader loader = new ApkLoader(getApplicationContext());
+        ApkLoader loader = new ApkLoader();
         private ArrayList<SearchedFileProperty> object;
 
         public FileAdapter(ArrayList<SearchedFileProperty> object) {
@@ -254,7 +254,7 @@ public class SearchActivity extends SherlockListActivity {
 
         @Override
         public int getCount() {
-            return object.size();
+            return object == null ? 0 : object.size();
         }
 
         @Override
@@ -327,7 +327,7 @@ public class SearchActivity extends SherlockListActivity {
         public Map<ImageView, String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
         ExecutorService executorService;
 
-        public ApkLoader(Context context) {
+        public ApkLoader() {
             executorService = Executors.newFixedThreadPool(5);
         }
 

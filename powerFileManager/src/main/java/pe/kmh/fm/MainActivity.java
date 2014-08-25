@@ -1832,7 +1832,7 @@ public class MainActivity extends SherlockActivity {
 
         @Override
         public int getCount() {
-            return object.size();
+            return object == null ? 0 : object.size();
         }
 
         @Override
@@ -1939,7 +1939,7 @@ public class MainActivity extends SherlockActivity {
 
         @Override
         public int getCount() {
-            return object.size();
+            return object == null ? 0 : object.size();
         }
 
         @Override
