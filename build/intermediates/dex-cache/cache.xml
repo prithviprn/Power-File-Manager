@@ -26,12 +26,6 @@
         revision="20.0.0"
         sha1="b8189e9eef2f07fae743e05d7fe7e69daebe98d1"/>
     <item
-        dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\RootTools-2.6-9983d97f4ab9504aba66612d6329104adaf61419.jar"
-        jar="D:\App\Android\PowerFileManager\powerFileManager\libs\RootTools-2.6.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e8205169fe8479771238b5b48e15e7d16e7cc56a"/>
-    <item
         dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\support-v4-19.1.0-a32d27fe7e65cdd34ee6d2ab86275761b654aa98.jar"
         jar="D:\App\Android_SDK\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
@@ -49,5 +43,11 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="af64527b748983a75de9c0756e9768b56b240a49"/>
+    <item
+        dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\RootTools-3.5-aadff4ffd97804ab1bfa075aecc0645457209574.jar"
+        jar="D:\App\Android\PowerFileManager\powerFileManager\libs\RootTools-3.5.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="16b2d49a7359c9ddbfcb1bc66f9c342c502e821b"/>
 
 </pre-dex-items>

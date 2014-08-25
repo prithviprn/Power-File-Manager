@@ -80,15 +80,27 @@ public class RootFile extends File {
             cmd = new Command(0, w) {
 
                 @Override
-                public void output(int id, String line) {
+                public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
                             output(id, s);
                     } else outLines.add(line);
                 }
+
+                @Override
+                public void commandTerminated(int i, String s) {
+
+                }
+
+                @Override
+                public void commandCompleted(int i, int i2) {
+
+                }
             };
 
-            RootTools.getShell(true).add(cmd).waitForFinish();
+            RootTools.getShell(true).add(cmd);
+            FileUtil.waitForFinish(cmd);
+
             for (String line : outLines) {
                 if (line.contains("failed") || line.contains("can't remove")) result = false;
             }
@@ -162,15 +174,26 @@ public class RootFile extends File {
             cmd = new Command(0, w) {
 
                 @Override
-                public void output(int id, String line) {
+                public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
                             output(id, s);
                     } else outLines.add(line);
                 }
+
+                @Override
+                public void commandTerminated(int i, String s) {
+
+                }
+
+                @Override
+                public void commandCompleted(int i, int i2) {
+
+                }
             };
 
-            RootTools.getShell(true).add(cmd).waitForFinish();
+            RootTools.getShell(true).add(cmd);
+            FileUtil.waitForFinish(cmd);
 
             for (String line : outLines) {
                 if (line.startsWith("total")) continue;
@@ -234,15 +257,27 @@ public class RootFile extends File {
             cmd = new Command(0, w) {
 
                 @Override
-                public void output(int id, String line) {
+                public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
                             output(id, s);
                     } else outLines.add(line);
                 }
+
+                @Override
+                public void commandTerminated(int i, String s) {
+
+                }
+
+                @Override
+                public void commandCompleted(int i, int i2) {
+
+                }
             };
 
-            RootTools.getShell(true).add(cmd).waitForFinish();
+            RootTools.getShell(true).add(cmd);
+            FileUtil.waitForFinish(cmd);
+
             for (String line : outLines) {
                 if (line.contains("failed") || line.contains("can't create")) result = false;
             }
@@ -273,15 +308,27 @@ public class RootFile extends File {
             cmd = new Command(0, w) {
 
                 @Override
-                public void output(int id, String line) {
+                public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
                             output(id, s);
                     } else outLines.add(line);
                 }
+
+                @Override
+                public void commandTerminated(int i, String s) {
+
+                }
+
+                @Override
+                public void commandCompleted(int i, int i2) {
+
+                }
             };
 
-            RootTools.getShell(true).add(cmd).waitForFinish();
+            RootTools.getShell(true).add(cmd);
+            FileUtil.waitForFinish(cmd);
+
             for (String line : outLines) {
                 if (line.contains("failed") || line.contains("can't create")) result = false;
             }
@@ -311,15 +358,27 @@ public class RootFile extends File {
             cmd = new Command(0, w) {
 
                 @Override
-                public void output(int id, String line) {
+                public void commandOutput(int id, String line) {
                     if (line.indexOf("\n") > -1) {
                         for (String s : line.split("\n"))
                             output(id, s);
                     } else outLines.add(line);
                 }
+
+                @Override
+                public void commandTerminated(int i, String s) {
+
+                }
+
+                @Override
+                public void commandCompleted(int i, int i2) {
+
+                }
             };
 
-            RootTools.getShell(true).add(cmd).waitForFinish();
+            RootTools.getShell(true).add(cmd);
+            FileUtil.waitForFinish(cmd);
+
             for (String line : outLines) {
                 if (line.contains("failed") || line.contains("can't rename")) result = false;
             }

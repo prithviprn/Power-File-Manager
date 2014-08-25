@@ -92,11 +92,23 @@ public class TextEditor extends SherlockActivity {
                     Command cmd = new Command(0, w) {
 
                         @Override
-                        public void output(int id, String line) {
+                        public void commandOutput(int id, String line) {
+
+                        }
+
+                        @Override
+                        public void commandTerminated(int i, String s) {
+
+                        }
+
+                        @Override
+                        public void commandCompleted(int i, int i2) {
+
                         }
                     };
 
-                    RootTools.getShell(true).add(cmd).waitForFinish();
+                    RootTools.getShell(true).add(cmd);
+                    FileUtil.waitForFinish(cmd);
                 } catch (Exception e) {
                 }
             }

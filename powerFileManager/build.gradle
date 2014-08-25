@@ -37,6 +37,6 @@ dependencies {
     compile 'de.keyboardsurfer.android.widget:crouton:1.8.4@aar'
     compile files('libs/Commons-Compress-1.5.jar')
     compile files('libs/crashlytics.jar')
-    compile files('libs/RootTools-2.6.jar')
+    compile files('libs/RootTools-3.5.jar')
     compile files('libs/Universal-Image-Loader-1.8.6.jar')
 }

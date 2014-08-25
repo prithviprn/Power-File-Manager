@@ -550,12 +550,24 @@ public class MainActivity extends SherlockActivity {
                                             cmd = new Command(0, s) {
 
                                                 @Override
-                                                public void output(int arg0, String arg1) {
+                                                public void commandOutput(int arg0, String arg1) {
+
+                                                }
+
+                                                @Override
+                                                public void commandTerminated(int i, String s) {
+
+                                                }
+
+                                                @Override
+                                                public void commandCompleted(int i, int i2) {
+
                                                 }
                                             };
 
                                             try {
-                                                RootTools.getShell(true).add(cmd).waitForFinish();
+                                                RootTools.getShell(true).add(cmd);
+                                                FileUtil.waitForFinish(cmd);
                                             } catch (Exception e) {
                                                 Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
                                             }
@@ -1245,12 +1257,24 @@ public class MainActivity extends SherlockActivity {
                         cmd = new Command(0, w) {
 
                             @Override
-                            public void output(int id, String line) {
+                            public void commandOutput(int id, String line) {
+
+                            }
+
+                            @Override
+                            public void commandTerminated(int i, String s) {
+
+                            }
+
+                            @Override
+                            public void commandCompleted(int i, int i2) {
+
                             }
                         };
 
                         try {
-                            RootTools.getShell(true).add(cmd).waitForFinish();
+                            RootTools.getShell(true).add(cmd);
+                            FileUtil.waitForFinish(cmd);
                         } catch (Exception e) {
                             Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
                         }
@@ -1293,12 +1317,24 @@ public class MainActivity extends SherlockActivity {
                         cmd = new Command(0, w) {
 
                             @Override
-                            public void output(int id, String line) {
+                            public void commandOutput(int id, String line) {
+
+                            }
+
+                            @Override
+                            public void commandTerminated(int i, String s) {
+
+                            }
+
+                            @Override
+                            public void commandCompleted(int i, int i2) {
+
                             }
                         };
 
                         try {
-                            RootTools.getShell(true).add(cmd).waitForFinish();
+                            RootTools.getShell(true).add(cmd);
+                            FileUtil.waitForFinish(cmd);
                         } catch (Exception e) {
                             Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
                         }

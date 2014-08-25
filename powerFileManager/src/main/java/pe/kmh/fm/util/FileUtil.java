@@ -216,12 +216,24 @@ public class FileUtil {
                     Command cmd = new Command(0, w) {
 
                         @Override
-                        public void output(int id, String line) {
+                        public void commandOutput(int id, String line) {
+
+                        }
+
+                        @Override
+                        public void commandTerminated(int i, String s) {
+
+                        }
+
+                        @Override
+                        public void commandCompleted(int i, int i2) {
+
                         }
                     };
 
                     try {
-                        RootTools.getShell(true).add(cmd).waitForFinish();
+                        RootTools.getShell(true).add(cmd);
+                        FileUtil.waitForFinish(cmd);
                     } catch (Exception e) {
                         return -1;
                     }
@@ -230,12 +242,24 @@ public class FileUtil {
                     Command cmd = new Command(0, w) {
 
                         @Override
-                        public void output(int id, String line) {
+                        public void commandOutput(int id, String line) {
+
+                        }
+
+                        @Override
+                        public void commandTerminated(int i, String s) {
+
+                        }
+
+                        @Override
+                        public void commandCompleted(int i, int i2) {
+
                         }
                     };
 
                     try {
-                        RootTools.getShell(true).add(cmd).waitForFinish();
+                        RootTools.getShell(true).add(cmd);
+                        FileUtil.waitForFinish(cmd);
                     } catch (Exception e) {
                         return -1;
                     }
@@ -255,13 +279,24 @@ public class FileUtil {
         Command cmd1 = new Command(0, w1) {
 
             @Override
-            public void output(int id, String line) {
+            public void commandOutput(int id, String line) {
                 file_count += Integer.parseInt(line);
+            }
+
+            @Override
+            public void commandTerminated(int i, String s) {
+
+            }
+
+            @Override
+            public void commandCompleted(int i, int i2) {
+
             }
         };
 
         try {
-            RootTools.getShell(true).add(cmd1).waitForFinish();
+            RootTools.getShell(true).add(cmd1);
+            FileUtil.waitForFinish(cmd1);
         } catch (Exception e) {
             return -1;
         }
@@ -270,13 +305,24 @@ public class FileUtil {
         Command cmd2 = new Command(0, w2) {
 
             @Override
-            public void output(int id, String line) {
+            public void commandOutput(int id, String line) {
                 file_count += Integer.parseInt(line);
+            }
+
+            @Override
+            public void commandTerminated(int i, String s) {
+
+            }
+
+            @Override
+            public void commandCompleted(int i, int i2) {
+
             }
         };
 
         try {
-            RootTools.getShell(true).add(cmd2).waitForFinish();
+            RootTools.getShell(true).add(cmd2);
+            FileUtil.waitForFinish(cmd2);
         } catch (Exception e) {
             return -1;
         }
@@ -299,5 +345,22 @@ public class FileUtil {
         }
 
         return count;
+    }
+
+    //************************************************ TEST ************************************************
+    public static void waitForFinish(Command cmd) throws Exception {
+
+        while (!cmd.isFinished()) {
+
+            synchronized (cmd) {
+                try {
+                    if (!cmd.isFinished()) {
+                        cmd.wait(2000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
