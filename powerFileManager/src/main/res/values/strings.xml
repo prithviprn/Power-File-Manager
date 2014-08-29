@@ -96,6 +96,7 @@
     <string name="UnknownError">Some error occured.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
     <string name="Freespace">Free Space :</string>
-    <string name="UpdateLog">v4.1 Update\n- Move speed : much better than previous versions!\n- Copy : show detail informations\n- Show free space of storages</string>
+    <string name="TooBigFileMsg">***WARNING***\nThis file is big. It can make an error! Will you open this file anyway?</string>
+    <string name="UpdateLog">v4.2 Update\n- Library Update: more stable on rooted devices</string>
 
 </resources>

@@ -692,10 +692,11 @@ public class MainActivity extends SherlockActivity {
                     }
 
                     if (mimeType == null || extension.equals("xml") || extension.equals("txt") || !runFile(f, mimeType)) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
                         alertDialog.setMessage(getString(R.string.AskOpenWithTextEditor));
 
-                        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.No),
+                        alertDialog.setNegativeButton(getString(R.string.No),
                             new DialogInterface.OnClickListener() {
 
                                 @Override
@@ -704,17 +705,41 @@ public class MainActivity extends SherlockActivity {
                             }
                         );
 
-                        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.Yes),
-                            new DialogInterface.OnClickListener() {
-
+                        alertDialog.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(MainActivity.this, TextEditor.class);
-                                    intent.putExtra("filepath", f.getPath());
-                                    if (isRoot)
-                                        intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
-                                    intent.putExtra("isRoot", isRoot);
-                                    startActivityForResult(intent, TEXT_EDITOR_REQUEST);
+                                    if (new File(f.getPath()).length() > 1024 * 1024) {  // 1.0MB Warning
+                                        AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+                                        aDialog.setMessage(R.string.TooBigFileMsg);
+
+                                        aDialog.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(MainActivity.this, TextEditor.class);
+                                                intent.putExtra("filepath", f.getPath());
+                                                if (isRoot)
+                                                    intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
+                                                intent.putExtra("isRoot", isRoot);
+                                                startActivityForResult(intent, TEXT_EDITOR_REQUEST);
+                                            }
+                                        });
+
+                                        aDialog.setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
+
+                                        aDialog.show();
+                                    }
+                                    else {
+                                        Intent intent = new Intent(MainActivity.this, TextEditor.class);
+                                        intent.putExtra("filepath", f.getPath());
+                                        if (isRoot)
+                                            intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
+                                        intent.putExtra("isRoot", isRoot);
+                                        startActivityForResult(intent, TEXT_EDITOR_REQUEST);
+                                    }
                                 }
                             }
                         );

@@ -7,8 +7,8 @@ android {
         applicationId 'pe.kmh.fm'
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 100
-        versionName "4.1"
+        versionCode 101
+        versionName "4.2"
     }
     buildTypes {
         release {
