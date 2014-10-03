@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/textfield_activated_holo_light"
             android:inputType="textMultiLine|textNoSuggestions"
+            android:maxLength="10485760"
             android:textColor="#000000"
             android:textSize="14sp"/>
     </ScrollView>

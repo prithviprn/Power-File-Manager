@@ -3,6 +3,7 @@ package pe.kmh.fm;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,6 +22,7 @@ import com.stericson.RootTools.execution.Command;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -71,16 +74,22 @@ public class TextEditor extends SherlockActivity {
     }
 
     public void onFileSaveBtnPress(View v) {
-        RootFile to = new RootFile(filepath);
-        if (isRoot) {
-            RootTools.remount(new RootFile(filepath).getParent(), "rw");
-            to = new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp/" + new File(filepath).getName());
-        }
-
         try {
-            FileWriter fw = new FileWriter(to);
-            fw.write(e.getText().toString());
-            fw.close();
+            RootFile to;
+            FileOutputStream fos;
+            if (isRoot) {
+                RootTools.remount(new RootFile(getFilesDir().getAbsolutePath()).getParent(), "rw");
+                RootTools.remount(new RootFile(filepath).getParent(), "rw");
+                to = new RootFile(getFilesDir().getAbsolutePath() + "/" + new File(filepath).getName());
+                fos = getApplicationContext().openFileOutput(to.getName(), Context.MODE_PRIVATE);
+            }
+            else {
+                to = new RootFile(filepath);
+                fos = new FileOutputStream(to);
+            }
+
+            fos.write(e.getText().toString().getBytes());
+            fos.close();
 
             if (isRoot) {
                 RootTools.remount(new RootFile(filepath).getParent(), "rw");
@@ -114,8 +123,8 @@ public class TextEditor extends SherlockActivity {
                 } catch (Exception e) {
                 }
             }
-            new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp").delete();
         } catch (IOException e) {
+            Log.e("PFM", e.getMessage());
         }
 
         setResult(JOB_SAVED);
@@ -143,12 +152,11 @@ public class TextEditor extends SherlockActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            RootFile to = new RootFile(new RootFile(filepath).getParent());
+            File to = new File(new File(filepath).getParent());
             if (isRoot) {
-                new File(Environment.getExternalStorageDirectory().toString() + "/temp/").mkdirs();
-                to = new RootFile(Environment.getExternalStorageDirectory().toString() + "/temp");
+                to = getFilesDir();
                 RootTools.remount(new RootFile(filepath).getParent(), "rw");
-                FileUtil.RootFileCopy(new RootFile(filepath), to);
+                FileUtil.RootFileCopy(new RootFile(filepath), new RootFile(to));
             }
 
             try {
@@ -162,6 +170,8 @@ public class TextEditor extends SherlockActivity {
                 }
 
                 s.close();
+
+                new RootFile(to.getAbsolutePath() + "/" + new File(filepath).getName()).delete();
             } catch (FileNotFoundException e) {
             }
             return null;

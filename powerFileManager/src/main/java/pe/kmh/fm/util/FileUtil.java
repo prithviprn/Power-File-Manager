@@ -275,58 +275,18 @@ public class FileUtil {
         // find . -type l | wc -l [Links]
 
         if (!new File(dir).isDirectory()) return 1;
-        final String w1 = "cd " + dir + " && " + "find . -type f | wc -l";
-        Command cmd1 = new Command(0, w1) {
 
-            @Override
-            public void commandOutput(int id, String line) {
-                file_count += Integer.parseInt(line);
+        RootFile[] list = (new RootFile(dir)).listFiles();
+
+        file_count = list.length;
+        for(int i = 0; i < list.length; i++)
+        {
+            if (list[i].isDirectory())
+            {
+                file_count--;
+                file_count += countDirEntries_Root(list[i].getAbsolutePath());
             }
-
-            @Override
-            public void commandTerminated(int i, String s) {
-
-            }
-
-            @Override
-            public void commandCompleted(int i, int i2) {
-
-            }
-        };
-
-        try {
-            RootTools.getShell(true).add(cmd1);
-            FileUtil.waitForFinish(cmd1);
-        } catch (Exception e) {
-            return -1;
         }
-
-        final String w2 = "cd " + dir + " && " + "find . -type l | wc -l";
-        Command cmd2 = new Command(0, w2) {
-
-            @Override
-            public void commandOutput(int id, String line) {
-                file_count += Integer.parseInt(line);
-            }
-
-            @Override
-            public void commandTerminated(int i, String s) {
-
-            }
-
-            @Override
-            public void commandCompleted(int i, int i2) {
-
-            }
-        };
-
-        try {
-            RootTools.getShell(true).add(cmd2);
-            FileUtil.waitForFinish(cmd2);
-        } catch (Exception e) {
-            return -1;
-        }
-
         return file_count;
     }
 

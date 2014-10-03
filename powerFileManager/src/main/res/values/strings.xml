@@ -72,6 +72,7 @@
     <string name="AskOpenWithTextEditor">Open this file with Text Editor?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="OK">OK</string>
     <string name="TextEditor">Text Editor</string>
     <string name="ifEmptythen">If Empty then, I will extract in now path.</string>
     <string name="Unzipping">Extracting..</string>
@@ -96,7 +97,7 @@
     <string name="UnknownError">Some error occured.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
     <string name="Freespace">Free Space :</string>
-    <string name="TooBigFileMsg">***WARNING***\nThis file is big. It can make an error! Will you open this file anyway?</string>
-    <string name="UpdateLog">v4.2 Update\n- Library Update: more stable on rooted devices</string>
+    <string name="TooBigFileMsg">This file is too big to open with text editor.</string>
+    <string name="UpdateLog">v4.3 Update\n- Improve: about Copy function\n- Improve: Text Editor</string>
 
 </resources>

@@ -83,7 +83,7 @@ public class RootFile extends File {
                 public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
-                            output(id, s);
+                            commandOutput(id, s);
                     } else outLines.add(line);
                 }
 
@@ -177,7 +177,7 @@ public class RootFile extends File {
                 public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
-                            output(id, s);
+                            commandOutput(id, s);
                     } else outLines.add(line);
                 }
 
@@ -260,7 +260,7 @@ public class RootFile extends File {
                 public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
-                            output(id, s);
+                            commandOutput(id, s);
                     } else outLines.add(line);
                 }
 
@@ -311,7 +311,7 @@ public class RootFile extends File {
                 public void commandOutput(int id, String line) {
                     if (line.contains("\n")) {
                         for (String s : line.split("\n"))
-                            output(id, s);
+                            commandOutput(id, s);
                     } else outLines.add(line);
                 }
 
@@ -361,7 +361,7 @@ public class RootFile extends File {
                 public void commandOutput(int id, String line) {
                     if (line.indexOf("\n") > -1) {
                         for (String s : line.split("\n"))
-                            output(id, s);
+                            commandOutput(id, s);
                     } else outLines.add(line);
                 }
 

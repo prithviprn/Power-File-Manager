@@ -13,13 +13,13 @@
         android:name=".PFMApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Power File Manager"
         android:largeHeap="true"
         android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name"
+            android:label="Power File Manager"
             android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

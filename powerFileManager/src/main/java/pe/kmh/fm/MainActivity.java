@@ -708,23 +708,11 @@ public class MainActivity extends SherlockActivity {
                         alertDialog.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (new File(f.getPath()).length() > 1024 * 1024) {  // 1.0MB Warning
+                                    if (new File(f.getPath()).length() > 1 * 1024 * 1024) {  // 5.0MB Warning
                                         AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
                                         aDialog.setMessage(R.string.TooBigFileMsg);
 
-                                        aDialog.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
-
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(MainActivity.this, TextEditor.class);
-                                                intent.putExtra("filepath", f.getPath());
-                                                if (isRoot)
-                                                    intent.putExtra("Perm", FileUtil.calcPerm(rootitem.get(position).getPerm()));
-                                                intent.putExtra("isRoot", isRoot);
-                                                startActivityForResult(intent, TEXT_EDITOR_REQUEST);
-                                            }
-                                        });
-
-                                        aDialog.setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+                                        aDialog.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 
                                             public void onClick(DialogInterface dialog, int which) {
                                             }

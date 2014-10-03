@@ -20,17 +20,17 @@
         revision="20.0.0"
         sha1="4be554f78b50d2bbfc15c41044786086ab78502b"/>
     <item
-        dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\crashlytics-11ac99961e4c005dd5a0919fa11bdee30a0b9d12.jar"
-        jar="D:\App\Android\PowerFileManager\powerFileManager\libs\crashlytics.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="b8189e9eef2f07fae743e05d7fe7e69daebe98d1"/>
-    <item
         dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\support-v4-19.1.0-a32d27fe7e65cdd34ee6d2ab86275761b654aa98.jar"
         jar="D:\App\Android_SDK\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\crashlytics-11ac99961e4c005dd5a0919fa11bdee30a0b9d12.jar"
+        jar="D:\App\Android\PowerFileManager\powerFileManager\libs\crashlytics.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="0e821eafa1bf489a26bdb71f95078c26785b37a1"/>
     <item
         dex="D:\App\Android\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\release\Universal-Image-Loader-1.8.6-3f61201fabaefad95a649c9d2b08e0aa2e135c9d.jar"
         jar="D:\App\Android\PowerFileManager\powerFileManager\libs\Universal-Image-Loader-1.8.6.jar"
