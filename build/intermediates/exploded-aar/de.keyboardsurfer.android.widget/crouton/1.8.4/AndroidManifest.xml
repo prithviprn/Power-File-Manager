@@ -13,7 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   --><!-- From: file:/data/home/bweiss/Documents/workspace/private/Crouton/library/src/main/AndroidManifest.xml -->
-<manifest package="de.keyboardsurfer.mobile.app.android.widget.crouton" xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="7" android:versionName="1.8.4">
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.keyboardsurfer.mobile.app.android.widget.crouton" android:versionCode="7" android:versionName="1.8.4">
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19" />
 
 </manifest>

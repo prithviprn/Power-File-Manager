@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-    <issue id="DefaultLocale" severity="ignore"/>
+    <issue id="DefaultLocale" severity="ignore" />
     <issue id="HandlerLeak">
-        <ignore path="src/pe/kmh/fm/MainActivity.java"/>
+        <ignore path="src/pe/kmh/fm/MainActivity.java" />
     </issue>
-    <issue id="MissingTranslation" severity="ignore"/>
-    <issue id="UseValueOf" severity="ignore"/>
+    <issue id="MissingTranslation" severity="ignore" />
+    <issue id="UseValueOf" severity="ignore" />
 </lint>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootrowlayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -11,7 +10,7 @@
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="1dp"/>
+        android:layout_marginLeft="1dp" />
 
     <LinearLayout
         android:layout_width="0dip"
@@ -25,7 +24,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="9dp"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,27 +38,28 @@
                 android:layout_marginRight="4dp"
                 android:paddingLeft="8sp"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="11sp"/>
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/fileperm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="4dp"
-                android:textSize="11sp"/>
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/filesize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="11sp"/>
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/check"
         android:layout_width="35dp"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"
+        android:background="@drawable/check" />
 
 </LinearLayout>

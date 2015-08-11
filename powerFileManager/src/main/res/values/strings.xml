@@ -44,9 +44,6 @@
     <string name="Search_Hint">Name of Searching File</string>
     <string name="Searching">Searching..</string>
     <string name="Basics">BASIC SETTINGS</string>
-    <string name="ThemeSetting">App Theme</string>
-    <string name="Light_DarkActionBar">Light Theme (Dark ActionBar)</string>
-    <string name="Dark">Dark Theme</string>
     <string name="AppInfo">APP INFO</string>
     <string name="ViewSetting">VIEW</string>
     <string name="SortSetting">List Sort Options</string>
@@ -98,6 +95,6 @@
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
     <string name="Freespace">Free Space :</string>
     <string name="TooBigFileMsg">This file is too big to open with text editor.</string>
-    <string name="UpdateLog">v4.3 Update\n- Improve: about Copy function\n- Improve: Text Editor</string>
+    <string name="UpdateLog">v4.3.4 Update\n- Fix: showing wrong icons\n- Add some icons</string>
 
 </resources>

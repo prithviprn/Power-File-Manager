@@ -5,16 +5,16 @@ import android.content.Context;
 
 public class PFMApp extends Application {
 
-    private static Context mContext;
+	private static Context mContext;
 
-    public static Context getContext() {
-        return mContext;
-    }
+	public static Context getContext() {
+		return mContext;
+	}
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mContext = getApplicationContext();
-    }
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		mContext = getApplicationContext();
+	}
 
 }

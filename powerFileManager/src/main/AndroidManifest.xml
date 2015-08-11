@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="pe.kmh.fm"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pe.kmh.fm">
 
-    <permission android:name="android.permission.INSTALL_PACKAGES"/>
+    <permission android:name="android.permission.INSTALL_PACKAGES" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".PFMApp"
@@ -15,21 +14,21 @@
         android:icon="@drawable/ic_launcher"
         android:label="Power File Manager"
         android:largeHeap="true"
-        android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="Power File Manager"
             android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
                 android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow"/>
+                android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name=".SearchActivity"
@@ -37,7 +36,7 @@
             android:uiOptions="splitActionBarWhenNarrow">
             <meta-data
                 android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow"/>
+                android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -45,7 +44,7 @@
             android:uiOptions="splitActionBarWhenNarrow">
             <meta-data
                 android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow"/>
+                android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name=".TextEditor"
@@ -53,12 +52,12 @@
             android:uiOptions="splitActionBarWhenNarrow">
             <meta-data
                 android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow"/>
+                android:value="splitActionBarWhenNarrow" />
         </activity>
 
         <meta-data
             android:name="com.crashlytics.ApiKey"
-            android:value="4c3854ec06c45b420682d3bb17779110c1354b2f"/>
+            android:value="4c3854ec06c45b420682d3bb17779110c1354b2f" />
     </application>
 
 </manifest>

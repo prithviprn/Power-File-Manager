@@ -44,9 +44,6 @@
     <string name="Search_Hint">검색할 파일의 이름</string>
     <string name="Searching">검색 중..</string>
     <string name="Basics">기본 설정</string>
-    <string name="ThemeSetting">테마</string>
-    <string name="Light_DarkActionBar">화이트 테마</string>
-    <string name="Dark">블랙 테마</string>
     <string name="AppInfo">앱 정보</string>
     <string name="ViewSetting">보기 옵션</string>
     <string name="SortSetting">파일 목록 정렬 방법</string>
@@ -98,6 +95,6 @@
     <string name="LeaveReview">플레이 스토어에서 리뷰를 남겨주세요!^^</string>
     <string name="Freespace">남은 용량 :</string>
     <string name="TooBigFileMsg">이 파일의 크기가 너무 커서 열 수 없습니다.</string>
-    <string name="UpdateLog">v4.3 업데이트\n- 복사 관련 수정\n- 텍스트에디터 개선</string>
+    <string name="UpdateLog">v4.3.4 업데이트\n- 일부 아이콘이 잘못 표시되는 현상 수정\n- 아이콘 추가</string>
 
 </resources>
