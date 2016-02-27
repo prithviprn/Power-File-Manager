@@ -2,67 +2,109 @@
 <items version="2" >
 
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/libs/Universal-Image-Loader-1.8.6.jar"
+        jar="F:\Android-SDK\extras\android\m2repository\com\android\support\support-annotations\23.2.0\support-annotations-23.2.0.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="09995ba681982ca129af798c9eb21e79c4bffa45">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/Universal-Image-Loader-1.8.6-1d0e37053107a90ebb97ed7d152316658500239c.jar" />
+        revision="23.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\support-annotations-23.2.0_7ffccd8c80554308e0d50a07008a7f878486ae36.jar" />
     </item>
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/exploded-aar/de.keyboardsurfer.android.widget/crouton/1.8.4/classes.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\libs\Commons-Compress-1.5.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="ef6e7d100ebc7feca53c3e2445b8e63ce4dea90c">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/classes-79182b6a6bfeb58d292bccad962aa1933e36bec3.jar" />
-    </item>
-    <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/classes-ea024bbc3fba786903af9ffaa56e29380205e621.jar" />
-    </item>
-    <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/libs/Commons-Compress-1.5.jar"
-        jumboMode="false"
-        revision="21.1.2"
+        revision="23.0.2"
         sha1="d2bd2c0bd328f1dabdf33e10b6d223ebcbe93343">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/Commons-Compress-1.5-f24616310b75260295cb527fb6b2d0412862a238.jar" />
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\Commons-Compress-1.5_169575f5771e66adb39d1e2e07b5f320318eb475.jar" />
     </item>
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/libs/crashlytics.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.0\jars\classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="0e821eafa1bf489a26bdb71f95078c26785b37a1">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/crashlytics-5d63e9b1133eab76862d46a5527bf17596f64abe.jar" />
+        revision="23.0.2"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.0_0c8c1d8186e34b8aae609b5e9ba4279ab64a6553.jar" />
     </item>
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/libs/RootTools-3.5.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\libs\internal_impl-23.2.0.jar"
         jumboMode="false"
-        revision="21.1.2"
+        revision="23.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\internal_impl-23.2.0_1f5ad265b80574146e7fb73e352cb4abf731e83a.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.0_52de8c7d4210446e6605cea95dafe537ab8ad433.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.0_10dfb0f3c03954bb75ad7833f4968df63871e6ab.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\de.keyboardsurfer.android.widget\crouton\1.8.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ef6e7d100ebc7feca53c3e2445b8e63ce4dea90c">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\de.keyboardsurfer.android.widget-crouton-1.8.4_17d70b8951193d15c9df5bdaa48dde96f0d4be81.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.5\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="611605b6b640c1558f9bdea41de8ff837ab68ca8">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-2.5.5_7f4688cb8bb65ba907af41062dd775b804e6793b.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.10\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a5db9a2dd46d84285ef737f65030b74b6e8ee2a4">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\io.fabric.sdk.android-fabric-1.3.10_302a383930e8fb232e57d855312cd9232ce56b63.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c9ef45dcbd082cd63aac09a5e2cd443adb5df837">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-core-2.3.8_6e8cdb36369aed90c57898b4824f25550a8b8bf2.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\libs\Universal-Image-Loader-1.8.6.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09995ba681982ca129af798c9eb21e79c4bffa45">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\Universal-Image-Loader-1.8.6_5c0f3b65700ee5bd339a0bdce51daee943bdb8ff.jar" />
+    </item>
+    <item
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\libs\RootTools-3.5.jar"
+        jumboMode="false"
+        revision="23.0.2"
         sha1="16b2d49a7359c9ddbfcb1bc66f9c342c502e821b">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/RootTools-3.5-6f0e54bd69b6d4e22eae6f6965a40c286c72459f.jar" />
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\RootTools-3.5_bfb364c0089f5d69e8fcbb85a39b082fe5efaed3.jar" />
     </item>
     <item
-        jar="/home/kmh/android-studio/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-aae037b66e0a0c05c367011c220f46b110302175.jar" />
+        revision="23.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.2.0_78702f3b046d095c2f15b2ed5739d560746a4281.jar" />
     </item>
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.4\jars\classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-6fdd54b841188fc76c3b41413fc7c25c3ec75021.jar" />
+        revision="23.0.2"
+        sha1="ad5bb101ced4d3939225c9b57e5a3d81547c1fbb">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-beta-1.1.4_7247716e3e173d9e99f386b6d3e4704b5fd065f5.jar" />
     </item>
     <item
-        jar="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.6\jars\classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/home/kmh/Android/PowerFileManager/powerFileManager/build/intermediates/pre-dexed/debug/classes-b09a7809570633b95100d3531c8a31e233ebe003.jar" />
+        revision="23.0.2"
+        sha1="9af3b9b8114e685291aa00e6572b0a9131244956">
+        <dex dex="F:\Android\Projects\PowerFileManager\powerFileManager\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-answers-1.3.6_0f7c567623e81049e13e6b568db7ae60a768b1cf.jar" />
     </item>
 
 </items>

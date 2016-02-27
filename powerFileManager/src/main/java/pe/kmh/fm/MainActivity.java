@@ -66,6 +66,8 @@ import com.stericson.RootTools.execution.Command;
 
 import java.io.File;
 import java.io.IOException;
+import io.fabric.sdk.android.Fabric;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -75,6 +77,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import io.fabric.sdk.android.Fabric;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import pe.kmh.fm.prop.FileProperty;
@@ -449,7 +452,7 @@ public class MainActivity extends ActionBarActivity {
 		boolean crashActivation = sharedPrefs.getBoolean("CrashlyticsActivation", true);
 		if (crashActivation) {
 			Log.d("PowerFileManager", "Crashlytics Enabled");
-			Crashlytics.start(this);
+			Fabric.with(this, new Crashlytics());
 		}
 
 		String Sort = sharedPrefs.getString("SortOption", "Alphabet");
