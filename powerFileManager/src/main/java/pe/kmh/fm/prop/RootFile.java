@@ -118,7 +118,7 @@ public class RootFile extends File {
 	@Override
 	public boolean isDirectory() {
 		boolean result = super.isDirectory();
-		if (result == true) return result;
+		if (result) return true;
 		if (this.getPath().startsWith("/data/media/")) result = true;
 		return result;
 	}
@@ -142,11 +142,8 @@ public class RootFile extends File {
 			flist = (new File(actualPath)).listFiles();
 			if (flist == null) return null;
 			ArrayList<File> arr_flist = new ArrayList<File>();
-			if (flist != null) {
-				for (File f : flist) {
-					arr_flist.add(f);
-				}
-			}
+			for (File f : flist) arr_flist.add(f);
+
 			Comparator<File> sort = new Comparator<File>() {
 
 				@Override
@@ -162,7 +159,7 @@ public class RootFile extends File {
 				if (arr_flist.get(i) != null) {
 					retlist[i] = new RootFile(arr_flist.get(i));
 					if (arr_flist.get(i).isDirectory()) size.add(-1);
-					else size.add(Integer.valueOf((int) (arr_flist.get(i).length())));
+					else size.add((int) arr_flist.get(i).length());
 				}
 			}
 		}
@@ -295,6 +292,7 @@ public class RootFile extends File {
 			try {
 				f.createNewFile();
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			return true;
 		}
@@ -346,6 +344,7 @@ public class RootFile extends File {
 			try {
 				f.renameTo(dest);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			return true;
 		}
@@ -359,7 +358,7 @@ public class RootFile extends File {
 
 				@Override
 				public void commandOutput(int id, String line) {
-					if (line.indexOf("\n") > -1) {
+					if (line.contains("\n")) {
 						for (String s : line.split("\n"))
 							commandOutput(id, s);
 					} else outLines.add(line);

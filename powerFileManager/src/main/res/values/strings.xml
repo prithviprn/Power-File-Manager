@@ -91,10 +91,10 @@
     <string name="FirstStart">Welcome</string>
     <string name="UpdateLogDialog">Update Log</string>
     <string name="GotoPlayStore">Go to Play Store</string>
-    <string name="UnknownError">Some error occured.</string>
+    <string name="UnknownError">Some error occurred.</string>
     <string name="LeaveReview">Write Review and Leave 5 STARs at Play Store!^^</string>
     <string name="Freespace">Free Space :</string>
     <string name="TooBigFileMsg">This file is too big to open with text editor.</string>
-    <string name="UpdateLog">v4.3.4 Update\n- Fix: showing wrong icons\n- Add some icons</string>
+    <string name="UpdateLog">v4.3.4 Update\n- Change App Icon (Thanks to RyuHwangByeol)\n- Fix Bugs</string>
 
 </resources>

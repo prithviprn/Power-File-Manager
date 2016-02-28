@@ -60,14 +60,12 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.execution.Command;
 
 import java.io.File;
 import java.io.IOException;
-import io.fabric.sdk.android.Fabric;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -77,9 +75,9 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import io.fabric.sdk.android.Fabric;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+import io.fabric.sdk.android.Fabric;
 import pe.kmh.fm.prop.FileProperty;
 import pe.kmh.fm.prop.RootFile;
 import pe.kmh.fm.prop.RootFileProperty;
@@ -150,6 +148,24 @@ public class MainActivity extends ActionBarActivity {
 	int[] internal_icon;
 	Command cmd;
 	boolean isRoot = false;
+	int goBack;
+	boolean loading = false;
+	RootFileAdapter rootAdapter;
+	FileAdapter normalAdapter;
+	boolean ShowHiddenFiles;
+	boolean UseImageLoader;
+	boolean AutoRootCheck;
+	String StartPathPref;
+	File f;
+	ApkLoader loader;
+	SharedPreferences sharedPrefs;
+	SharedPreferences.Editor editor;
+	String[] MenuListItems;
+	DrawerLayout MenuLayout;
+	ActionBarDrawerToggle MenuToggle;
+	ListView MenuList;
+	StringBuilder sb;
+	ActionMode mActionMode;
 	ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
 		@Override
@@ -280,24 +296,6 @@ public class MainActivity extends ActionBarActivity {
 			if (isRoot) findViewById(R.id.PermBtn).setVisibility(View.GONE);
 		}
 	};
-	int goBack;
-	boolean loading = false;
-	RootFileAdapter rootAdapter;
-	FileAdapter normalAdapter;
-	boolean ShowHiddenFiles;
-	boolean UseImageLoader;
-	boolean AutoRootCheck;
-	String StartPathPref;
-	File f;
-	ApkLoader loader;
-	SharedPreferences sharedPrefs;
-	SharedPreferences.Editor editor;
-	String[] MenuListItems;
-	DrawerLayout MenuLayout;
-	ActionBarDrawerToggle MenuToggle;
-	ListView MenuList;
-	StringBuilder sb;
-	ActionMode mActionMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -984,8 +982,10 @@ public class MainActivity extends ActionBarActivity {
 			ArrayList<Integer> Files = new ArrayList<Integer>();
 
 			for (int i = 0; i < psize; i++) {
-				if (isRoot && newrootitem.get(i).getIcon().equals("FOLDER")) Folders.add(i);   // Root
-				else if (!isRoot && newitem.get(i).getIcon().equals("FOLDER")) Folders.add(i); // Not root
+				if (isRoot && newrootitem.get(i).getIcon().equals("FOLDER"))
+					Folders.add(i);   // Root
+				else if (!isRoot && newitem.get(i).getIcon().equals("FOLDER"))
+					Folders.add(i); // Not root
 				else Files.add(i);
 			}
 
@@ -1021,7 +1021,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onBackPressed() {
 		if (rootAdapter != null && isRoot && rootAdapter.isScrolling) list.smoothScrollBy(0, 0);
-		if (normalAdapter != null && !isRoot && normalAdapter.isScrolling) list.smoothScrollBy(0, 0);
+		if (normalAdapter != null && !isRoot && normalAdapter.isScrolling)
+			list.smoothScrollBy(0, 0);
 
 		if (MenuLayout.isDrawerOpen(MenuList)) MenuLayout.closeDrawer(MenuList);
 		else if (nowlevel > 0 && Selected_Count == 0 && path.size() > 0) LoadList(path.get(0));
@@ -1096,8 +1097,10 @@ public class MainActivity extends ActionBarActivity {
 				int mes = msg.what;
 				if (mes == -1) {
 					int result = FileUtil.Set_Auto_Perm(nowPath, sharedPrefs, Clipboard_Count, clipboard);
-					if (result == 1) Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
-					else if (result == -1) Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
+					if (result == 1)
+						Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
+					else if (result == -1)
+						Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
 
 					LoadList(nowPath);
 				} else if (mes == -2) {
@@ -1121,7 +1124,8 @@ public class MainActivity extends ActionBarActivity {
 						}
 						if (isRoot)
 							FileUtil.RootFileCopy(new RootFile(clipboard.get(i)), new RootFile(nowPath), handler);
-						else FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath), handler);
+						else
+							FileUtil.NormalFileCopy(new File(clipboard.get(i)), new File(nowPath), handler);
 					}
 				} catch (IOException e) {
 					Crouton.makeText(MainActivity.this, e.getMessage(), Style.ALERT).show();
@@ -1208,8 +1212,10 @@ public class MainActivity extends ActionBarActivity {
 				int mes = msg.what;
 				if (mes == -1) {
 					int result = FileUtil.Set_Auto_Perm(nowPath, sharedPrefs, Clipboard_Count, clipboard);
-					if (result == 1) Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
-					else if (result == -1) Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
+					if (result == 1)
+						Crouton.makeText(MainActivity.this, R.string.AutoPermissionSetFinished, Style.INFO).show();
+					else if (result == -1)
+						Crouton.makeText(MainActivity.this, R.string.UnknownError, Style.ALERT).show();
 
 					LoadList(nowPath);
 
@@ -1877,7 +1883,8 @@ public class MainActivity extends ActionBarActivity {
 		public View getView(int position, View row, ViewGroup parent) {
 			if (loading) return row;
 
-			if (row == null) row = LayoutInflater.from(MainActivity.this).inflate(R.layout.row, parent, false);
+			if (row == null)
+				row = LayoutInflater.from(MainActivity.this).inflate(R.layout.row, parent, false);
 
 			ImageView f_icon = ViewHolder.get(row, R.id.icon);
 			TextView f_name = ViewHolder.get(row, R.id.filename);
@@ -1964,7 +1971,8 @@ public class MainActivity extends ActionBarActivity {
 		public View getView(int position, View row, ViewGroup parent) {
 			if (loading) return row;
 
-			if (row == null) row = LayoutInflater.from(MainActivity.this).inflate(R.layout.rootrow, parent, false);
+			if (row == null)
+				row = LayoutInflater.from(MainActivity.this).inflate(R.layout.rootrow, parent, false);
 
 			ImageView f_icon = ViewHolder.get(row, R.id.icon);
 			TextView f_name = ViewHolder.get(row, R.id.filename);

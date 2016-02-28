@@ -53,10 +53,10 @@ android {
     dependencies {
         compile 'com.android.support:support-v4:23.2.0'
         compile 'com.android.support:appcompat-v7:23.2.0'
-        compile 'de.keyboardsurfer.android.widget:crouton:1.8.4@aar'
+        compile 'de.keyboardsurfer.android.widget:crouton:1.8.5@aar'
+        compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
-        compile files('libs/Commons-Compress-1.5.jar')
+        compile files('libs/Commons-Compress-1.10.jar')
         compile files('libs/RootTools-3.5.jar')
-        compile files('libs/Universal-Image-Loader-1.8.6.jar')
     }
 }
